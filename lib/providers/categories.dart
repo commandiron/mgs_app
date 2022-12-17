@@ -28,6 +28,11 @@ class Categories with ChangeNotifier {
         title: "Metal Gears",
         imageUrl: "https://i.ytimg.com/vi/vX_rLYMz8cE/maxresdefault.jpg"
     ),
+    Category(
+        id: 5,
+        title: "Equipments",
+        imageUrl: "https://preview.redd.it/0k4ali39zdu41.png?auto=webp&s=a4abf3afa92d09c9c5b1e37f3c2f9add55dfad76"
+    ),
   ];
 
   List<Category> get items {

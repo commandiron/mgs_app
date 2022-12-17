@@ -7,47 +7,42 @@ class Games with ChangeNotifier {
     Game(
       id: 0,
       title: "Metal Gear",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/bd/Metal_Gear_cover.jpg"
+      imagePath: "assets/images/games/mg_logo.png"
     ),
     Game(
-        id: 1,
-        title: "Metal Gear 2 Solid Snake",
-        imageUrl: "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co3whu.jpg"
+      id: 1,
+      title: "Metal Gear 2 Solid Snake",
+      imagePath: "assets/images/games/mg_ii_logo.png"
     ),
     Game(
-        id: 2,
-        title: "Metal Gear Solid",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/tr/8/8b/308Image.jpg"
+      id: 2,
+      title: "Metal Gear Solid",
+      imagePath: "assets/images/games/mgs_logo.png"
     ),
     Game(
-        id: 3,
-        title: "Metal Gear Solid Peace Walker",
-        imageUrl: ""
+      id: 3,
+      title: "Metal Gear Solid II Sons of Liberty",
+      imagePath: "assets/images/games/mgs_ii_logo.png"
     ),
     Game(
-        id: 4,
-        title: "Metal Gear Solid II Sons of Liberty",
-        imageUrl: ""
+      id: 4,
+      title: "Metal Gear Solid III Snake Eater",
+      imagePath: "assets/images/games/mgs_iii_logo.png"
     ),
     Game(
-        id: 5,
-        title: "Metal Gear Solid III Snake Eater",
-        imageUrl: ""
+      id: 5,
+      title: "Metal Gear Solid IV Guns of the Patriots",
+      imagePath: "assets/images/games/mgs_iv_logo.png"
     ),
     Game(
-        id: 6,
-        title: "Metal Gear Solid IV Guns of the Patriots",
-        imageUrl: ""
+      id: 6,
+      title: "Metal Gear Solid Peace Walker",
+      imagePath: "assets/images/games/mgs_pw_logo.png"
     ),
     Game(
-        id: 7,
-        title: "Metal Gear Solid V Ground Zeroes",
-        imageUrl: ""
-    ),
-    Game(
-        id: 8,
-        title: "Metal Gear Solid V Phantom Pain",
-        imageUrl: ""
+      id: 7,
+      title: "Metal Gear Solid V Phantom Pain",
+      imagePath: "assets/images/games/mgs_v_logo.png"
     ),
   ];
 

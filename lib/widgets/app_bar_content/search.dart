@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
-  const Search(this.onSearch, {Key? key}) : super(key: key);
+  const Search(this.onChange, {Key? key}) : super(key: key);
 
-  final Function onSearch;
+  final Function onChange;
 
   @override
   State<Search> createState() => _SearchState();
@@ -39,19 +39,15 @@ class _SearchState extends State<Search> {
               focusNode: _focusNode,
               controller: _controller,
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.primary,
               ),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.fromLTRB(8, 0, 36, 8),
               ),
               keyboardType: TextInputType.text,
-              onSubmitted: (value) {
-                if(value.isNotEmpty) {
-                  widget.onSearch(value);
-                }
-              },
               onChanged: (value) {
+                widget.onChange(value);
                 setState(() {
                   _textIsEmpty = value.isEmpty;
                 });
@@ -78,17 +74,18 @@ class _SearchState extends State<Search> {
                     _controller.clear();
                   }
                   setState(() {
+                    widget.onChange(_controller.value.text);
                     _textIsEmpty = _controller.value.text.isEmpty;
                   });
                 },
                 child: _textIsEmpty
                     ? Icon(
                   Icons.search,
-                  color: _hasFocus ? Theme.of(context).colorScheme.onPrimary : Colors.grey,
+                  color: _hasFocus ? Theme.of(context).colorScheme.primary : Colors.grey,
                 )
                     : Icon(
                   Icons.clear,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             )

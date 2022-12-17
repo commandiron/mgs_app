@@ -34,7 +34,6 @@ dependencies:
   provider: ^6.0.5
   video_player: ^2.4.9
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -62,7 +61,18 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/mgs_logo.jpg
+    - assets/images/mgs_main_logo.jpg
+    - assets/images/foxhound_logo.png
+
+    - assets/images/games/mg_logo.png
+    - assets/images/games/mg_ii_logo.png
+    - assets/images/games/mgs_logo.png
+    - assets/images/games/mgs_ii_logo.png
+    - assets/images/games/mgs_iii_logo.png
+    - assets/images/games/mgs_iv_logo.png
+    - assets/images/games/mgs_pw_logo.png
+    - assets/images/games/mgs_v_logo.png
+    - assets/videos/mgs_theme.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
