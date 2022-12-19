@@ -4,6 +4,7 @@ import 'package:mgs_app/util/page_route.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/categories.dart';
+import '../../../characters/characters.dart';
 import '../../../games/games_screen.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
 
-    final categories  = Provider.of<Categories>(context).items;
+    final categories = Provider.of<Categories>(context).items;
     final scrollController = ScrollController();
 
     return RawScrollbar(
@@ -32,13 +33,15 @@ class _CategoriesPageState extends State<CategoriesPage> {
         controller: scrollController,
         itemCount: categories.length,
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height / 3
+          bottom: MediaQuery.of(context).size.height / 4
         ),
         itemBuilder: (context, index) => CategoryItem(
           category: categories[index],
           onTab: () {
             if(index == 0) {
               Navigator.of(context).pushNamed(GamesScreen.route);
+            } else if(index == 1) {
+              Navigator.of(context).pushNamed(CharactersScreen.route);
             }
           }
         )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mgs_app/helpers/isKeyboardOpen.dart';
 
 import '../../widgets/app_bar_content/app_bar_content.dart';
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
@@ -17,44 +16,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-  bool _showFab = true;
-
-  void startFabAnimation() async {
-    while(true) {
-      await Future.delayed(
-        const Duration(seconds: 5)
-      ).then(
-        (value) {
-          setState(() {
-            _showFab = false;
-          });
-        }
-      );
-      await Future.delayed(
-        const Duration(milliseconds: 500)
-      ).then(
-        (value) {
-          setState(() {
-            _showFab = true;
-          });
-        }
-      );
-    }
-  }
-
-  Widget _buildFab() {
-    return SizedBox(
-        height: 46,
-        child: Image.asset("assets/images/foxhound_logo.png")
-    );
-  }
-
-  @override
-  void initState() {
-    startFabAnimation();
-    super.initState();
-  }
 
   final PageController _pageController = PageController();
   String _searchText = "";
@@ -96,7 +57,10 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
-      floatingActionButton: !isKeyboardOpen(context) ? _showFab ? _buildFab() : null : null,
+      floatingActionButton: SizedBox(
+          height: 46,
+          child: Image.asset("assets/images/foxhound_logo.png")
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked
     );
   }

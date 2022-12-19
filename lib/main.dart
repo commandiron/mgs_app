@@ -5,6 +5,7 @@ import 'package:mgs_app/util/screen_route.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/categories.dart';
+import 'providers/clips.dart';
 import 'screens/main/main_screen.dart';
 import 'util/constants.dart';
 
@@ -30,6 +31,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => Games(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Clips(),
         ),
       ],
       builder: (context, child) {

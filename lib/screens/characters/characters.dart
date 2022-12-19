@@ -7,6 +7,8 @@ class CharactersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Characters Screen"),);
+    return Scaffold(
+      body: Center(child: Text("Characters Screen"),),
+    );
   }
 }

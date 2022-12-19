@@ -19,12 +19,15 @@ class MyTheme {
 
     ),
     textTheme: const TextTheme(
+      headlineMedium: TextStyle(
+        fontWeight: FontWeight.bold
+      ),
+      headlineSmall: TextStyle(
+          fontWeight: FontWeight.bold
+      ),
       titleLarge: TextStyle(
           fontWeight: FontWeight.bold
       ),
-      headlineMedium: TextStyle(
-          color: Colors.black
-      )
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: primary,

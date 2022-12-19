@@ -22,16 +22,29 @@ class _GamesScreenState extends State<GamesScreen> {
     final games = Provider.of<Games>(context).items;
 
     return Scaffold(
-      body: Center(
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: games.length,
-            itemBuilder: (context, index) => GamesItem(
-              game: games[index],
-              onTab: () {
-                Navigator.of(context).pushNamed(GameLandingScreen.route);
-              }
-            )
+      body: Container(
+        padding: MediaQuery.of(context).padding,
+        child: Stack(
+          children: [
+            const BackButton(),
+            Padding(
+              padding: const EdgeInsets.only(top: 46),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: games.length,
+                itemBuilder: (context, index) => GamesItem(
+                  game: games[index],
+                  onTab: () {
+                    Navigator.of(context).pushNamed(
+                        GameLandingScreen.route,
+                        arguments: games[index].id
+                    );
+                  }
+                )
+              ),
+            ),
+          ]
         ),
       )
     );

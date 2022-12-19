@@ -25,7 +25,7 @@ class GamesItem extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 50.0),
-                    child: Image.asset(game.imagePath),
+                    child: Image.asset(game.logoPath),
                   ),
                 ],
               ),
