@@ -32,24 +32,31 @@ class _ClipsPageState extends State<ClipsPage> {
     super.initState();
   }
 
+  void toNextPage() {
+    _pageController.nextPage(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.fastLinearToSlowEaseIn
+    );
+  }
+
+  void toPreviousPage() {
+    _pageController.previousPage(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.fastLinearToSlowEaseIn
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final clips = Provider.of<Clips>(context, listen: false).items;
-
     return Scaffold(
       body: GestureDetector(
         onHorizontalDragUpdate: (details) {
           int sensitivity = 8;
           if (details.delta.dx > sensitivity) {
-            _pageController.previousPage(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.fastLinearToSlowEaseIn
-            );
+            toPreviousPage();
           } else if(details.delta.dx < -sensitivity){
-            _pageController.nextPage(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.fastLinearToSlowEaseIn
-            );
+            toNextPage();
           }
         },
         child: PageView.builder(
@@ -64,18 +71,8 @@ class _ClipsPageState extends State<ClipsPage> {
               onVolumeIconPressed: () {
                 _volume == 0 ? _volume = 1 : _volume = 0;
               },
-              onNext: () {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastLinearToSlowEaseIn
-                );
-              },
-              onBack: () {
-                _pageController.previousPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.fastLinearToSlowEaseIn
-                );
-              },
+              onNext: toNextPage,
+              onBack: toPreviousPage,
             );
           },
         ),
