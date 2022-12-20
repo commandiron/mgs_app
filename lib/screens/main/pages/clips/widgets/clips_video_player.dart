@@ -5,6 +5,7 @@ import 'package:video_player/video_player.dart';
 class ClipsVideoPlayer extends StatefulWidget {
   const ClipsVideoPlayer(
     {
+      required this.shouldStart,
       required this.clipPath,
       required this.title,
       required this.initialVolume,
@@ -15,6 +16,7 @@ class ClipsVideoPlayer extends StatefulWidget {
     }
   ) : super(key: key);
 
+  final bool shouldStart;
   final String clipPath;
   final String title;
   final double initialVolume;
@@ -37,8 +39,25 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
     _controller.setVolume(widget.initialVolume);
     _controller.initialize().then((value) {
       _controller.setLooping(true);
-      _controller.play();
+      if(!widget.shouldStart) {
+        _controller.pause();
+      } else {
+        _controller.play();
+      }
     });
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void didUpdateWidget(oldWidget) {
+    if(widget.shouldStart) {
+      _controller.play();
+    } else {
+      _controller.pause();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -52,6 +71,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey.shade200,
       padding: MediaQuery.of(context).padding,
       child: Stack(
         children: [
@@ -65,14 +85,35 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                     alignment: Alignment.bottomRight,
                     children: [
                       VideoPlayer(_controller,),
+                      InkWell(
+                        onTap: () {
+                          _controller.pause();
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Colors.black.withOpacity(
+                            _controller.value.isPlaying ? 0.0 : 0.5
+                          ),
+                          child: !_controller.value.isPlaying ? IconButton(
+                            iconSize: 64,
+                            onPressed: () {
+                              _controller.play();
+                            },
+                            icon: Icon(
+                              Icons.play_arrow,
+                              color: Colors.white.withOpacity(0.5)
+                            ),
+                          ) : null
+                        ),
+                      ),
                       Container(
                         alignment: Alignment.centerRight,
                         child: IconButton(
-                          onPressed: widget.onNext,
-                          icon: const Icon(
-                            Icons.arrow_right,
-                            color: Colors.white,
-                          )
+                            onPressed: widget.onNext,
+                            icon: const Icon(
+                              Icons.arrow_right,
+                              color: Colors.white,
+                            )
                         ),
                       ),
                       Container(
@@ -92,8 +133,8 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                             widget.onVolumeIconPressed();
                             setState(() {
                               _controller.value.volume == 0
-                                  ? _controller.setVolume(1.0)
-                                  : _controller.setVolume(0.0);
+                                ? _controller.setVolume(1.0)
+                                : _controller.setVolume(0.0);
                             });
                           },
                           icon: Icon(
@@ -119,7 +160,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
               const SizedBox(height: 32,),
               Text(
                 widget.title,
-                style: Theme.of(context).textTheme.titleLarge
+                style: Theme.of(context).textTheme.titleMedium
               )
             ],
           ),

@@ -14,41 +14,72 @@ class _ClipsPageState extends State<ClipsPage> {
 
   final PageController _pageController = PageController();
   var _volume = 0.0;
+  var _shouldStart = true;
+
+  @override
+  void initState() {
+    _pageController.addListener(() {
+      if(_pageController.offset.remainder(MediaQuery.of(context).size.width) == 0) {
+        setState(() {
+          _shouldStart = true;
+        });
+      } else {
+        setState(() {
+          _shouldStart = false;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final clips = Provider.of<Clips>(context, listen: false).items;
+
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Consumer<Clips>(
-            builder: (context, value, child) {
-              return ClipsVideoPlayer(
-                clipPath: value.findById(index).clipPath,
-                title: value.findById(index).title,
-                initialVolume: _volume,
-                key: UniqueKey(),
-                onVolumeIconPressed: () {
-                  _volume == 0 ? _volume = 1 : _volume = 0;
-                },
-                onNext: () {
-                  _pageController.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.fastLinearToSlowEaseIn
-                  );
-                },
-                onBack: () {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.fastLinearToSlowEaseIn
-                  );
-                },
-              );
-            },
-          );
+      body: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          int sensitivity = 8;
+          if (details.delta.dx > sensitivity) {
+            _pageController.previousPage(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.fastLinearToSlowEaseIn
+            );
+          } else if(details.delta.dx < -sensitivity){
+            _pageController.nextPage(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.fastLinearToSlowEaseIn
+            );
+          }
         },
-      )
+        child: PageView.builder(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return ClipsVideoPlayer(
+              shouldStart: _shouldStart,
+              clipPath: clips[index % clips.length].clipPath,
+              title: clips[index % clips.length].title,
+              initialVolume: _volume,
+              onVolumeIconPressed: () {
+                _volume == 0 ? _volume = 1 : _volume = 0;
+              },
+              onNext: () {
+                _pageController.nextPage(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastLinearToSlowEaseIn
+                );
+              },
+              onBack: () {
+                _pageController.previousPage(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.fastLinearToSlowEaseIn
+                );
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 }
