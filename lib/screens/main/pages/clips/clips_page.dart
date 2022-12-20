@@ -14,23 +14,6 @@ class _ClipsPageState extends State<ClipsPage> {
 
   final PageController _pageController = PageController();
   var _volume = 0.0;
-  var _shouldStart = true;
-
-  @override
-  void initState() {
-    _pageController.addListener(() {
-      if(_pageController.offset.remainder(MediaQuery.of(context).size.width) == 0) {
-        setState(() {
-          _shouldStart = true;
-        });
-      } else {
-        setState(() {
-          _shouldStart = false;
-        });
-      }
-    });
-    super.initState();
-  }
 
   void toNextPage() {
     _pageController.nextPage(
@@ -61,10 +44,9 @@ class _ClipsPageState extends State<ClipsPage> {
         },
         child: PageView.builder(
           controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return ClipsVideoPlayer(
-              shouldStart: _shouldStart,
               clipPath: clips[index % clips.length].clipPath,
               title: clips[index % clips.length].title,
               initialVolume: _volume,

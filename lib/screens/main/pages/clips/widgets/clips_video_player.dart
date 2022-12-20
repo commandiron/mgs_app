@@ -5,7 +5,6 @@ import 'package:video_player/video_player.dart';
 class ClipsVideoPlayer extends StatefulWidget {
   const ClipsVideoPlayer(
     {
-      required this.shouldStart,
       required this.clipPath,
       required this.title,
       required this.initialVolume,
@@ -17,7 +16,6 @@ class ClipsVideoPlayer extends StatefulWidget {
     }
   ) : super(key: key);
 
-  final bool shouldStart;
   final String clipPath;
   final String title;
   final double initialVolume;
@@ -40,11 +38,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
     _controller = VideoPlayerController.asset(widget.clipPath);
     _controller.setVolume(widget.initialVolume);
     _controller.initialize().then((value) {
-      if(!widget.shouldStart) {
-        _controller.pause();
-      } else {
-        _controller.play();
-      }
+      _controller.play();
     });
     _controller.addListener(() {
       setState(() {});
@@ -52,16 +46,6 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
         widget.onEnd();
       }
     });
-  }
-
-  @override
-  void didUpdateWidget(oldWidget) {
-    if(widget.shouldStart) {
-      _controller.play();
-    } else {
-      _controller.pause();
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
