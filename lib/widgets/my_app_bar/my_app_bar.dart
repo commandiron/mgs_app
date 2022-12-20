@@ -13,7 +13,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: <Widget>[
           Image.asset(
             "assets/images/mgs_main_logo.jpg",
-            width: MediaQuery.of(context).size.width / 3,
+            width: 120,
             fit: BoxFit.cover,
           ),
           const Expanded(

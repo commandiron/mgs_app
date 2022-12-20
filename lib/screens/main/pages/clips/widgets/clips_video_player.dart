@@ -74,8 +74,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.background,
+    return Padding(
       padding: MediaQuery.of(context).padding,
       child: Stack(
         children: [
