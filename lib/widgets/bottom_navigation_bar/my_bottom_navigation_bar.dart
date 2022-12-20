@@ -23,11 +23,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       backgroundColor: Colors.white.withOpacity(0.85),
       currentIndex: _selectedIndex,
       onTap: (index) {
-        if(index == 0) {
-          widget.onTab(CategoriesPage.pageRoute);
-        } else if(index == 1) {
-          widget.onTab(ClipsPage.pageRoute);
-        }
+        widget.onTab(index);
         setState(() {
           _selectedIndex = index;
         });

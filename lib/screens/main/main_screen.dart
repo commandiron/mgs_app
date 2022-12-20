@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/app_bar_content/app_bar_content.dart';
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
+import '../../widgets/my_app_bar/my_app_bar.dart';
 import 'pages/categories/categories_page.dart';
 import 'pages/clips/clips_page.dart';
 import 'pages/search/search_page.dart';
@@ -24,14 +24,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        title: AppBarContent(
-          onSearchTextChange: (value) {
-            setState(() {
-              _searchText = value;
-            });
-          }
-        ),
+      appBar: MyAppBar(
+        onSearchTextChange: (value) {
+          setState(() {
+            _searchText = value;
+          });
+        },
       ),
       body: Stack(
         children: [
@@ -47,19 +45,18 @@ class _MainScreenState extends State<MainScreen> {
             const SearchPage(),
         ],
       ),
-
       bottomNavigationBar: MyBottomNavigationBar(
-        onTab: (pageRoute) {
+        onTab: (index) {
           _pageController.animateToPage(
-              pageRoute.index,
+              index,
               duration: const Duration(milliseconds: 200),
               curve: Curves.fastLinearToSlowEaseIn
           );
         },
       ),
       floatingActionButton: SizedBox(
-          height: 46,
-          child: Image.asset("assets/images/foxhound_logo.png")
+        height: 46,
+        child: Image.asset("assets/images/foxhound_logo.png")
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked
     );

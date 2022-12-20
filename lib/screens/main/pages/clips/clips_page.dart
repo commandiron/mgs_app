@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/clips.dart';
 import 'package:provider/provider.dart';
-import '../../../../util/page_route.dart';
 import 'widgets/clips_video_player.dart';
 
 class ClipsPage extends StatefulWidget {
   const ClipsPage({Key? key}) : super(key: key);
-
-  static final pageRoute = MyPageRoute(route: "clips", index: 1);
 
   @override
   State<ClipsPage> createState() => _ClipsPageState();

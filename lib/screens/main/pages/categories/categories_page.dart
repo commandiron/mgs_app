@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/main/pages/categories/widgets/category_item.dart';
-import 'package:mgs_app/util/page_route.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/categories.dart';
@@ -8,10 +7,7 @@ import '../../../characters/characters.dart';
 import '../../../games/games_screen.dart';
 
 class CategoriesPage extends StatefulWidget {
-
   const CategoriesPage({Key? key}) : super(key: key);
-
-  static final pageRoute = MyPageRoute(route:"categories", index: 0);
 
   @override
   State<CategoriesPage> createState() => _CategoriesPageState();
