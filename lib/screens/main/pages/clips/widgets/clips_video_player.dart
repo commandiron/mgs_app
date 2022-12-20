@@ -12,6 +12,7 @@ class ClipsVideoPlayer extends StatefulWidget {
       required this.onVolumeIconPressed,
       required this.onNext,
       required this.onBack,
+      required this.onEnd,
       Key? key
     }
   ) : super(key: key);
@@ -23,6 +24,7 @@ class ClipsVideoPlayer extends StatefulWidget {
   final VoidCallback onVolumeIconPressed;
   final VoidCallback onNext;
   final VoidCallback onBack;
+  final VoidCallback onEnd;
 
   @override
   State<ClipsVideoPlayer> createState() => _ClipsVideoPlayerState();
@@ -38,7 +40,6 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
     _controller = VideoPlayerController.asset(widget.clipPath);
     _controller.setVolume(widget.initialVolume);
     _controller.initialize().then((value) {
-      _controller.setLooping(true);
       if(!widget.shouldStart) {
         _controller.pause();
       } else {
@@ -47,6 +48,9 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
     });
     _controller.addListener(() {
       setState(() {});
+      if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+        widget.onEnd();
+      }
     });
   }
 
@@ -71,7 +75,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey.shade200,
+      color: Theme.of(context).colorScheme.background,
       padding: MediaQuery.of(context).padding,
       child: Stack(
         children: [

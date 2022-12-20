@@ -20,7 +20,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white.withOpacity(0.85),
+      backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0.9),
       currentIndex: _selectedIndex,
       onTap: (index) {
         widget.onTab(index);

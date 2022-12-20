@@ -39,7 +39,8 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return MaterialApp(
           title: Constants.appName,
-          theme: MyTheme.myThemeData,
+          theme: MyTheme.light,
+          darkTheme: MyTheme.dark,
           routes: ScreenRoute.routes,
           initialRoute: MainScreen.route,
         );
