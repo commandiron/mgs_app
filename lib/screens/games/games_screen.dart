@@ -22,6 +22,7 @@ class _GamesScreenState extends State<GamesScreen> {
     final games = Provider.of<Games>(context).items;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: MediaQuery.of(context).padding,
         child: Stack(
