@@ -20,7 +20,6 @@ class _ClipsPageState extends State<ClipsPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: PageView.builder(
         controller: _pageController,
