@@ -6,7 +6,6 @@ class ClipsVideoPlayer extends StatefulWidget {
   const ClipsVideoPlayer(
     {
       required this.clipPath,
-      required this.title,
       required this.initialVolume,
       required this.onVolumeIconPressed,
       required this.onNext,
@@ -17,7 +16,6 @@ class ClipsVideoPlayer extends StatefulWidget {
   ) : super(key: key);
 
   final String clipPath;
-  final String title;
   final double initialVolume;
   final VoidCallback onVolumeIconPressed;
   final VoidCallback onNext;
@@ -60,96 +58,84 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
   Widget build(BuildContext context) {
     return Padding(
       padding: MediaQuery.of(context).padding,
-      child: Stack(
+      child: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      VideoPlayer(_controller,),
-                      InkWell(
-                        onTap: () {
-                          _controller.pause();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          color: Colors.black.withOpacity(
-                            _controller.value.isPlaying ? 0.0 : 0.5
-                          ),
-                          child: !_controller.value.isPlaying ? IconButton(
-                            iconSize: 64,
-                            onPressed: () {
-                              _controller.play();
-                            },
-                            icon: Icon(
-                              Icons.play_arrow,
-                              color: Colors.white.withOpacity(0.5)
-                            ),
-                          ) : null
-                        ),
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                VideoPlayer(_controller,),
+                InkWell(
+                  onTap: () {
+                    _controller.pause();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.black.withOpacity(
+                      _controller.value.isPlaying ? 0.0 : 0.5
+                    ),
+                    child: !_controller.value.isPlaying ? IconButton(
+                      iconSize: 64,
+                      onPressed: () {
+                        _controller.play();
+                      },
+                      icon: Icon(
+                        Icons.play_arrow,
+                        color: Colors.white.withOpacity(0.5)
                       ),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                            onPressed: widget.onNext,
-                            icon: const Icon(
-                              Icons.arrow_right,
-                              color: Colors.white,
-                            )
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          onPressed: widget.onBack,
-                          icon: const Icon(
-                            Icons.arrow_left,
-                            color: Colors.white
-                          )
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: IconButton(
-                          onPressed: () {
-                            widget.onVolumeIconPressed();
-                            setState(() {
-                              _controller.value.volume == 0
-                                ? _controller.setVolume(1.0)
-                                : _controller.setVolume(0.0);
-                            });
-                          },
-                          icon: Icon(
-                            _controller.value.volume == 0
-                                ? Icons.volume_off
-                                : Icons.volume_up,
-                            color: Colors.white.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ]
+                    ) : null
                   ),
                 ),
-              ),
-              VideoProgressIndicator(
-                padding: const EdgeInsets.all(0),
-                  _controller,
-                  colors: VideoProgressColors(
-                    playedColor: Theme.of(context).colorScheme.primary,
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                      onPressed: widget.onNext,
+                      icon: const Icon(
+                        Icons.arrow_right,
+                        color: Colors.white,
+                      )
                   ),
-                  allowScrubbing: false
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: widget.onBack,
+                    icon: const Icon(
+                      Icons.arrow_left,
+                      color: Colors.white
+                    )
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: IconButton(
+                    onPressed: () {
+                      widget.onVolumeIconPressed();
+                      setState(() {
+                        _controller.value.volume == 0
+                          ? _controller.setVolume(1.0)
+                          : _controller.setVolume(0.0);
+                      });
+                    },
+                    icon: Icon(
+                      _controller.value.volume == 0
+                          ? Icons.volume_off
+                          : Icons.volume_up,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                  ),
+                ),
+              ]
+            ),
+          ),
+          VideoProgressIndicator(
+            padding: const EdgeInsets.all(0),
+              _controller,
+              colors: VideoProgressColors(
+                playedColor: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 32,),
-              Text(
-                widget.title,
-                style: Theme.of(context).textTheme.titleMedium
-              )
-            ],
+              allowScrubbing: false
           ),
         ]
       ),

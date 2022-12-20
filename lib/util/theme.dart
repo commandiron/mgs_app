@@ -37,37 +37,5 @@ class MyTheme {
     ),
   );
 
-  static Color backgroundDark = Colors.black;
-
-  static ThemeData dark = ThemeData(
-    colorScheme: ColorScheme.dark(
-        primary: primaryLight,
-        secondary: secondaryLight,
-        background: backgroundDark
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: backgroundDark,
-    ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: backgroundDark,
-      selectedItemColor: primaryLight,
-      unselectedItemColor: Colors.grey.shade400,
-    ),
-    textTheme: const TextTheme(
-      headlineMedium: TextStyle(
-          fontWeight: FontWeight.bold
-      ),
-      headlineSmall: TextStyle(
-          fontWeight: FontWeight.bold
-      ),
-      titleLarge: TextStyle(
-          fontWeight: FontWeight.bold
-      ),
-    ),
-    textSelectionTheme: TextSelectionThemeData(
-        cursorColor: primaryLight,
-        selectionColor: primaryLight,
-        selectionHandleColor: primaryLight
-    ),
-  );
+  static ThemeData dark = MyTheme.light;
 }
