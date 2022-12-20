@@ -61,7 +61,7 @@ class _ClipsPageState extends State<ClipsPage> {
         },
         child: PageView.builder(
           controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return ClipsVideoPlayer(
               shouldStart: _shouldStart,
