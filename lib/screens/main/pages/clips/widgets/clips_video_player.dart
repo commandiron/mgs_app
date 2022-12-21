@@ -56,7 +56,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
         AspectRatio(
           aspectRatio: 16 / 9,
@@ -127,11 +127,12 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
           ),
         ),
         VideoProgressIndicator(
-            _controller,
-            colors: VideoProgressColors(
-              playedColor: Theme.of(context).colorScheme.primary,
-            ),
-            allowScrubbing: false
+          _controller,
+          padding: const EdgeInsets.all(0),
+          colors: VideoProgressColors(
+            playedColor: Theme.of(context).colorScheme.primary,
+          ),
+          allowScrubbing: false
         ),
       ]
     );
