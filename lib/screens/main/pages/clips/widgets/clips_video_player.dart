@@ -65,7 +65,11 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
-                VideoPlayer(_controller,),
+                ClipRRect(
+                  child: VideoPlayer(_controller,),
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 InkWell(
                   onTap: () {
                     _controller.pause();
@@ -75,14 +79,13 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                     color: Colors.black.withOpacity(
                       _controller.value.isPlaying ? 0.0 : 0.5
                     ),
-                    child: !_controller.value.isPlaying ? IconButton(
-                      iconSize: 64,
-                      onPressed: () {
-                        _controller.play();
-                      },
-                      icon: Icon(
+                    child: !_controller.value.isPlaying ? CircleAvatar(
+                      backgroundColor: Colors.grey.shade300.withOpacity(0.2),
+                      maxRadius: 50,
+                      child: const Icon(
                         Icons.play_arrow,
-                        color: Colors.white.withOpacity(0.5)
+                        color: Colors.white,
+                        size: 20,
                       ),
                     ) : null
                   ),
@@ -130,7 +133,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
             ),
           ),
           VideoProgressIndicator(
-            padding: const EdgeInsets.all(0),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
               _controller,
               colors: VideoProgressColors(
                 playedColor: Theme.of(context).colorScheme.primary,
