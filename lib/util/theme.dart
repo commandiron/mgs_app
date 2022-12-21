@@ -4,7 +4,7 @@ class MyTheme {
 
   static Color primaryLight = const Color(0xffaf0000);
   static Color secondaryLight = const Color(0xffFF6F6F);
-  static Color backgroundLight = Colors.grey.shade100;
+  static Color backgroundLight = Colors.grey.shade200;
 
   static ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
