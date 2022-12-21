@@ -47,65 +47,17 @@ class _ClipsPageState extends State<ClipsPage> {
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 8,
-                    color: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      side: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                        strokeAlign: StrokeAlign.inside
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 20,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 20,),
-                              Text(
-                                clips[index % clips.length].title,
-                                style: Theme.of(context).textTheme.headlineSmall,
-                              ),
-                              SizedBox(height: 20,),
-                              Text(
-                                clips[index % clips.length].title,
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 30,),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(32),
-                          child: ClipsVideoPlayer(
-                            clipPath: clips[index % clips.length].clipPath,
-                            initialVolume: _volume,
-                            onVolumeIconPressed: () {
-                              _volume == 0 ? _volume = 1 : _volume = 0;
-                            },
-                            onNext: toNextPage,
-                            onBack: toPreviousPage,
-                            onEnd: toNextPage,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            return ClipsVideoPlayer(
+              clipPath: clips[index % clips.length].clipPath,
+              title: clips[index % clips.length].title,
+              subTitle: clips[index % clips.length].title,
+              initialVolume: _volume,
+              onVolumeIconPressed: () {
+                _volume == 0 ? _volume = 1 : _volume = 0;
+              },
+              onNext: toNextPage,
+              onBack: toPreviousPage,
+              onEnd: toNextPage,
             );
           },
         ),
