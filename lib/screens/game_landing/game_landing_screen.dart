@@ -15,6 +15,7 @@ class GameLandingScreen extends StatelessWidget {
     final game = Provider.of<Games>(context).findById(id);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: MediaQuery.of(context).padding,
         child: Column(

@@ -24,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       extendBody: true,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: MyAppBar(
         onSearchTextChange: (value) {
           setState(() {

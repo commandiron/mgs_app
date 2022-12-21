@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
 
-  static Color primary = const Color(0xffaf0000);
-  static Color secondary = const Color(0xffFF6F6F);
+  static Color primaryLight = const Color(0xffaf0000);
+  static Color secondaryLight = const Color(0xffFF6F6F);
+  static Color backgroundLight = Colors.grey.shade100;
 
-  static ThemeData myThemeData = ThemeData(
+  static ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
-      primary: primary,
-      secondary: secondary
+      primary: primaryLight,
+      secondary: secondaryLight,
+      background: backgroundLight
     ),
     appBarTheme: const AppBarTheme(
       color: Colors.white,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedItemColor: primary,
+      selectedItemColor: primaryLight,
       unselectedItemColor: Colors.grey.shade400,
-
     ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
@@ -30,9 +31,11 @@ class MyTheme {
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: primary,
-      selectionColor: primary,
-      selectionHandleColor: primary
+      cursorColor: primaryLight,
+      selectionColor: primaryLight,
+      selectionHandleColor: primaryLight
     ),
   );
+
+  static ThemeData dark = MyTheme.light;
 }
