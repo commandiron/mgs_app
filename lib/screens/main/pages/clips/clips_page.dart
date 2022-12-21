@@ -54,14 +54,14 @@ class _ClipsPageState extends State<ClipsPage> {
               ),
               color: Colors.grey.shade300,
               child: Padding(
-                padding: EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.only(top: 30),
                 child: Column(
                   children: [
                     Text(
                         clips[index % clips.length].title,
                         style: Theme.of(context).textTheme.titleMedium
                     ),
-                    SizedBox(height: 32,),
+                    const SizedBox(height: 32,),
                     ClipsVideoPlayer(
                       clipPath: clips[index % clips.length].clipPath,
                       initialVolume: _volume,
