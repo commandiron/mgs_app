@@ -19,20 +19,20 @@ class _MainScreenState extends State<MainScreen> {
 
   final PageController _pageController = PageController();
   String _searchText = "";
-  bool _showNavBar = true;
+  bool _showBars = true;
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: MyAppBar(
+      appBar: _showBars ? MyAppBar(
         onSearchTextChange: (value) {
           setState(() {
             _searchText = value;
           });
         },
-      ),
+      ): null,
       body: Stack(
         children: [
           PageView(
@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
               ClipsPage(
                 onExpandCollapse: (isFullScreen) {
                   setState(() {
-                    _showNavBar = !isFullScreen;
+                    _showBars = !isFullScreen;
                   });
                 },
               )
@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
             const SearchPage(),
         ],
       ),
-      bottomNavigationBar: _showNavBar ? MyBottomNavigationBar(
+      bottomNavigationBar: _showBars ? MyBottomNavigationBar(
         onTab: (index) {
           _pageController.animateToPage(
               index,
@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ): null,
-      floatingActionButton: _showNavBar ?SizedBox(
+      floatingActionButton: _showBars ?SizedBox(
         height: 46,
         child: Image.asset("assets/images/foxhound_logo.png")
       ): null,
