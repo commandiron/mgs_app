@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/clips.dart';
 import 'package:provider/provider.dart';
-import 'widgets/clips_video_player.dart';
+import 'widgets/clip_card.dart';
 
 class ClipsPage extends StatefulWidget {
   const ClipsPage({Key? key}) : super(key: key);
@@ -47,7 +47,7 @@ class _ClipsPageState extends State<ClipsPage> {
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return ClipsVideoPlayer(
+            return ClipCard(
               clip: clips[index % clips.length],
               initialVolume: _volume,
               onVolumeIconPressed: () {

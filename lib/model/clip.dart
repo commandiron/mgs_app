@@ -1,8 +1,19 @@
 class Clip {
   final int id;
-  final String title;
   final String clipPath;
-  final bool isFavorite = false;
+  final String title;
+  final String subTitle;
+  final String avatarImagePath;
+  final bool isFavorite;
 
-  Clip({required this.id, required this.title, required this.clipPath});
+  Clip(
+    {
+      required this.id,
+      required this.clipPath,
+      required this.title,
+      this.subTitle = "",
+      this.avatarImagePath = "assets/images/mgs_main_logo.jpg",
+      this.isFavorite = false,
+    }
+  );
 }
