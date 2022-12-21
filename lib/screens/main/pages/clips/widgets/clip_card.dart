@@ -9,6 +9,8 @@ class ClipCard extends StatefulWidget {
       required this.clip,
       required this.initialVolume,
       required this.onVolumeIconPressed,
+      required this.isFullScreen,
+      required this.onExpandCollapse,
       required this.onNext,
       required this.onBack,
       required this.onEnd,
@@ -19,6 +21,8 @@ class ClipCard extends StatefulWidget {
   final Clip clip;
   final double initialVolume;
   final VoidCallback onVolumeIconPressed;
+  final bool isFullScreen;
+  final VoidCallback onExpandCollapse;
   final VoidCallback onNext;
   final VoidCallback onBack;
   final VoidCallback onEnd;
@@ -30,7 +34,6 @@ class ClipCard extends StatefulWidget {
 class _ClipCardState extends State<ClipCard>  {
 
   late VideoPlayerController _controller;
-  bool _isFullScreen = false;
 
   @override
   void initState() {
@@ -58,20 +61,28 @@ class _ClipCardState extends State<ClipCard>  {
 
   @override
   Widget build(BuildContext context) {
-    return _isFullScreen
+    return widget.isFullScreen
       ? Container(
         color: Colors.black,
-        child: Center(
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Stack(
-              children: [
-                _buildRawVideoPlayer(),
-                _buildStartStopButton(),
-                _buildExpandSoundButton()
-              ],
+        child: Stack(
+          children: [
+            Center(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Stack(
+                  children: [
+                    _buildRawVideoPlayer(),
+                    _buildStartStopButton(),
+                    _buildExpandSoundButton(),
+                  ],
+                )
+              ),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: _buildProgressIndicator(widthFactor: 1.0),
             )
-          ),
+          ],
         ),
       )
       : Column(
@@ -108,9 +119,9 @@ class _ClipCardState extends State<ClipCard>  {
     );
   }
 
-  Widget _buildProgressIndicator() {
+  Widget _buildProgressIndicator({double? widthFactor = 0.4}) {
     return  FractionallySizedBox(
-      widthFactor: 0.5,
+      widthFactor: widthFactor,
       child: SizedBox(
         height: 2,
         child: VideoProgressIndicator(
@@ -268,12 +279,10 @@ class _ClipCardState extends State<ClipCard>  {
         children: [
           IconButton(
             onPressed: () {
-              setState(() {
-                _isFullScreen = !_isFullScreen;
-              });
+              widget.onExpandCollapse();
             },
             icon: Icon(
-                !_isFullScreen ? Icons.fullscreen : Icons.fullscreen_exit
+              !widget.isFullScreen ? Icons.fullscreen : Icons.fullscreen_exit
             ),
             color: Colors.white.withOpacity(0.5),
           ),
