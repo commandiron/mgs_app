@@ -19,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final PageController _pageController = PageController();
   String _searchText = "";
+  bool _showNavBar = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,22 @@ class _MainScreenState extends State<MainScreen> {
           PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
-            children: const [
+            children: [
               CategoriesPage(),
-              ClipsPage()
+              ClipsPage(
+                onExpandCollapse: (isFullScreen) {
+                  setState(() {
+                    _showNavBar = !isFullScreen;
+                  });
+                },
+              )
             ],
           ),
           if(_searchText.isNotEmpty)
             const SearchPage(),
         ],
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
+      bottomNavigationBar: _showNavBar ? MyBottomNavigationBar(
         onTab: (index) {
           _pageController.animateToPage(
               index,
@@ -54,11 +61,11 @@ class _MainScreenState extends State<MainScreen> {
               curve: Curves.fastLinearToSlowEaseIn
           );
         },
-      ),
-      floatingActionButton: SizedBox(
+      ): null,
+      floatingActionButton: _showNavBar ?SizedBox(
         height: 46,
         child: Image.asset("assets/images/foxhound_logo.png")
-      ),
+      ): null,
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked
     );
   }

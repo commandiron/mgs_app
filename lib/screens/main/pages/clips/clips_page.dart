@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'widgets/clip_card.dart';
 
 class ClipsPage extends StatefulWidget {
-  const ClipsPage({Key? key}) : super(key: key);
+const ClipsPage( {required this.onExpandCollapse,Key? key}) : super(key: key);
+
+  final Function(bool) onExpandCollapse;
 
   @override
   State<ClipsPage> createState() => _ClipsPageState();
@@ -59,6 +61,7 @@ class _ClipsPageState extends State<ClipsPage> {
                 setState(() {
                   _isFullScreen = !_isFullScreen;
                 });
+                widget.onExpandCollapse(_isFullScreen);
               },
               onNext: toNextPage,
               onBack: toPreviousPage,
