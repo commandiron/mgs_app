@@ -48,9 +48,7 @@ class _ClipsPageState extends State<ClipsPage> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return ClipsVideoPlayer(
-              clipPath: clips[index % clips.length].clipPath,
-              title: clips[index % clips.length].title,
-              subTitle: clips[index % clips.length].title,
+              clip: clips[index % clips.length],
               initialVolume: _volume,
               onVolumeIconPressed: () {
                 _volume == 0 ? _volume = 1 : _volume = 0;

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:mgs_app/model/clip.dart';
 
 
 class ClipsVideoPlayer extends StatefulWidget {
   const ClipsVideoPlayer(
     {
-      required this.clipPath,
-      required this.title,
-      required this.subTitle,
+      required this.clip,
       required this.initialVolume,
       required this.onVolumeIconPressed,
       required this.onNext,
@@ -17,9 +16,7 @@ class ClipsVideoPlayer extends StatefulWidget {
     }
   ) : super(key: key);
 
-  final String clipPath;
-  final String title;
-  final String subTitle;
+  final Clip clip;
   final double initialVolume;
   final VoidCallback onVolumeIconPressed;
   final VoidCallback onNext;
@@ -33,11 +30,12 @@ class ClipsVideoPlayer extends StatefulWidget {
 class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
   late VideoPlayerController _controller;
+  bool _isFullScreen = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.clipPath);
+    _controller = VideoPlayerController.asset(widget.clip.clipPath);
     _controller.setVolume(widget.initialVolume);
     _controller.initialize().then((value) {
       _controller.play();
@@ -58,9 +56,20 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
     super.dispose();
   }
 
+  Widget _buildFullScreen() {
+    return Container(
+      color: Colors.black,
+    );
+  }
+
+  Widget _buildNormalScreen() {
+    return
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -69,14 +78,35 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(32),
               side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 1,
-                  strokeAlign: StrokeAlign.inside
+                color: Theme.of(context).colorScheme.primary,
+                width: 1,
+                strokeAlign: StrokeAlign.inside
               ),
             ),
             child: Column(
               children: [
-                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.background,
+                        child: Image.asset("assets/images/mgs_main_logo.jpg")
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.background,
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: widget.clip.isFavorite ? Colors.red : Colors.white
+                            )
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 30,
@@ -84,14 +114,13 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20,),
                       Text(
-                        widget.title,
+                        widget.clip.title,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 20,),
                       Text(
-                        widget.subTitle,
+                        widget.clip.title,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ],
@@ -115,12 +144,12 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
                           },
                           child: Container(
-                              alignment: Alignment.center,
-                              color: Colors.black.withOpacity(
-                                  _controller.value.isPlaying ? 0.0 : 0.5
-                              ),
-                              child: !_controller.value.isPlaying
-                                  ? CircleAvatar(
+                            alignment: Alignment.center,
+                            color: Colors.black.withOpacity(
+                              _controller.value.isPlaying ? 0.0 : 0.5
+                            ),
+                            child: !_controller.value.isPlaying
+                              ? CircleAvatar(
                                 backgroundColor: Colors.grey.shade300.withOpacity(0.2),
                                 maxRadius: 50,
                                 child: const Icon(
@@ -129,7 +158,7 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                                   size: 20,
                                 ),
                               )
-                                  : null
+                              : null
                           ),
                         ),
                         Container(
@@ -155,21 +184,31 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
                         Container(
                           alignment: Alignment.bottomRight,
                           padding: const EdgeInsets.all(10.0),
-                          child: IconButton(
-                            onPressed: () {
-                              widget.onVolumeIconPressed();
-                              setState(() {
-                                _controller.value.volume == 0
-                                    ? _controller.setVolume(1.0)
-                                    : _controller.setVolume(0.0);
-                              });
-                            },
-                            icon: Icon(
-                              _controller.value.volume == 0
-                                  ? Icons.volume_off
-                                  : Icons.volume_up,
-                              color: Colors.white.withOpacity(0.5),
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.fullscreen),
+                                color: Colors.white.withOpacity(0.5),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  widget.onVolumeIconPressed();
+                                  setState(() {
+                                    _controller.value.volume == 0
+                                        ? _controller.setVolume(1.0)
+                                        : _controller.setVolume(0.0);
+                                  });
+                                },
+                                icon: Icon(
+                                  _controller.value.volume == 0
+                                      ? Icons.volume_off
+                                      : Icons.volume_up,
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
