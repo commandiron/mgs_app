@@ -30,7 +30,6 @@ class ClipsVideoPlayer extends StatefulWidget {
 class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
   late VideoPlayerController _controller;
-  bool _isFullScreen = false;
 
   @override
   void initState() {
@@ -54,16 +53,6 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
       _controller.dispose();
     });
     super.dispose();
-  }
-
-  Widget _buildFullScreen() {
-    return Container(
-      color: Colors.black,
-    );
-  }
-
-  Widget _buildNormalScreen() {
-    return
   }
 
   @override
