@@ -56,92 +56,84 @@ class _ClipsVideoPlayerState extends State<ClipsVideoPlayer>  {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: MediaQuery.of(context).padding,
-      child: Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                ClipRRect(
-                  child: VideoPlayer(_controller,),
-                  clipBehavior: Clip.hardEdge,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                InkWell(
-                  onTap: () {
-                    _controller.pause();
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.black.withOpacity(
-                      _controller.value.isPlaying ? 0.0 : 0.5
+    return Stack(
+      children: [
+        AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              VideoPlayer(_controller,),
+              InkWell(
+                onTap: () {
+                  _controller.pause();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Colors.black.withOpacity(
+                    _controller.value.isPlaying ? 0.0 : 0.5
+                  ),
+                  child: !_controller.value.isPlaying ? CircleAvatar(
+                    backgroundColor: Colors.grey.shade300.withOpacity(0.2),
+                    maxRadius: 50,
+                    child: const Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                      size: 20,
                     ),
-                    child: !_controller.value.isPlaying ? CircleAvatar(
-                      backgroundColor: Colors.grey.shade300.withOpacity(0.2),
-                      maxRadius: 50,
-                      child: const Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ) : null
-                  ),
+                  ) : null
                 ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                      onPressed: widget.onNext,
-                      icon: const Icon(
-                        Icons.arrow_right,
-                        color: Colors.white,
-                      )
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    onPressed: widget.onBack,
-                    icon: const Icon(
-                      Icons.arrow_left,
-                      color: Colors.white
-                    )
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {
-                      widget.onVolumeIconPressed();
-                      setState(() {
-                        _controller.value.volume == 0
-                          ? _controller.setVolume(1.0)
-                          : _controller.setVolume(0.0);
-                      });
-                    },
-                    icon: Icon(
-                      _controller.value.volume == 0
-                          ? Icons.volume_off
-                          : Icons.volume_up,
-                      color: Colors.white.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-              ]
-            ),
-          ),
-          VideoProgressIndicator(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-              _controller,
-              colors: VideoProgressColors(
-                playedColor: Theme.of(context).colorScheme.primary,
               ),
-              allowScrubbing: false
+              Container(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                    onPressed: widget.onNext,
+                    icon: const Icon(
+                      Icons.arrow_right,
+                      color: Colors.white,
+                    )
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                  onPressed: widget.onBack,
+                  icon: const Icon(
+                    Icons.arrow_left,
+                    color: Colors.white
+                  )
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: IconButton(
+                  onPressed: () {
+                    widget.onVolumeIconPressed();
+                    setState(() {
+                      _controller.value.volume == 0
+                        ? _controller.setVolume(1.0)
+                        : _controller.setVolume(0.0);
+                    });
+                  },
+                  icon: Icon(
+                    _controller.value.volume == 0
+                        ? Icons.volume_off
+                        : Icons.volume_up,
+                    color: Colors.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+            ]
           ),
-        ]
-      ),
+        ),
+        VideoProgressIndicator(
+            _controller,
+            colors: VideoProgressColors(
+              playedColor: Theme.of(context).colorScheme.primary,
+            ),
+            allowScrubbing: false
+        ),
+      ]
     );
   }
 }
