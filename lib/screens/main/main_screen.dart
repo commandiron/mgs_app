@@ -35,13 +35,14 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   PreferredSizeWidget? _buildAppBar() {
-    return _showBars ? MyAppBar(
+    return MyAppBar(
+      visible: _showBars,
       onSearchTextChange: (value) {
         setState(() {
           _searchText = value;
         });
       },
-    ): null;
+    );
   }
 
   Widget _buildBody() {
@@ -68,16 +69,19 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget? _buildNavigationBar() {
-    return SizedBox(
-      height: _showBars ? 56.0 : 0.0,
-      child: MyBottomNavigationBar(
-        onTab: (index) {
-          _pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.fastLinearToSlowEaseIn
-          );
-        },
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 200),
+      child: SizedBox(
+        height: _showBars ? 56.0 : 0.0,
+        child: MyBottomNavigationBar(
+          onTab: (index) {
+            _pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.fastLinearToSlowEaseIn
+            );
+          },
+        ),
       ),
     );
   }
