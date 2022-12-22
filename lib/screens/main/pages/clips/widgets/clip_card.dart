@@ -3,8 +3,8 @@ import 'package:video_player/video_player.dart';
 import 'package:mgs_app/model/clip.dart';
 
 
-class ClipCard extends StatefulWidget {
-  const ClipCard(
+class ClipView extends StatefulWidget {
+  const ClipView(
     {
       required this.clip,
       required this.initialVolume,
@@ -28,10 +28,10 @@ class ClipCard extends StatefulWidget {
   final VoidCallback onEnd;
 
   @override
-  State<ClipCard> createState() => _ClipCardState();
+  State<ClipView> createState() => _ClipViewState();
 }
 
-class _ClipCardState extends State<ClipCard>  {
+class _ClipViewState extends State<ClipView>  {
 
   late VideoPlayerController _controller;
 
@@ -82,6 +82,37 @@ class _ClipCardState extends State<ClipCard>  {
                   ],
                 )
             ),
+          ),
+          Container(
+            alignment: Alignment.topRight,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 64
+            ),
+            child: Column(
+              children: [
+                _logoIcon(),
+                const SizedBox(height: 10,),
+                _likeIcon()
+              ],
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildTitleText(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.white
+                ),
+              ),
+              _buildSubTitleText(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Colors.white
+                ),
+              )
+            ],
           ),
           Container(
             alignment: Alignment.bottomCenter,
@@ -168,27 +199,40 @@ class _ClipCardState extends State<ClipCard>  {
     );
   }
 
-  Widget _buildCardHeader() {
+  Widget _buildCardHeader(
+    {
+      EdgeInsetsGeometry padding =
+        const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32)
+    }
+  ) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
+      padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.background,
-              child: Image.asset(widget.clip.avatarImagePath)
-          ),
-          CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.background,
-            child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                    widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: widget.clip.isFavorite ? Colors.red : Colors.white
-                )
-            ),
-          ),
+          _logoIcon(),
+          _likeIcon()
         ],
+      ),
+    );
+  }
+
+  Widget _logoIcon() {
+    return CircleAvatar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        child: Image.asset(widget.clip.avatarImagePath)
+    );
+  }
+
+  Widget _likeIcon() {
+    return CircleAvatar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      child: IconButton(
+          onPressed: () {},
+          icon: Icon(
+              widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: widget.clip.isFavorite ? Colors.red : Colors.white
+          )
       ),
     );
   }
@@ -205,10 +249,7 @@ class _ClipCardState extends State<ClipCard>  {
             children: [
               Expanded(
                 flex: 2,
-                child: Text(
-                  widget.clip.title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
+                child: _buildTitleText()
               ),
               const Expanded(flex: 1, child: SizedBox())
             ],
@@ -218,16 +259,35 @@ class _ClipCardState extends State<ClipCard>  {
           Column(
             children: [
               const SizedBox(height: 10,),
-              Text(
-                widget.clip.subTitle,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.black38
-                ),
-              )
+              _buildSubTitleText()
             ],
           )
-          : SizedBox.shrink()
+          : const SizedBox.shrink()
         ],
+      ),
+    );
+  }
+
+  Widget _buildTitleText(
+    {
+      TextStyle? style
+    }
+  ) {
+    return Text(
+      widget.clip.title,
+      style: style ?? Theme.of(context).textTheme.headlineSmall,
+    );
+  }
+
+  Widget _buildSubTitleText(
+      {
+        TextStyle? style
+      }
+  ) {
+    return Text(
+      widget.clip.subTitle,
+      style: style ?? Theme.of(context).textTheme.titleSmall?.copyWith(
+          color: Colors.black38
       ),
     );
   }

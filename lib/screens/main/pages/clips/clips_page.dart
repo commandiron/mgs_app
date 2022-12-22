@@ -50,7 +50,7 @@ class _ClipsPageState extends State<ClipsPage> {
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return ClipCard(
+            return ClipView(
               clip: clips[index % clips.length],
               initialVolume: _volume,
               isExpanded: _isExpanded,
