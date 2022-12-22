@@ -9,7 +9,7 @@ class ClipCard extends StatefulWidget {
       required this.clip,
       required this.initialVolume,
       required this.onVolumeIconPressed,
-      required this.isFullScreen,
+      required this.isExpanded,
       required this.onExpandCollapse,
       required this.onNext,
       required this.onBack,
@@ -21,7 +21,7 @@ class ClipCard extends StatefulWidget {
   final Clip clip;
   final double initialVolume;
   final VoidCallback onVolumeIconPressed;
-  final bool isFullScreen;
+  final bool isExpanded;
   final VoidCallback onExpandCollapse;
   final VoidCallback onNext;
   final VoidCallback onBack;
@@ -61,13 +61,18 @@ class _ClipCardState extends State<ClipCard>  {
 
   @override
   Widget build(BuildContext context) {
-    return widget.isFullScreen
-      ? Container(
-        color: Colors.black,
-        child: Stack(
-          children: [
-            Center(
-              child: AspectRatio(
+    return widget.isExpanded
+      ? _buildExpandedView()
+      : _buildCollapsedView();
+  }
+
+  Widget _buildExpandedView() {
+    return Container(
+      color: Colors.black,
+      child: Stack(
+        children: [
+          Center(
+            child: AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Stack(
                   children: [
@@ -76,25 +81,55 @@ class _ClipCardState extends State<ClipCard>  {
                     _buildExpandSoundButton(),
                   ],
                 )
-              ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: _buildProgressIndicator(widthFactor: 1.0),
-            )
-          ],
-        ),
-      )
-      : Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _buildCard()
           ),
-          _buildProgressIndicator()
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: _buildProgressIndicator(widthFactor: 1.0),
+          )
         ],
-      );
+      ),
+    );
+  }
+
+  Widget _buildCollapsedView() {
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if(orientation == Orientation.portrait) {
+          return _buildPortraitView();
+        } else {
+          return _buildLandscapeView();
+        }
+      },
+    );
+  }
+
+  Widget _buildPortraitView() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: _buildCard()
+        ),
+        _buildProgressIndicator()
+      ],
+    );
+  }
+
+  Widget _buildLandscapeView() {
+    return Center(
+      child:
+      AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              _buildVideoPlayer()
+            ],
+          )
+      ),
+    );
   }
 
   Widget _buildCard() {
@@ -282,7 +317,7 @@ class _ClipCardState extends State<ClipCard>  {
               widget.onExpandCollapse();
             },
             icon: Icon(
-              !widget.isFullScreen ? Icons.fullscreen : Icons.fullscreen_exit
+              !widget.isExpanded ? Icons.fullscreen : Icons.fullscreen_exit
             ),
             color: Colors.white.withOpacity(0.5),
           ),

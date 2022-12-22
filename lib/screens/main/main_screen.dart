@@ -41,9 +41,9 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               CategoriesPage(),
               ClipsPage(
-                onExpandCollapse: (isFullScreen) {
+                onExpandCollapse: (isClipExpanded) {
                   setState(() {
-                    _showBars = !isFullScreen;
+                    _showBars = !isClipExpanded;
                   });
                 },
               )

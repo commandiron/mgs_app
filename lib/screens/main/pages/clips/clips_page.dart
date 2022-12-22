@@ -16,7 +16,7 @@ class _ClipsPageState extends State<ClipsPage> {
 
   final PageController _pageController = PageController();
   var _volume = 0.0;
-  bool _isFullScreen = false;
+  bool _isExpanded = false;
 
   void toNextPage() {
     _pageController.nextPage(
@@ -53,15 +53,15 @@ class _ClipsPageState extends State<ClipsPage> {
             return ClipCard(
               clip: clips[index % clips.length],
               initialVolume: _volume,
-              isFullScreen: _isFullScreen,
+              isExpanded: _isExpanded,
               onVolumeIconPressed: () {
                 _volume == 0 ? _volume = 1 : _volume = 0;
               },
               onExpandCollapse: () {
                 setState(() {
-                  _isFullScreen = !_isFullScreen;
+                  _isExpanded = !_isExpanded;
                 });
-                widget.onExpandCollapse(_isFullScreen);
+                widget.onExpandCollapse(_isExpanded);
               },
               onNext: toNextPage,
               onBack: toPreviousPage,
