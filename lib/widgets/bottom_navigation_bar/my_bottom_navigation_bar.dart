@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mgs_app/screens/main/pages/categories/categories_page.dart';
-
-import '../../screens/main/pages/clips/clips_page.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
 

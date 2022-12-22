@@ -68,15 +68,18 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget? _buildNavigationBar() {
-    return _showBars ? MyBottomNavigationBar(
-      onTab: (index) {
-        _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.fastLinearToSlowEaseIn
-        );
-      },
-    ): null;
+    return SizedBox(
+      height: _showBars ? 56.0 : 0.0,
+      child: MyBottomNavigationBar(
+        onTab: (index) {
+          _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.fastLinearToSlowEaseIn
+          );
+        },
+      ),
+    );
   }
 
   Widget? _buildFab() {

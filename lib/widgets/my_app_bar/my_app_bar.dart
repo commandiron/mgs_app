@@ -9,7 +9,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title:  Row(
+      title: Row(
         children: <Widget>[
           Image.asset(
             "assets/images/mgs_main_logo.jpg",
