@@ -17,7 +17,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
 
-    final categories = Provider.of<Categories>(context).items;
+    final categories = Provider.of<Categories>(context, listen: false).items;
     final scrollController = ScrollController();
 
     return RawScrollbar(
@@ -28,8 +28,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
       child: ListView.builder(
         controller: scrollController,
         itemCount: categories.length,
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height / 4
+        padding: const EdgeInsets.only(
+          bottom: 100
         ),
         itemBuilder: (context, index) => CategoryItem(
           category: categories[index],

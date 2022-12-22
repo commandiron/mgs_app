@@ -12,7 +12,7 @@ class GameLandingScreen extends StatelessWidget {
 
     final id = ModalRoute.of(context)!.settings.arguments as int;
 
-    final game = Provider.of<Games>(context).findById(id);
+    final game = Provider.of<Games>(context, listen: false).findById(id);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,

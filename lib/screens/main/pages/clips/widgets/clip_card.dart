@@ -137,11 +137,6 @@ class _ClipCardState extends State<ClipCard>  {
       elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(32),
-        side: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-            width: 1,
-            strokeAlign: StrokeAlign.inside
-        ),
       ),
       child: Column(
         children: [
@@ -175,7 +170,7 @@ class _ClipCardState extends State<ClipCard>  {
 
   Widget _buildCardHeader() {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -206,15 +201,32 @@ class _ClipCardState extends State<ClipCard>  {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.clip.title,
-            style: Theme.of(context).textTheme.headlineSmall,
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  widget.clip.title,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+              const Expanded(flex: 1, child: SizedBox())
+            ],
           ),
-          const SizedBox(height: 20,),
-          Text(
-            widget.clip.subTitle,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
+          widget.clip.subTitle.isNotEmpty
+          ?
+          Column(
+            children: [
+              const SizedBox(height: 10,),
+              Text(
+                widget.clip.subTitle,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Colors.black38
+                ),
+              )
+            ],
+          )
+          : SizedBox.shrink()
         ],
       ),
     );

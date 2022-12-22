@@ -19,7 +19,7 @@ class _GamesScreenState extends State<GamesScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final games = Provider.of<Games>(context).items;
+    final games = Provider.of<Games>(context, listen: false).items;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -31,6 +31,7 @@ class _GamesScreenState extends State<GamesScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 46),
               child: ListView.builder(
+                physics: const ClampingScrollPhysics(),
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 itemCount: games.length,
@@ -38,8 +39,8 @@ class _GamesScreenState extends State<GamesScreen> {
                   game: games[index],
                   onTab: () {
                     Navigator.of(context).pushNamed(
-                        GameLandingScreen.route,
-                        arguments: games[index].id
+                      GameLandingScreen.route,
+                      arguments: games[index].id
                     );
                   }
                 )

@@ -26,47 +26,63 @@ class _MainScreenState extends State<MainScreen> {
     return  Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: _showBars ? MyAppBar(
-        onSearchTextChange: (value) {
-          setState(() {
-            _searchText = value;
-          });
-        },
-      ): null,
-      body: Stack(
-        children: [
-          PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _pageController,
-            children: [
-              CategoriesPage(),
-              ClipsPage(
-                onExpandCollapse: (isClipExpanded) {
-                  setState(() {
-                    _showBars = !isClipExpanded;
-                  });
-                },
-              )
-            ],
-          ),
-          if(_searchText.isNotEmpty)
-            const SearchPage(),
-        ],
-      ),
-      bottomNavigationBar: _showBars ? MyBottomNavigationBar(
-        onTab: (index) {
-          _pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.fastLinearToSlowEaseIn
-          );
-        },
-      ): null,
-      floatingActionButton: _showBars ?SizedBox(
-        height: 46,
-        child: Image.asset("assets/images/foxhound_logo.png")
-      ): null,
+      appBar: _buildAppBar(),
+      body: _buildBody(),
+      bottomNavigationBar: _buildNavigationBar(),
+      floatingActionButton: _buildFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked
     );
+  }
+
+  PreferredSizeWidget? _buildAppBar() {
+    return _showBars ? MyAppBar(
+      onSearchTextChange: (value) {
+        setState(() {
+          _searchText = value;
+        });
+      },
+    ): null;
+  }
+
+  Widget _buildBody() {
+    return Stack(
+      children: [
+        PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: [
+            const CategoriesPage(),
+            ClipsPage(
+              onExpandCollapse: (isClipExpanded) {
+                setState(() {
+                  _showBars = !isClipExpanded;
+                });
+              },
+            )
+          ],
+        ),
+        if(_searchText.isNotEmpty)
+          const SearchPage(),
+      ],
+    );
+  }
+
+  Widget? _buildNavigationBar() {
+    return _showBars ? MyBottomNavigationBar(
+      onTab: (index) {
+        _pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.fastLinearToSlowEaseIn
+        );
+      },
+    ): null;
+  }
+
+  Widget? _buildFab() {
+    return _showBars ?SizedBox(
+        height: 46,
+        child: Image.asset("assets/images/foxhound_logo.png")
+    ): null;
   }
 }

@@ -12,35 +12,35 @@ class CategoryItem extends StatelessWidget {
     return InkWell(
       onTap: onTab,
       child: Container(
-          height: MediaQuery.of(context).size.height / 6,
-          margin: const EdgeInsets.symmetric(
-            vertical: 2,
-            horizontal: 4
+        height: MediaQuery.of(context).size.height / 6,
+        margin: const EdgeInsets.symmetric(
+          vertical: 2,
+          horizontal: 4
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(category.imageUrl, scale: 0.2)
           ),
+        ),
+        child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(category.imageUrl, scale: 0.2)
+            color: Colors.black.withOpacity(0.25)
+          ),
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Text(
+              category.title,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              )
             ),
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.black.withOpacity(0.25)
-            ),
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: Text(
-                category.title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white
-                )
-              ),
-            ),
-          )
+        )
       ),
     );
   }

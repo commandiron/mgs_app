@@ -6,12 +6,14 @@ class Clips with ChangeNotifier {
   final List<Clip> _items = [
     Clip(
         id: 0,
-        title: "Metal Gear Solid - Theme",
+        title: "Theme",
+        subTitle: "Game: Metal Gear Solid",
         clipPath: "assets/videos/mgs_theme.mp4"
     ),
     Clip(
         id: 1,
-        title: "Metal Gear Solid - Game Over Screen",
+        title: "Game Over Screen",
+        subTitle: "Game: Metal Gear Solid",
         clipPath: "assets/videos/mgs_game_over.mp4"
     ),
   ];
