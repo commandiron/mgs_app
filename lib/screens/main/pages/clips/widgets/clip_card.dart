@@ -78,7 +78,7 @@ class _ClipViewState extends State<ClipView>  {
                   children: [
                     _buildRawVideoPlayer(),
                     _buildStartStopButton(),
-                    _buildExpandSoundButton(),
+                    _buildExpandAndSoundButton(),
                   ],
                 )
             ),
@@ -91,28 +91,35 @@ class _ClipViewState extends State<ClipView>  {
             ),
             child: Column(
               children: [
-                _logoIcon(),
+                _logoIcon(borderColor: Colors.white.withOpacity(0.4)),
                 const SizedBox(height: 10,),
-                _likeIcon()
+                _likeIcon(
+                  borderColor: Colors.white.withOpacity(0.4),
+                  iconColor: Colors.white.withOpacity(0.4)
+                )
               ],
             ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildTitleText(
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildTitleText(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.white
+                  ),
                 ),
-              ),
-              _buildSubTitleText(
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Colors.white
-                ),
-              )
-            ],
+                _buildSubTitleText(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: Colors.white54
+                  ),
+                )
+              ],
+            ),
           ),
           Container(
             alignment: Alignment.bottomCenter,
@@ -217,23 +224,40 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _logoIcon() {
-    return CircleAvatar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        child: Image.asset(widget.clip.avatarImagePath)
+  Widget _logoIcon({Color? borderColor}) {
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 2,
+            color: borderColor ?? Colors.black.withOpacity(0.2)
+          ),
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: Image.asset(widget.clip.avatarImagePath),
+      )
     );
   }
 
-  Widget _likeIcon() {
-    return CircleAvatar(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      child: IconButton(
-          onPressed: () {},
-          icon: Icon(
-              widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: widget.clip.isFavorite ? Colors.red : Colors.white
-          )
-      ),
+  Widget _likeIcon({Color? borderColor, Color? iconColor}) {
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 2,
+            color: borderColor ?? Colors.black.withOpacity(0.2)
+          ),
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: Icon(
+          widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
+          color: widget.clip.isFavorite ? Colors.red : iconColor ?? Colors.black.withOpacity(0.2)
+        ),
+      )
     );
   }
 
@@ -316,7 +340,7 @@ class _ClipViewState extends State<ClipView>  {
       children: [
         _buildStartStopButton(),
         _buildBackNextButton(),
-        _buildExpandSoundButton()
+        _buildExpandAndSoundButton()
       ]
     );
   }
@@ -377,7 +401,7 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _buildExpandSoundButton() {
+  Widget _buildExpandAndSoundButton() {
     return Container(
       alignment: Alignment.bottomRight,
       padding: const EdgeInsets.all(10.0),
