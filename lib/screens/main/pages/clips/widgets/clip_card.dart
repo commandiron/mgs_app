@@ -178,7 +178,10 @@ class _ClipViewState extends State<ClipView>  {
       ),
       child: Column(
         children: [
-          _buildCardHeader(),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
+            child: _buildCardHeader()
+          ),
           _buildCardBody(),
           const SizedBox(height: 30,),
           _buildVideoPlayer()
@@ -206,21 +209,13 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _buildCardHeader(
-    {
-      EdgeInsetsGeometry padding =
-        const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32)
-    }
-  ) {
-    return Padding(
-      padding: padding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _logoIcon(),
-          _likeIcon()
-        ],
-      ),
+  Widget _buildCardHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _logoIcon(),
+        _likeIcon()
+      ],
     );
   }
 
@@ -292,22 +287,14 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _buildTitleText(
-    {
-      TextStyle? style
-    }
-  ) {
+  Widget _buildTitleText({TextStyle? style}) {
     return Text(
       widget.clip.title,
       style: style ?? Theme.of(context).textTheme.headlineSmall,
     );
   }
 
-  Widget _buildSubTitleText(
-      {
-        TextStyle? style
-      }
-  ) {
+  Widget _buildSubTitleText({TextStyle? style}) {
     return Text(
       widget.clip.subTitle,
       style: style ?? Theme.of(context).textTheme.titleSmall?.copyWith(
