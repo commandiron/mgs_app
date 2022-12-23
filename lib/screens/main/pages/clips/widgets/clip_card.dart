@@ -83,50 +83,68 @@ class _ClipViewState extends State<ClipView>  {
                 )
             ),
           ),
-          Container(
-            alignment: Alignment.topRight,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 64
-            ),
-            child: Column(
-              children: [
-                _logoIcon(borderColor: Colors.white.withOpacity(0.4)),
-                const SizedBox(height: 10,),
-                _likeIcon(
-                  borderColor: Colors.white.withOpacity(0.4),
-                  iconColor: Colors.white.withOpacity(0.4)
-                )
-              ],
-            ),
+          _buildExpandedSideIcons(),
+          _buildExpandedFooter()
+        ]
+      ),
+    );
+  }
+
+  Widget _buildExpandedSideIcons() {
+    return Container(
+      alignment: Alignment.topRight,
+      padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 64
+      ),
+      child: Column(
+        children: [
+          _logoIcon(borderColor: Colors.white.withOpacity(0.4)),
+          const SizedBox(height: 10,),
+          _likeIcon(
+            borderColor: Colors.white.withOpacity(0.4),
+            iconColor: Colors.white.withOpacity(0.4),
           ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.only(bottom: 50),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildTitleText(
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white
-                  ),
-                ),
-                _buildSubTitleText(
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white54
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: _buildProgressIndicator(widthFactor: 1.0),
+          const SizedBox(height: 10,),
+          _shareIcon(
+            borderColor: Colors.white.withOpacity(0.4),
+            iconColor: Colors.white.withOpacity(0.4),
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildExpandedFooter() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(bottom: 50),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildTitleText(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.white
+                ),
+              ),
+              _buildSubTitleText(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Colors.white54
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          child: _buildProgressIndicator(widthFactor: 1.0),
+        )
+      ],
     );
   }
 
@@ -214,7 +232,13 @@ class _ClipViewState extends State<ClipView>  {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _logoIcon(),
-        _likeIcon()
+        Row(
+          children: [
+            _shareIcon(),
+            SizedBox(width: 10,),
+            _likeIcon()
+          ],
+        )
       ],
     );
   }
@@ -233,6 +257,26 @@ class _ClipViewState extends State<ClipView>  {
         ),
         child: Image.asset(widget.clip.avatarImagePath),
       )
+    );
+  }
+
+  Widget _shareIcon({Color? borderColor, Color? iconColor}) {
+    return SizedBox(
+        width: 40,
+        height: 40,
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(
+                  width: 2,
+                  color: borderColor ?? Colors.black.withOpacity(0.2)
+              ),
+              borderRadius: BorderRadius.circular(10)
+          ),
+          child: Icon(
+              Icons.share,
+              color: iconColor ?? Colors.black.withOpacity(0.2)
+          ),
+        )
     );
   }
 
