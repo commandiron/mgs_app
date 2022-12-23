@@ -99,15 +99,13 @@ class _ClipViewState extends State<ClipView>  {
       ),
       child: Column(
         children: [
-          _logoIcon(borderColor: Colors.white.withOpacity(0.4)),
+          _logoAvatar(),
           const SizedBox(height: 10,),
           _likeIcon(
-            borderColor: Colors.white.withOpacity(0.4),
             iconColor: Colors.white.withOpacity(0.4),
           ),
           const SizedBox(height: 10,),
           _shareIcon(
-            borderColor: Colors.white.withOpacity(0.4),
             iconColor: Colors.white.withOpacity(0.4),
           )
         ],
@@ -231,7 +229,7 @@ class _ClipViewState extends State<ClipView>  {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _logoIcon(),
+        _logoAvatar(),
         Row(
           children: [
             _shareIcon(),
@@ -243,60 +241,30 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _logoIcon({Color? borderColor}) {
-    return SizedBox(
-      width: 40,
-      height: 40,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: borderColor ?? Colors.black.withOpacity(0.2)
-          ),
-          borderRadius: BorderRadius.circular(10)
-        ),
-        child: Image.asset(widget.clip.avatarImagePath),
-      )
+  Widget _logoAvatar({Color? bgColor}) {
+    return IconButton(
+      onPressed: null,
+      icon: Image.asset(widget.clip.avatarImagePath)
     );
   }
 
-  Widget _shareIcon({Color? borderColor, Color? iconColor}) {
-    return SizedBox(
-        width: 40,
-        height: 40,
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                  width: 2,
-                  color: borderColor ?? Colors.black.withOpacity(0.2)
-              ),
-              borderRadius: BorderRadius.circular(10)
-          ),
-          child: Icon(
-              Icons.share,
-              color: iconColor ?? Colors.black.withOpacity(0.2)
-          ),
-        )
+  Widget _shareIcon({Color? iconColor}) {
+    return IconButton(
+      onPressed: () {},
+      icon: Icon(
+          Icons.share,
+          color: iconColor ?? Colors.black.withOpacity(0.2)
+      ),
     );
   }
 
-  Widget _likeIcon({Color? borderColor, Color? iconColor}) {
-    return SizedBox(
-      width: 40,
-      height: 40,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: borderColor ?? Colors.black.withOpacity(0.2)
-          ),
-          borderRadius: BorderRadius.circular(10)
-        ),
-        child: Icon(
-          widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: widget.clip.isFavorite ? Colors.red : iconColor ?? Colors.black.withOpacity(0.2)
-        ),
-      )
+  Widget _likeIcon({Color? iconColor}) {
+    return IconButton(
+      onPressed: () {},
+      icon: Icon(
+        widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: widget.clip.isFavorite ? Colors.red : iconColor ?? Colors.black.withOpacity(0.2)
+      ),
     );
   }
 

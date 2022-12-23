@@ -12,7 +12,7 @@ class Clip {
       required this.clipPath,
       required this.title,
       this.subTitle = "",
-      this.avatarImagePath = "assets/images/mgs_main_logo.jpg",
+      this.avatarImagePath = "assets/images/games/mgs_logo.png",
       this.isFavorite = false,
     }
   );
