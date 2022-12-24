@@ -202,12 +202,7 @@ class _ClipViewState extends State<ClipView>  {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 32),
-            child: _buildCardHeader()
-          ),
-          _buildCardBody(),
-          const SizedBox(height: 30,),
+          _buildCardHeader(),
           _buildVideoPlayer()
         ],
       ),
@@ -234,47 +229,30 @@ class _ClipViewState extends State<ClipView>  {
   }
 
   Widget _buildCardHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _logoAvatar(),
-        Row(
-          children: [
-            _shareIcon(),
-            const SizedBox(width: 10,),
-            _likeIcon()
-          ],
-        )
-      ],
-    );
-  }
-
-  Widget _buildCardBody() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.all(20),
+      child: Row(
         children: [
-          Row(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: _buildTitleText()
-              ),
-              const Expanded(flex: 1, child: SizedBox())
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTitleText(),
+                _buildSubTitleText()
+              ],
+            )
           ),
-          widget.clip.subTitle.isNotEmpty
-              ?
-          Column(
-            children: [
-              const SizedBox(height: 10,),
-              _buildSubTitleText()
-            ],
+          Expanded(
+            child: Row(
+              children: [
+                const SizedBox(width: 10,),
+                _shareIcon(),
+                const SizedBox(width: 10,),
+                _likeIcon(),
+                _logoAvatar(),
+              ],
+            )
           )
-              : const SizedBox.shrink()
         ],
       ),
     );
