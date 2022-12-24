@@ -66,6 +66,9 @@ class _ClipsPageState extends State<ClipsPage> {
               onNext: toNextPage,
               onBack: toPreviousPage,
               onEnd: toNextPage,
+              onSharePressed: () {
+                
+              },
             );
           },
         ),

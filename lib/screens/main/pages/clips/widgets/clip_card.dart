@@ -14,6 +14,7 @@ class ClipView extends StatefulWidget {
       required this.onNext,
       required this.onBack,
       required this.onEnd,
+      required this.onSharePressed,
       Key? key
     }
   ) : super(key: key);
@@ -26,6 +27,7 @@ class ClipView extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
   final VoidCallback onEnd;
+  final VoidCallback onSharePressed;
 
   @override
   State<ClipView> createState() => _ClipViewState();
@@ -285,7 +287,7 @@ class _ClipViewState extends State<ClipView>  {
 
   Widget _shareIcon({Color? iconColor}) {
     return IconButton(
-      onPressed: () {},
+      onPressed: widget.onSharePressed,
       icon: Icon(
           Icons.share,
           color: iconColor ?? Colors.black.withOpacity(0.2)
