@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/clips.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'widgets/clip_card.dart';
 
 class ClipsPage extends StatefulWidget {
@@ -67,7 +68,7 @@ class _ClipsPageState extends State<ClipsPage> {
               onBack: toPreviousPage,
               onEnd: toNextPage,
               onSharePressed: () {
-                
+                Share.share("Share test!");
               },
             );
           },
