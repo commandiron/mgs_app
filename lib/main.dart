@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/games.dart';
 import 'package:mgs_app/util/theme.dart';
-import 'package:mgs_app/util/screen_route.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/categories.dart';
@@ -41,7 +40,7 @@ class _MyAppState extends State<MyApp> {
           title: Constants.appName,
           theme: MyTheme.light,
           darkTheme: MyTheme.dark,
-          routes: ScreenRoute.routes,
+          routes: Constants.routes,
           initialRoute: MainScreen.route,
         );
       },
