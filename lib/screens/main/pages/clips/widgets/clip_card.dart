@@ -174,20 +174,22 @@ class _ClipViewState extends State<ClipView>  {
   }
 
   Widget _buildLandscapeView() {
-    return Center(
-      child:
-      AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            _buildVideoPlayer(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _buildProgressIndicator(),
-            )
-          ],
-        )
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Center(
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              _buildVideoPlayer(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _buildProgressIndicator(),
+              )
+            ],
+          )
+        ),
       ),
     );
   }
