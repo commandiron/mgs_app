@@ -16,36 +16,7 @@ class GameLandingScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: MediaQuery.of(context).padding,
-        child: Column(
-          children: [
-            Flex(
-              direction: Axis.horizontal,
-              children: const [
-                BackButton()
-              ],
-            ),
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 300,
-                  child: Image.network(
-                    game.posterUrl,
-                  ),
-                ),
-                const SizedBox(height: 20,),
-                Text(
-                  game.title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ]
-        ),
-      ),
+      body: ,
     );
   }
 }
