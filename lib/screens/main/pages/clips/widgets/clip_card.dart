@@ -10,7 +10,7 @@ class ClipView extends StatefulWidget {
       required this.initialVolume,
       required this.onVolumeIconPressed,
       required this.isExpanded,
-      required this.onExpandCollapse,
+      required this.onExpandCollapsePressed,
       required this.onNext,
       required this.onBack,
       required this.onEnd,
@@ -22,7 +22,7 @@ class ClipView extends StatefulWidget {
   final double initialVolume;
   final VoidCallback onVolumeIconPressed;
   final bool isExpanded;
-  final VoidCallback onExpandCollapse;
+  final VoidCallback onExpandCollapsePressed;
   final VoidCallback onNext;
   final VoidCallback onBack;
   final VoidCallback onEnd;
@@ -164,7 +164,7 @@ class _ClipViewState extends State<ClipView>  {
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: _buildCard()
+          child: _buildClipCard()
         ),
         _buildProgressIndicator()
       ],
@@ -175,18 +175,22 @@ class _ClipViewState extends State<ClipView>  {
     return Center(
       child:
       AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              _buildVideoPlayer()
-            ],
-          )
+        aspectRatio: 16 / 9,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            _buildVideoPlayer(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _buildProgressIndicator(),
+            )
+          ],
+        )
       ),
     );
   }
 
-  Widget _buildCard() {
+  Widget _buildClipCard() {
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(
@@ -233,7 +237,7 @@ class _ClipViewState extends State<ClipView>  {
         Row(
           children: [
             _shareIcon(),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             _likeIcon()
           ],
         )
@@ -241,7 +245,38 @@ class _ClipViewState extends State<ClipView>  {
     );
   }
 
-  Widget _logoAvatar({Color? bgColor}) {
+  Widget _buildCardBody() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 30,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  flex: 2,
+                  child: _buildTitleText()
+              ),
+              const Expanded(flex: 1, child: SizedBox())
+            ],
+          ),
+          widget.clip.subTitle.isNotEmpty
+              ?
+          Column(
+            children: [
+              const SizedBox(height: 10,),
+              _buildSubTitleText()
+            ],
+          )
+              : const SizedBox.shrink()
+        ],
+      ),
+    );
+  }
+
+  Widget _logoAvatar() {
     return IconButton(
       onPressed: null,
       icon: Image.asset(widget.clip.avatarImagePath)
@@ -264,37 +299,6 @@ class _ClipViewState extends State<ClipView>  {
       icon: Icon(
         widget.clip.isFavorite ? Icons.favorite : Icons.favorite_border,
         color: widget.clip.isFavorite ? Colors.red : iconColor ?? Colors.black.withOpacity(0.2)
-      ),
-    );
-  }
-
-  Widget _buildCardBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: _buildTitleText()
-              ),
-              const Expanded(flex: 1, child: SizedBox())
-            ],
-          ),
-          widget.clip.subTitle.isNotEmpty
-          ?
-          Column(
-            children: [
-              const SizedBox(height: 10,),
-              _buildSubTitleText()
-            ],
-          )
-          : const SizedBox.shrink()
-        ],
       ),
     );
   }
@@ -323,7 +327,9 @@ class _ClipViewState extends State<ClipView>  {
             child: Stack(
               children: [
                 _buildRawVideoPlayer(),
-                _buildVideoPlayerOverlay()
+                _buildStartStopButton(),
+                _buildBackNextButton(),
+                _buildExpandAndSoundButton()
               ],
             )
         )
@@ -332,16 +338,6 @@ class _ClipViewState extends State<ClipView>  {
 
   Widget _buildRawVideoPlayer() {
     return VideoPlayer(_controller,);
-  }
-
-  Widget _buildVideoPlayerOverlay() {
-    return Stack(
-      children: [
-        _buildStartStopButton(),
-        _buildBackNextButton(),
-        _buildExpandAndSoundButton()
-      ]
-    );
   }
 
   Widget _buildStartStopButton() {
@@ -409,7 +405,7 @@ class _ClipViewState extends State<ClipView>  {
         children: [
           IconButton(
             onPressed: () {
-              widget.onExpandCollapse();
+              widget.onExpandCollapsePressed();
             },
             icon: Icon(
               !widget.isExpanded ? Icons.fullscreen : Icons.fullscreen_exit

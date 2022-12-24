@@ -57,7 +57,7 @@ class _ClipsPageState extends State<ClipsPage> {
               onVolumeIconPressed: () {
                 _volume == 0 ? _volume = 1 : _volume = 0;
               },
-              onExpandCollapse: () {
+              onExpandCollapsePressed: () {
                 setState(() {
                   _isExpanded = !_isExpanded;
                 });
