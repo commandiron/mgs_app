@@ -9,11 +9,10 @@ class GameLandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final id = ModalRoute.of(context)!.settings.arguments as int;
 
     final game = Provider.of<Games>(context, listen: false).findById(id);
-
+    
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
@@ -75,5 +74,6 @@ class GameLandingScreen extends StatelessWidget {
         ],
       )
     );
+    
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
@@ -16,7 +18,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   final PageController _pageController = PageController();
   String _searchText = "";
   bool _showBars = true;
@@ -24,14 +25,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-      bottomNavigationBar: _buildNavigationBar(),
-      floatingActionButton: _buildFab(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked
-    );
+        extendBody: true,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: _buildAppBar(),
+        body: _buildBody(),
+        bottomNavigationBar: _buildNavigationBar(),
+        floatingActionButton: _buildFab(),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniCenterDocked);
   }
 
   PreferredSizeWidget? _buildAppBar() {
@@ -62,8 +63,7 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
-        if(_searchText.isNotEmpty)
-          const SearchPage(),
+        if (_searchText.isNotEmpty) const SearchPage(),
       ],
     );
   }
@@ -72,14 +72,16 @@ class _MainScreenState extends State<MainScreen> {
     return AnimatedSize(
       duration: const Duration(milliseconds: 200),
       child: SizedBox(
-        height: _showBars ? 56.0 : 0.0,
+        height: _showBars
+            ? Platform.isIOS
+                ? 89.0
+                : 56.0
+            : 0.0,
         child: MyBottomNavigationBar(
           onTab: (index) {
-            _pageController.animateToPage(
-                index,
+            _pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 200),
-                curve: Curves.fastLinearToSlowEaseIn
-            );
+                curve: Curves.fastLinearToSlowEaseIn);
           },
         ),
       ),
@@ -87,9 +89,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget? _buildFab() {
-    return _showBars ?SizedBox(
-        height: 46,
-        child: Image.asset("assets/images/foxhound_logo.png")
-    ): null;
+    return _showBars
+        ? SizedBox(
+            height: 46, child: Image.asset("assets/images/foxhound_logo.png"))
+        : null;
   }
 }
