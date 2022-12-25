@@ -24,10 +24,10 @@ class MyTheme {
         fontWeight: FontWeight.bold
       ),
       headlineSmall: TextStyle(
-          fontWeight: FontWeight.bold
+        fontWeight: FontWeight.bold
       ),
       titleLarge: TextStyle(
-          fontWeight: FontWeight.bold
+        fontWeight: FontWeight.bold
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
