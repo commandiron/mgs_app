@@ -247,7 +247,6 @@ class _ClipViewState extends State<ClipView>  {
               children: [
                 const SizedBox(width: 10,),
                 _shareIcon(),
-                const SizedBox(width: 10,),
                 _likeIcon(),
                 _logoAvatar(),
               ],
