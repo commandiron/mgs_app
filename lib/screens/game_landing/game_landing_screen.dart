@@ -41,6 +41,7 @@ class GameLandingScreen extends StatelessWidget {
               ),
               surfaceTintColor: Colors.red,
               titleSpacing: 0,
+              centerTitle: true,
               title: ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(bottom: Radius.circular(26)),
@@ -70,7 +71,6 @@ class GameLandingScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              centerTitle: true,
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
