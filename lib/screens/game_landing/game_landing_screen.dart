@@ -25,15 +25,19 @@ class GameLandingScreen extends StatelessWidget {
               expandedHeight: MediaQuery.of(context).size.height / 2,
               iconTheme: Theme.of(context).iconTheme,
               shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(26))),
-              backgroundColor: Colors.white,
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(26))
+              ),
+              backgroundColor: Colors.grey.shade300,
               flexibleSpace: FlexibleSpaceBar(
                 background: Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top + 56, bottom: 4),
+                    top: MediaQuery.of(context).padding.top + 56 + 16,
+                    bottom: 16,
+                    right: 32,
+                    left: 32
+                  ),
                   child: Image.network(game.posterUrl),
-                ),
+                )
               ),
               surfaceTintColor: Colors.red,
               titleSpacing: 0,
@@ -45,12 +49,22 @@ class GameLandingScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 56,
                   color: Colors.grey.withOpacity(0.7),
-                  child: Row(
+                  child: Stack(
+                    alignment: Alignment.centerLeft,
                     children: [
-                      const BackButton(),
-                      Text(
-                        game.title,
-                        style: Theme.of(context).textTheme.titleSmall,
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const BackButton(),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 46),
+                        child: FittedBox(
+                          child: Text(
+                            game.title,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
                       ),
                     ],
                   ),
