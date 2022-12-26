@@ -29,6 +29,9 @@ class MyTheme {
       titleLarge: TextStyle(
         fontWeight: FontWeight.bold
       ),
+      titleMedium: TextStyle(
+          fontWeight: FontWeight.bold
+      ),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: primaryLight,
