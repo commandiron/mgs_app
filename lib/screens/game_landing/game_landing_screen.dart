@@ -36,7 +36,19 @@ class GameLandingScreen extends StatelessWidget {
                     right: 32,
                     left: 32
                   ),
-                  child: Image.network(game.posterUrl),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: const BorderSide(
+                        width: 1,
+                        color: Colors.grey
+                      )
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.network(game.posterUrl),
+                    ),
+                  )
                 )
               ),
               surfaceTintColor: Colors.red,
