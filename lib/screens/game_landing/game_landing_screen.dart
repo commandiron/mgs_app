@@ -156,7 +156,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16,),
+                          const SizedBox(height: 16,),
                           Flex(
                             direction: Axis.horizontal,
                             children: [
@@ -168,7 +168,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
                               )
                             ]
                           ),
-                          SizedBox(height: 16,),
+                          const SizedBox(height: 16,),
                           Flex(
                             direction: Axis.horizontal,
                             children: [
@@ -179,7 +179,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16,),
+                          const SizedBox(height: 16,),
                           Text(game.summary),
                         ],
                       ),
