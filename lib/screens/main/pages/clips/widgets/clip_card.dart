@@ -42,9 +42,7 @@ class _ClipViewState extends State<ClipView>  {
     super.initState();
     _controller = VideoPlayerController.asset(widget.clip.clipPath);
     _controller.setVolume(widget.initialVolume);
-    _controller.initialize().then((value) {
-      _controller.play();
-    });
+    _controller.initialize();
     _controller.addListener(() {
       setState(() {});
       if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {

@@ -35,7 +35,6 @@ class _ClipsPageState extends State<ClipsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final clips = Provider.of<Clips>(context, listen: false).items;
     return Padding(
       padding: MediaQuery.of(context).padding,
       child: GestureDetector(
@@ -48,27 +47,33 @@ class _ClipsPageState extends State<ClipsPage> {
           }
         },
         child: PageView.builder(
+          onPageChanged: (value) {
+            print(value);
+          },
           controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return ClipView(
-              clip: clips[index % clips.length],
-              initialVolume: _volume,
-              isExpanded: _isExpanded,
-              onVolumeIconPressed: () {
-                _volume == 0 ? _volume = 1 : _volume = 0;
-              },
-              onExpandCollapsePressed: () {
-                setState(() {
-                  _isExpanded = !_isExpanded;
-                });
-                widget.onExpandCollapse(_isExpanded);
-              },
-              onNext: toNextPage,
-              onBack: toPreviousPage,
-              onEnd: toNextPage,
-              onSharePressed: () {
-                Share.share("Share test!");
+            return Consumer<Clips>(
+              builder: (context, clips, child) {
+                return ClipView(
+                  clip: clips.items[index % clips.items.length],
+                  initialVolume: _volume,
+                  isExpanded: _isExpanded,
+                  onVolumeIconPressed: () {
+                    _volume == 0 ? _volume = 1 : _volume = 0;
+                  },
+                  onExpandCollapsePressed: () {
+                    setState(() {
+                      _isExpanded = !_isExpanded;
+                    });
+                    widget.onExpandCollapse(_isExpanded);
+                  },
+                  onNext: toNextPage,
+                  onBack: toPreviousPage,
+                  onEnd: toNextPage,
+                  onSharePressed: () {
+                    Share.share("Share test!");
+                  },
+                );
               },
             );
           },
