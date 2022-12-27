@@ -76,6 +76,10 @@ flutter:
     - assets/images/games/mgs_pw_logo.png
     - assets/images/games/mgs_v_logo.png
 
+    - assets/images/characters/kazuhira_miller.jpg
+    - assets/images/characters/liquid_snake.jpg
+    - assets/images/characters/solid_snake.jpg
+
     - assets/videos/mgs_theme.mp4
     - assets/videos/mgs_game_over.mp4
 
