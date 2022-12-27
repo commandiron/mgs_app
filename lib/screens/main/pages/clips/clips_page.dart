@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/clips.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'widgets/clip_card.dart';
+import 'widgets/clip_view.dart';
 
 class ClipsPage extends StatefulWidget {
 const ClipsPage( {required this.onExpandCollapse,Key? key}) : super(key: key);
@@ -47,9 +47,6 @@ class _ClipsPageState extends State<ClipsPage> {
           }
         },
         child: PageView.builder(
-          onPageChanged: (value) {
-            print(value);
-          },
           controller: _pageController,
           itemBuilder: (context, index) {
             return Consumer<Clips>(

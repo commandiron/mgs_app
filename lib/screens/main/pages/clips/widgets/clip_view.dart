@@ -33,16 +33,19 @@ class ClipView extends StatefulWidget {
   State<ClipView> createState() => _ClipViewState();
 }
 
-class _ClipViewState extends State<ClipView>  {
+class _ClipViewState extends State<ClipView> {
 
   late VideoPlayerController _controller;
 
   @override
   void initState() {
+    print("init() ${widget.key}");
     super.initState();
     _controller = VideoPlayerController.asset(widget.clip.clipPath);
     _controller.setVolume(widget.initialVolume);
-    _controller.initialize();
+    _controller.initialize().then((value) {
+      _controller.play();
+    });
     _controller.addListener(() {
       setState(() {});
       if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
@@ -53,8 +56,10 @@ class _ClipViewState extends State<ClipView>  {
 
   @override
   void dispose() {
-    _controller.pause().then((_) {
-      _controller.dispose();
+    setState(() {
+      _controller.pause().then((_) {
+        _controller.dispose();
+      });
     });
     super.dispose();
   }
