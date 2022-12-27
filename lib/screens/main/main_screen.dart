@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
 import '../../widgets/my_app_bar/my_app_bar.dart';
@@ -26,14 +25,13 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBody: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: _buildAppBar(),
-        body: _buildBody(),
-        bottomNavigationBar: _buildNavigationBar(),
-        floatingActionButton: _buildFab(),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniCenterDocked);
+      extendBody: true,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: _buildAppBar(),
+      body: _buildBody(),
+      bottomNavigationBar: _buildNavigationBar(),
+      floatingActionButton: _buildFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked);
   }
 
   PreferredSizeWidget? _buildAppBar() {
@@ -48,51 +46,24 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _buildBody() {
-
-    Future<bool> checkInternetConnection() async {
-      final result = await InternetConnectionChecker().hasConnection;
-      return result;
-    }
-
-    return FutureBuilder(
-      future: checkInternetConnection(),
-      builder: (context, snapshot) {
-        if(snapshot.data == false) {
-          return Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 50,
-                  child: Image.asset("assets/images/mgs_alert.jpg")
-                ),
-                const SizedBox(width: 20,),
-                const Text("No Internet Connection"),
-              ],
+    return Stack(
+      children: [
+        PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: [
+            const CategoriesPage(),
+            ClipsPage(
+              onExpandCollapse: (isClipExpanded) {
+                setState(() {
+                  _showBars = !isClipExpanded;
+                });
+              },
             )
-          );
-        } else {
-          return Stack(
-            children: [
-              PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _pageController,
-                children: [
-                  const CategoriesPage(),
-                  ClipsPage(
-                    onExpandCollapse: (isClipExpanded) {
-                      setState(() {
-                        _showBars = !isClipExpanded;
-                      });
-                    },
-                  )
-                ],
-              ),
-              if (_searchText.isNotEmpty) const SearchPage(),
-            ],
-          );
-        }
-      },
+          ],
+        ),
+        if (_searchText.isNotEmpty) const SearchPage(),
+      ],
     );
   }
 

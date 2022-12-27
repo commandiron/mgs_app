@@ -39,7 +39,6 @@ class _ClipViewState extends State<ClipView> {
 
   @override
   void initState() {
-    print("init() ${widget.key}");
     super.initState();
     _controller = VideoPlayerController.asset(widget.clip.clipPath);
     _controller.setVolume(widget.initialVolume);
@@ -72,25 +71,33 @@ class _ClipViewState extends State<ClipView> {
   }
 
   Widget _buildExpandedView() {
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        children: [
-          Center(
-            child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Stack(
-                  children: [
-                    _buildRawVideoPlayer(),
-                    _buildStartStopButton(),
-                    _buildExpandAndSoundButton(),
-                  ],
-                )
+    return GestureDetector(
+      onVerticalDragUpdate: (details) {
+        int sensitivity = 8;
+        if (details.delta.dy > sensitivity || details.delta.dy < -sensitivity) {
+          widget.onExpandCollapsePressed();
+        }
+      },
+      child: Container(
+        color: Colors.black,
+        child: Stack(
+          children: [
+            Center(
+              child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Stack(
+                    children: [
+                      _buildRawVideoPlayer(),
+                      _buildStartStopButton(),
+                      _buildExpandAndSoundButton(),
+                    ],
+                  )
+              ),
             ),
-          ),
-          _buildExpandedSideIcons(),
-          _buildExpandedFooter()
-        ]
+            _buildExpandedSideIcons(),
+            _buildExpandedFooter()
+          ]
+        ),
       ),
     );
   }
