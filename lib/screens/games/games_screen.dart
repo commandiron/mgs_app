@@ -39,8 +39,8 @@ class _GamesScreenState extends State<GamesScreen> {
                   game: games[index],
                   onTab: () {
                     Navigator.of(context).pushNamed(
-                      GameLandingScreen.route,
-                      arguments: games[index].id
+                        GameLandingScreen.route,
+                        arguments: games[index].id
                     );
                   }
                 )

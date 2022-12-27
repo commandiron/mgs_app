@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/games.dart';
+import 'package:mgs_app/providers/mgs_characters.dart';
 import 'package:mgs_app/util/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -26,13 +27,16 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (BuildContext context) => Categories(),
+          create: (BuildContext context) => Categories(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Clips(),
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => Games(),
         ),
         ChangeNotifierProvider(
-          create: (BuildContext context) => Clips(),
+          create: (BuildContext context) => MgsCharacters(),
         ),
       ],
       builder: (context, child) {
