@@ -57,44 +57,40 @@ class _MainScreenState extends State<MainScreen> {
     return FutureBuilder(
       future: checkInternetConnection(),
       builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator(),);
-        } else {
-          if(snapshot.data == false) {
-            return Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      width: 50,
-                      child: Image.asset("assets/images/mgs_alert.jpg")
-                  ),
-                  const SizedBox(width: 20,),
-                  const Text("No Internet Connection"),
-                ],
-              )
-            );
-          } else {
-            return Stack(
+        if(snapshot.data == false) {
+          return Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PageView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: _pageController,
-                  children: [
-                    const CategoriesPage(),
-                    ClipsPage(
-                      onExpandCollapse: (isClipExpanded) {
-                        setState(() {
-                          _showBars = !isClipExpanded;
-                        });
-                      },
-                    )
-                  ],
+                SizedBox(
+                  width: 50,
+                  child: Image.asset("assets/images/mgs_alert.jpg")
                 ),
-                if (_searchText.isNotEmpty) const SearchPage(),
+                const SizedBox(width: 20,),
+                const Text("No Internet Connection"),
               ],
-            );
-          }
+            )
+          );
+        } else {
+          return Stack(
+            children: [
+              PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                children: [
+                  const CategoriesPage(),
+                  ClipsPage(
+                    onExpandCollapse: (isClipExpanded) {
+                      setState(() {
+                        _showBars = !isClipExpanded;
+                      });
+                    },
+                  )
+                ],
+              ),
+              if (_searchText.isNotEmpty) const SearchPage(),
+            ],
+          );
         }
       },
     );
