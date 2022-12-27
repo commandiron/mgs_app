@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
 import '../../widgets/my_app_bar/my_app_bar.dart';
@@ -47,24 +48,39 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _buildBody() {
-    return Stack(
-      children: [
-        PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          children: [
-            const CategoriesPage(),
-            ClipsPage(
-              onExpandCollapse: (isClipExpanded) {
-                setState(() {
-                  _showBars = !isClipExpanded;
-                });
-              },
-            )
-          ],
-        ),
-        if (_searchText.isNotEmpty) const SearchPage(),
-      ],
+
+    Future<bool> checkInternetConnection() async {
+      final result = await InternetConnectionChecker().hasConnection;
+      return result;
+    }
+
+    return FutureBuilder(
+      future: checkInternetConnection(),
+      builder: (context, snapshot) {
+        if(snapshot.data == false) {
+          return const Center(child: Text("No Internet Connection"));
+        } else {
+          return Stack(
+            children: [
+              PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                children: [
+                  const CategoriesPage(),
+                  ClipsPage(
+                    onExpandCollapse: (isClipExpanded) {
+                      setState(() {
+                        _showBars = !isClipExpanded;
+                      });
+                    },
+                  )
+                ],
+              ),
+              if (_searchText.isNotEmpty) const SearchPage(),
+            ],
+          );
+        }
+      },
     );
   }
 
