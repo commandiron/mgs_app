@@ -57,28 +57,44 @@ class _MainScreenState extends State<MainScreen> {
     return FutureBuilder(
       future: checkInternetConnection(),
       builder: (context, snapshot) {
-        if(snapshot.data == false) {
-          return const Center(child: Text("No Internet Connection"));
+        if(snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator(),);
         } else {
-          return Stack(
-            children: [
-              PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _pageController,
+          if(snapshot.data == false) {
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CategoriesPage(),
-                  ClipsPage(
-                    onExpandCollapse: (isClipExpanded) {
-                      setState(() {
-                        _showBars = !isClipExpanded;
-                      });
-                    },
-                  )
+                  SizedBox(
+                      width: 50,
+                      child: Image.asset("assets/images/mgs_alert.jpg")
+                  ),
+                  const SizedBox(width: 20,),
+                  const Text("No Internet Connection"),
                 ],
-              ),
-              if (_searchText.isNotEmpty) const SearchPage(),
-            ],
-          );
+              )
+            );
+          } else {
+            return Stack(
+              children: [
+                PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _pageController,
+                  children: [
+                    const CategoriesPage(),
+                    ClipsPage(
+                      onExpandCollapse: (isClipExpanded) {
+                        setState(() {
+                          _showBars = !isClipExpanded;
+                        });
+                      },
+                    )
+                  ],
+                ),
+                if (_searchText.isNotEmpty) const SearchPage(),
+              ],
+            );
+          }
         }
       },
     );
