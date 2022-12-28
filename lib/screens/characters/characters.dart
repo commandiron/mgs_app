@@ -21,42 +21,39 @@ class CharactersScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: BackAppBar(),
-      body: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        padding: EdgeInsets.all(8),
-        itemCount: characters.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionDuration: const Duration(seconds: 1),
-                  reverseTransitionDuration: const Duration(seconds: 1),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return CharacterDetailPage(index);
-                  },
-                )
-              );
-            },
-            child: AspectRatio(
-              aspectRatio: 1.77,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                child: Stack(
-                  children: [
-                    Stack(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 3 / 4 ,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            itemCount: characters.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      transitionDuration: const Duration(seconds: 1),
+                      reverseTransitionDuration: const Duration(seconds: 1),
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return CharacterDetailPage(index);
+                      },
+                    )
+                  );
+                },
+                child: SizedBox(
+                  width: 260,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                    child: Stack(
                       children: [
                         CharacterImageHero(
-                          height: double.infinity,
-                          width: double.infinity,
                           index: index
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Align(
-                            alignment: Alignment.bottomLeft,
+                            alignment: Alignment.bottomCenter,
                             child: CharacterNameHero(
                               index: index
                             ),
@@ -64,12 +61,12 @@ class CharactersScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ),
       )
     );
   }

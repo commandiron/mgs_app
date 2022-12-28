@@ -25,7 +25,7 @@ class CharacterNameHero extends StatelessWidget {
           characters[index].name,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             color: Colors.white
-          ),
+          )
         ),
       ),
     );

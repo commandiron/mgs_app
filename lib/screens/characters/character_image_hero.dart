@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,10 +25,14 @@ class CharacterImageHero extends StatelessWidget {
           height: height,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              characters[index].imagePath,
-              fit: BoxFit.cover,
-            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Image.asset(
+                characters[index].imagePath,
+                fit: BoxFit.cover,
+              ),
+            )
           ),
         )
     );
