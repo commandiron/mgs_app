@@ -22,7 +22,7 @@ class CharacterImageHero extends StatelessWidget {
           width: width,
           height: height,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
             child: Image.asset(
               characters[index].imagePath,
               fit: BoxFit.cover,
