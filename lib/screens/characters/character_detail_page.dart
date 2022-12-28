@@ -20,22 +20,22 @@ class CharacterDetailPage extends StatelessWidget {
             floating: false,
             expandedHeight: 320,
             backgroundColor: Theme.of(context).colorScheme.background,
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.black
             ),
             flexibleSpace: FlexibleSpaceBar(
               expandedTitleScale: 1.0,
               title: CharacterNameHero(
-                  index: index
+                index: index
               ),
               background: InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
                 child: CharacterImageHero(
-                    width: double.infinity,
-                    height: 320,
-                    index: index
+                  width: double.infinity,
+                  height: 320,
+                  index: index
                 ),
               ),
             ),
