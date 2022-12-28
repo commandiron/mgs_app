@@ -39,56 +39,30 @@ class CharactersScreen extends StatelessWidget {
               );
             },
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 1.77,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)
                 ),
                 child: Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: ExactAssetImage(characters[index].imagePath),
-                            fit: BoxFit.cover,
-                          ),
+                    Stack(
+                      children: [
+                        CharacterImageHero(
+                          height: double.infinity,
+                          width: double.infinity,
+                          index: index
                         ),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                          child: Container(
-                            decoration: BoxDecoration(color: Colors.black.withOpacity(0.3)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: CharacterImageHero(
-                              height: double.infinity,
-                              width: double.infinity,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: CharacterNameHero(
                               index: index
-                            )
+                            ),
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              height: double.infinity,
-                              alignment: Alignment.center,
-                              child: CharacterNameHero(
-                                index: index
-                              ),
-                            )
-                          ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ],
                 ),
