@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/characters/characters.dart';
+import '../screens/characters/characters_screen.dart';
 import '../screens/game_landing/game_landing_screen.dart';
 import '../screens/games/games_screen.dart';
 import '../screens/intro/intro_screen.dart';

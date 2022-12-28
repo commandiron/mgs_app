@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/mgs_characters.dart';
+import '../../../providers/mgs_characters.dart';
 
 class CharacterImageHero extends StatelessWidget {
 
@@ -19,7 +19,7 @@ class CharacterImageHero extends StatelessWidget {
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
     return Hero(
-        tag: "$index",
+        tag: "image_hero_$index",
         child: SizedBox(
           width: width,
           height: height,

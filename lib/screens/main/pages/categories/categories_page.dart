@@ -3,7 +3,7 @@ import 'package:mgs_app/screens/main/pages/categories/widgets/category_item.dart
 import 'package:provider/provider.dart';
 
 import '../../../../providers/categories.dart';
-import '../../../characters/characters.dart';
+import '../../../characters/characters_screen.dart';
 import '../../../games/games_screen.dart';
 
 class CategoriesPage extends StatefulWidget {

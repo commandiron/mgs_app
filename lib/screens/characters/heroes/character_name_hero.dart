@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/mgs_characters.dart';
+import '../../../providers/mgs_characters.dart';
 
 class CharacterNameHero extends StatelessWidget {
 

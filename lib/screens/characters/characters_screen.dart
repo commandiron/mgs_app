@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/characters/character_detail_page.dart';
-import 'package:mgs_app/screens/characters/character_image_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 import 'package:provider/provider.dart';
 import '../../../../providers/mgs_characters.dart';
 import '../../widgets/back_app_bar/back_app_bar.dart';
-import 'character_name_hero.dart';
+import 'heroes/character_name_hero.dart';
+import 'heroes/character_summary_hero.dart';
 
 class CharactersScreen extends StatelessWidget {
   const CharactersScreen({Key? key}) : super(key: key);
@@ -67,11 +69,32 @@ class CharactersScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(16.0),
                               child: Align(
                                 alignment: Alignment.bottomCenter,
-                                child: CharacterNameHero(
-                                  index: index
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CharacterNameHero(
+                                      index: index
+                                    ),
+                                  ],
                                 ),
                               ),
-                            )
+                            ),
+                            Transform.translate(
+                              offset: Offset(
+                                0.0,
+                                MediaQuery.of(context).size.height * 2,
+                              ),
+                              child: DividerHero(index: index)
+                            ),
+                            Transform.translate(
+                              offset: Offset(
+                                0.0,
+                                MediaQuery.of(context).size.height,
+                              ),
+                              child: CharacterSummaryHero(
+                                  index: index
+                              ),
+                            ),
                           ],
                         ),
                       ),

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mgs_app/screens/characters/character_image_hero.dart';
-import 'package:mgs_app/screens/characters/character_name_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/character_summary_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 
-class CharacterDetailPage extends StatelessWidget {
+class CharacterDetailPage extends StatefulWidget {
   const CharacterDetailPage(this.index,{Key? key}) : super(key: key);
 
   final int index;
+
+  @override
+  State<CharacterDetailPage> createState() => _CharacterDetailPageState();
+}
+
+class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +26,7 @@ class CharacterDetailPage extends StatelessWidget {
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: 320,
+            expandedHeight: 400,
             backgroundColor: Theme.of(context).colorScheme.background,
             iconTheme: const IconThemeData(
               color: Colors.black
@@ -32,7 +40,7 @@ class CharacterDetailPage extends StatelessWidget {
                   child: BackButton(),
                 ),
                 CharacterNameHero(
-                    index: index
+                  index: widget.index
                 ),
               ],
             ),
@@ -46,35 +54,38 @@ class CharacterDetailPage extends StatelessWidget {
                     child: CharacterImageHero(
                       width: double.infinity,
                       height: 320,
-                      index: index
+                      index: widget.index
                     ),
                   ),
                 ),
-                AnimatedSize(
-                  duration: Duration(milliseconds: 5000),
+                Container(
+                  height: double.infinity,
+                  alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: double.infinity,
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(30))
-                      ),
-                      height: 20,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(30))
                     ),
+                    height: 20,
                   ),
                 ),
               ],
             ),
           ),
           SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.topCenter,
-                  height: 1000,
-                ),
-              ],
+            child: Container(
+              alignment: Alignment.topCenter,
+              height: 1000,
+              child: Column(
+                children: [
+                  DividerHero(index: widget.index),
+                  const SizedBox(height: 16,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: CharacterSummaryHero(index: widget.index),
+                  )
+                ],
+              ),
             )
           )
         ],
