@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/model/game_platform.dart';
 import 'package:mgs_app/providers/games.dart';
+import 'package:mgs_app/widgets/back_app_bar/back_app_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 
@@ -52,71 +53,43 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
 
   Widget _buildSliverAppBar(Game game, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
     return SliverAppBar(
-      automaticallyImplyLeading: false,
       pinned: true,
       snap: false,
       floating: false,
       expandedHeight: MediaQuery.of(context).size.height / 2,
       iconTheme: Theme.of(context).iconTheme,
-      backgroundColor: Colors.grey.shade300,
       flexibleSpace: _buildFlexibleSpaceBar(game.posterUrl, paletteSnapshot),
-      surfaceTintColor: Colors.red,
       titleSpacing: 0,
       centerTitle: true,
-      title: _buildTitle(game.title)
+      title: Text(game.title, style: Theme.of(context).textTheme.titleLarge,)
     );
   }
 
   Widget _buildFlexibleSpaceBar(String posterUrl, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
     return FlexibleSpaceBar(
-        background: Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 52 + 16,
-                bottom: 16,
-                right: 32,
-                left: 32
-            ),
-            child: Card(
-              color: paletteSnapshot.data?.lightMutedColor?.color,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
+        background: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+          ),
+          child: Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 52 + 16,
+                  bottom: 16,
+                  right: 32,
+                  left: 32
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Image.network(posterUrl),
-              ),
-            )
-        )
-    );
-  }
-
-  Widget _buildTitle(String title) {
-    return ClipRRect(
-      child: Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: 56,
-        color: Theme.of(context).colorScheme.background,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: const BackButton(),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 46),
-              child: FittedBox(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleMedium,
+              child: Card(
+                color: paletteSnapshot.data?.lightMutedColor?.color,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Image.network(posterUrl),
+                ),
+              )
+          ),
+        )
     );
   }
 
