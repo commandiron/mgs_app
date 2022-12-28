@@ -23,34 +23,63 @@ class CharacterDetailPage extends StatelessWidget {
             iconTheme: const IconThemeData(
               color: Colors.black
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              expandedTitleScale: 1.0,
-              title: CharacterNameHero(
-                index: index
-              ),
-              background: InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: CharacterImageHero(
-                  width: double.infinity,
-                  height: 320,
-                  index: index
+            titleSpacing: 0,
+            toolbarHeight: 56,
+            title: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: BackButton(),
                 ),
-              ),
+                CharacterNameHero(
+                    index: index
+                ),
+              ],
+            ),
+            flexibleSpace: Stack(
+              children: [
+                FlexibleSpaceBar(
+                  background: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: CharacterImageHero(
+                      width: double.infinity,
+                      height: 320,
+                      index: index
+                    ),
+                  ),
+                ),
+                AnimatedSize(
+                  duration: Duration(milliseconds: 5000),
+                  child: Container(
+                    height: double.infinity,
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(30))
+                      ),
+                      height: 20,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SliverToBoxAdapter(
             child: Column(
               children: [
                 Container(
+                  alignment: Alignment.topCenter,
                   height: 1000,
                 ),
               ],
-            ),
+            )
           )
         ],
       )
     );
   }
 }
+

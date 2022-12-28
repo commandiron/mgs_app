@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/model/game_platform.dart';
 import 'package:mgs_app/providers/games.dart';
-import 'package:mgs_app/widgets/back_app_bar/back_app_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 

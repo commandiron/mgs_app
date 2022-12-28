@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/game_landing/game_landing_screen.dart';
-import 'package:mgs_app/widgets/back_app_bar/back_app_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/games.dart';
+import '../../widgets/back_app_bar/back_app_bar.dart';
 import 'widgets/games_item.dart';
 
 class GamesScreen extends StatefulWidget {

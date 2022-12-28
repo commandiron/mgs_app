@@ -24,7 +24,7 @@ class CharacterImageHero extends StatelessWidget {
           width: width,
           height: height,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
             child: SizedBox(
               width: double.infinity,
               height: double.infinity,

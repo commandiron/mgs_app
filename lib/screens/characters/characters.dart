@@ -22,50 +22,65 @@ class CharactersScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: BackAppBar(),
       body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 3 / 4 ,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemCount: characters.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      transitionDuration: const Duration(seconds: 1),
-                      reverseTransitionDuration: const Duration(seconds: 1),
-                      pageBuilder: (context, animation, secondaryAnimation) {
-                        return CharacterDetailPage(index);
-                      },
-                    )
-                  );
-                },
-                child: SizedBox(
-                  width: 260,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                    child: Stack(
-                      children: [
-                        CharacterImageHero(
-                          index: index
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: CharacterNameHero(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Characters",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            ),
+            SizedBox(height: 28,),
+            Container(
+              height: MediaQuery.of(context).size.height / 2 ,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.zero,
+                itemCount: characters.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          transitionDuration: const Duration(seconds: 1),
+                          reverseTransitionDuration: const Duration(seconds: 1),
+                          pageBuilder: (context, animation, secondaryAnimation) {
+                            return CharacterDetailPage(index);
+                          },
+                        )
+                      );
+                    },
+                    child: SizedBox(
+                      width: 220,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                        child: Stack(
+                          children: [
+                            CharacterImageHero(
                               index: index
                             ),
-                          ),
-                        )
-                      ],
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: CharacterNameHero(
+                                  index: index
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       )
     );
