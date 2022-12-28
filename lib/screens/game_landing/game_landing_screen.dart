@@ -63,7 +63,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       surfaceTintColor: Colors.red,
       titleSpacing: 0,
       centerTitle: true,
-      title: _buildTitle(game.title, paletteSnapshot)
+      title: _buildTitle(game.title)
     );
   }
 
@@ -79,11 +79,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
             child: Card(
               color: paletteSnapshot.data?.lightMutedColor?.color,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  side: BorderSide(
-                      width: 1,
-                      color: paletteSnapshot.data?.lightMutedColor?.color ?? Colors.grey
-                  )
+                borderRadius: BorderRadius.circular(30),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -94,13 +90,13 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
     );
   }
 
-  Widget _buildTitle(String title, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
+  Widget _buildTitle(String title) {
     return ClipRRect(
       child: Container(
         alignment: Alignment.center,
         width: double.infinity,
         height: 56,
-        color: paletteSnapshot.data?.lightMutedColor?.color.withOpacity(0.7),
+        color: Theme.of(context).colorScheme.background,
         child: Stack(
           alignment: Alignment.centerLeft,
           children: [
