@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/characters/character_detail_page.dart';
+import 'package:mgs_app/screens/characters/heroes/blur_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class CharactersScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: BackAppBar(),
+      appBar: const BackAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -36,7 +37,7 @@ class CharactersScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 28,),
+            const SizedBox(height: 28,),
             Container(
               height: MediaQuery.of(context).size.height / 2 ,
               child: ListView.builder(
@@ -63,19 +64,26 @@ class CharactersScreen extends StatelessWidget {
                         child: Stack(
                           children: [
                             CharacterImageHero(
-                              index: index
+                              index: index,
+                              blurHeight: 84,
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: BlurHero(
+                                index: index,
+                                height: 84,
+                              )
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.only(
+                                bottom: 56,
+                                left: 10,
+                                right: 10
+                              ),
                               child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    CharacterNameHero(
-                                      index: index
-                                    ),
-                                  ],
+                                alignment: Alignment.bottomLeft,
+                                child: CharacterNameHero(
+                                  index: index
                                 ),
                               ),
                             ),

@@ -12,11 +12,11 @@ class DividerHero extends StatelessWidget {
     return Hero(
       tag: "divider_hero_$index",
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 150),
+        padding: EdgeInsets.symmetric(horizontal: 160),
         child: Divider(
           color: Colors.black,
-          thickness: 2,
-          height: 2,
+          thickness: 3,
+          height: 3,
         ),
       ),
     );

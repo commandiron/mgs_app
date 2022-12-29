@@ -4,6 +4,8 @@ import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_summary_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 
+import 'heroes/blur_hero.dart';
+
 class CharacterDetailPage extends StatefulWidget {
   const CharacterDetailPage(this.index,{Key? key}) : super(key: key);
 
@@ -26,50 +28,44 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: 400,
+            elevation: 0,
+            expandedHeight: 320,
             backgroundColor: Theme.of(context).colorScheme.background,
             iconTheme: const IconThemeData(
               color: Colors.black
             ),
-            titleSpacing: 0,
-            toolbarHeight: 56,
-            title: Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: BackButton(),
-                ),
-                CharacterNameHero(
-                  index: widget.index
-                ),
-              ],
-            ),
-            flexibleSpace: Stack(
-              children: [
-                FlexibleSpaceBar(
-                  background: InkWell(
+            flexibleSpace: Flexible(
+              child: Stack(
+                children: [
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
                     },
                     child: CharacterImageHero(
-                      width: double.infinity,
-                      height: 320,
-                      index: widget.index
+                      imageWidth: double.infinity,
+                      imageHeight: double.infinity,
+                      index: widget.index,
+                      blurHeight: 56,
                     ),
                   ),
-                ),
-                Container(
-                  height: double.infinity,
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(30))
-                    ),
-                    height: 20,
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: BlurHero(
+                        index: widget.index,
+                        height: 56,
+                      )
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: CharacterNameHero(
+                        index: widget.index
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           SliverToBoxAdapter(
@@ -78,12 +74,13 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
               height: 1000,
               child: Column(
                 children: [
+                  const SizedBox(height: 8,),
                   DividerHero(index: widget.index),
                   const SizedBox(height: 16,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CharacterSummaryHero(index: widget.index),
-                  )
+                  ),
                 ],
               ),
             )

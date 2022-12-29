@@ -18,8 +18,8 @@ class CharacterNameHero extends StatelessWidget {
       tag: "name_hero_$index",
       child: Text(
         characters[index].name,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          color: Colors.black
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          color: Colors.white
         )
       ),
     );

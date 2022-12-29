@@ -7,10 +7,11 @@ import '../../../providers/mgs_characters.dart';
 
 class CharacterImageHero extends StatelessWidget {
 
-  const CharacterImageHero({this.width, this.height, required this.index, Key? key}) : super(key: key);
+  const CharacterImageHero({this.imageWidth, this.imageHeight, this.blurHeight, required this.index, Key? key}) : super(key: key);
 
-  final double? width;
-  final double? height;
+  final double? imageWidth;
+  final double? imageHeight;
+  final double? blurHeight;
   final int index;
 
   @override
@@ -21,17 +22,23 @@ class CharacterImageHero extends StatelessWidget {
     return Hero(
         tag: "image_hero_$index",
         child: SizedBox(
-          width: width,
-          height: height,
+          width: imageWidth,
+          height: imageHeight,
           child: ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image.asset(
-                characters[index].imagePath,
-                fit: BoxFit.cover,
-              ),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            child: Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: ExactAssetImage(characters[index].imagePath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
             )
           ),
         )
