@@ -4,7 +4,7 @@ class MgsCharacter {
   final String? realName;
   final List<String>? alsoKnownNames;
   final String? summary;
-  final String imagePath;
+  final List<String> imagePaths;
   final String? shortClipPath;
 
   MgsCharacter(
@@ -14,7 +14,7 @@ class MgsCharacter {
       this.realName,
       this.alsoKnownNames,
       this.summary,
-      required this.imagePath,
+      required this.imagePaths,
       this.shortClipPath,
     }
   );

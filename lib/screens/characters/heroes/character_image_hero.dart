@@ -7,11 +7,12 @@ import '../../../providers/mgs_characters.dart';
 
 class CharacterImageHero extends StatelessWidget {
 
-  const CharacterImageHero({this.imageWidth, this.imageHeight, this.blurHeight, required this.index, Key? key}) : super(key: key);
+  const CharacterImageHero({this.imageWidth, this.imageHeight, this.blurHeight, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
 
   final double? imageWidth;
   final double? imageHeight;
   final double? blurHeight;
+  final ScrollPhysics? scrollPhysics;
   final int index;
 
   @override
@@ -26,13 +27,19 @@ class CharacterImageHero extends StatelessWidget {
           height: imageHeight,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: ExactAssetImage(characters[index].imagePath),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            child: PageView.builder(
+              physics: scrollPhysics,
+              itemCount: characters[index].imagePaths.length,
+              itemBuilder: (context, pageIndex) {
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: ExactAssetImage(characters[index].imagePaths[pageIndex]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
             )
           ),
         )

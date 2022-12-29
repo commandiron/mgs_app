@@ -21,7 +21,11 @@ class MgsCharacters with ChangeNotifier {
       """
       Solid Snake, real name David, also known as Old Snake, and briefly known as Iroquois Pliskin, or simply Snake, was a former spy, special operations soldier, and mercenary. Possessing an IQ of 180 and fluent in six languages,[3][4], the fame he achieved from his military exploits earned him such monikers as "Legendary Soldier,"[3] "Legendary Hero,"[5] and "the Man Who Makes the Impossible Possible."[3]
       """,
-      imagePath: "assets/images/characters/solid_snake.jpg",
+      imagePaths: [
+        "assets/images/characters/solid_snake.jpg",
+        "assets/images/characters/liquid_snake.jpg",
+        "assets/images/characters/kazuhira_miller.jpg"
+      ],
       shortClipPath: "assets/videos/mgs_theme.mp4"
     ),
     MgsCharacter(
@@ -32,7 +36,7 @@ class MgsCharacters with ChangeNotifier {
         "White Mamba",
         "McDonell Miller"
       ],
-      imagePath: "assets/images/characters/liquid_snake.jpg",
+      imagePaths: ["assets/images/characters/liquid_snake.jpg"],
     ),
     MgsCharacter(
       id: 2,
@@ -43,7 +47,7 @@ class MgsCharacters with ChangeNotifier {
         "Hell Master",
         "Master Miller"
       ],
-      imagePath: "assets/images/characters/kazuhira_miller.jpg",
+      imagePaths: ["assets/images/characters/kazuhira_miller.jpg"],
     ),
   ];
 

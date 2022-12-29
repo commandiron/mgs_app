@@ -17,7 +17,7 @@ class BackHero extends StatelessWidget {
     return Hero(
       tag: "back_hero_$index",
       child: CircleAvatar(
-        backgroundColor: Colors.black.withOpacity(0.2),
+        backgroundColor: Colors.black.withOpacity(0.0),
         foregroundColor: Colors.white,
         maxRadius: 26,
         minRadius: 0,

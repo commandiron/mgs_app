@@ -4,10 +4,7 @@ import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_summary_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
-import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
-
-import '../../providers/mgs_characters.dart';
 import 'heroes/back_hero.dart';
 import 'heroes/blur_hero.dart';
 import 'heroes/play_hero.dart';
@@ -105,33 +102,39 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                       Navigator.of(context).pop();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(32.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 32
+                      ),
                       child: BackHero(index: widget.index),
                     ),
                   ),
                   Align(
                     alignment: Alignment.topRight,
                     child: Padding(
-                      padding: const EdgeInsets.all(32.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 32
+                      ),
                       child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              if(_controller.value.isPlaying) {
-                                _controller.pause();
-                                _controller.seekTo(Duration.zero);
-                                _showCharAvatar = true;
-                              } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
-                                _controller.pause();
-                                _controller.seekTo(Duration.zero);
-                                _showCharAvatar = true;
-                              } else {
-                                _showCharAvatar = false;
-                                _controller.setLooping(true);
-                                _controller.play();
-                              }
-                            });
-                          },
-                          child: PlayHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
+                        onTap: () {
+                          setState(() {
+                            if(_controller.value.isPlaying) {
+                              _controller.pause();
+                              _controller.seekTo(Duration.zero);
+                              _showCharAvatar = true;
+                            } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+                              _controller.pause();
+                              _controller.seekTo(Duration.zero);
+                              _showCharAvatar = true;
+                            } else {
+                              _showCharAvatar = false;
+                              _controller.setLooping(true);
+                              _controller.play();
+                            }
+                          });
+                        },
+                        child: PlayHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
                       ),
                     ),
                   ),

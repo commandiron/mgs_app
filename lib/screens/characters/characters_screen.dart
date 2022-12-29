@@ -42,6 +42,11 @@ class CharactersScreen extends StatelessWidget {
                 ),
               ),
             ),
+            FilterChip(
+              selected: true,
+              label: Text("MGS 1"),
+              onSelected: (value) {},
+            ),
             const SizedBox(height: 28,),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -58,7 +63,7 @@ class CharactersScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16,),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 2 ,
+              height: MediaQuery.of(context).size.height / 1.6 ,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.zero,
@@ -73,6 +78,7 @@ class CharactersScreen extends StatelessWidget {
                           CharacterImageHero(
                             index: index,
                             blurHeight: 84,
+                            scrollPhysics: const NeverScrollableScrollPhysics(),
                           ),
                           Align(
                             alignment: Alignment.bottomCenter,
