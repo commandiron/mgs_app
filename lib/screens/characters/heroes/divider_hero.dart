@@ -15,8 +15,8 @@ class DividerHero extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 160),
         child: Divider(
           color: Colors.black,
-          thickness: 3,
-          height: 3,
+          thickness: 4,
+          height: 4,
         ),
       ),
     );

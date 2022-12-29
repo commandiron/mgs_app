@@ -26,19 +26,13 @@ class CharacterImageHero extends StatelessWidget {
           height: imageHeight,
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: ExactAssetImage(characters[index].imagePath),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: ExactAssetImage(characters[index].imagePath),
+                  fit: BoxFit.cover,
                 ),
-              ],
+              ),
             )
           ),
         )

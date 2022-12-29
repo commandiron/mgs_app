@@ -38,6 +38,17 @@ class MyTheme {
       selectionColor: primaryLight,
       selectionHandleColor: primaryLight
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: MaterialStateProperty.all(primaryLight),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30))
+          )
+        )
+      )
+    )
   );
 
   static ThemeData dark = MyTheme.light;

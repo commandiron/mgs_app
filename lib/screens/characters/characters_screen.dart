@@ -8,8 +8,10 @@ import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 import 'package:provider/provider.dart';
 import '../../../../providers/mgs_characters.dart';
 import '../../widgets/back_app_bar/back_app_bar.dart';
+import 'heroes/back_hero.dart';
 import 'heroes/character_name_hero.dart';
 import 'heroes/character_summary_hero.dart';
+import 'heroes/play_hero.dart';
 
 class CharactersScreen extends StatelessWidget {
   const CharactersScreen({Key? key}) : super(key: key);
@@ -28,7 +30,24 @@ class CharactersScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 8
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Filters",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            ),
+            const SizedBox(height: 28,),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 8
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -37,74 +56,108 @@ class CharactersScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 28,),
-            Container(
+            const SizedBox(height: 16,),
+            SizedBox(
               height: MediaQuery.of(context).size.height / 2 ,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.zero,
                 itemCount: characters.length,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteBuilder(
-                          transitionDuration: const Duration(seconds: 1),
-                          reverseTransitionDuration: const Duration(seconds: 1),
-                          pageBuilder: (context, animation, secondaryAnimation) {
-                            return CharacterDetailPage(index);
-                          },
-                        )
-                      );
-                    },
-                    child: SizedBox(
-                      width: 220,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                        child: Stack(
-                          children: [
-                            CharacterImageHero(
+                  return SizedBox(
+                    width: 180,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                      child: Stack(
+                        children: [
+                          CharacterImageHero(
+                            index: index,
+                            blurHeight: 84,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: BlurHero(
                               index: index,
-                              blurHeight: 84,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: BlurHero(
-                                index: index,
-                                height: 84,
-                              )
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 56,
-                                left: 10,
-                                right: 10
-                              ),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: CharacterNameHero(
-                                  index: index
+                              height: 100,
+                            )
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              width: double.infinity,
+                              height: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 12,
+                                  right: 16,
+                                  left: 16,
+                                  bottom: 12
+                                ),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: CharacterNameHero(
+                                          index: index
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                                PageRouteBuilder(
+                                                  transitionDuration: const Duration(seconds: 1),
+                                                  reverseTransitionDuration: const Duration(seconds: 1),
+                                                  pageBuilder: (context, animation, secondaryAnimation) {
+                                                    return CharacterDetailPage(characters[index], index);
+                                                  },
+                                                )
+                                            );
+                                          },
+                                          child: const Text("Details"),
+                                        )
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            Transform.translate(
+                          ),
+                          Transform.translate(
                               offset: Offset(
                                 0.0,
-                                MediaQuery.of(context).size.height * 2,
+                                - MediaQuery.of(context).size.height * 2,
                               ),
-                              child: DividerHero(index: index)
-                            ),
-                            Transform.translate(
+                              child: BackHero(index: index)
+                          ),
+                          Transform.translate(
                               offset: Offset(
                                 0.0,
-                                MediaQuery.of(context).size.height,
+                                - MediaQuery.of(context).size.height * 2,
                               ),
-                              child: CharacterSummaryHero(
-                                  index: index
-                              ),
+                              child: PlayHero(index: index)
+                          ),
+                          Transform.translate(
+                            offset: Offset(
+                              0.0,
+                              MediaQuery.of(context).size.height * 2,
                             ),
-                          ],
-                        ),
+                            child: DividerHero(index: index)
+                          ),
+                          Transform.translate(
+                            offset: Offset(
+                              0.0,
+                              MediaQuery.of(context).size.height,
+                            ),
+                            child: CharacterSummaryHero(
+                                index: index
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
