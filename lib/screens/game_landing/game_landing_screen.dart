@@ -60,7 +60,10 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       flexibleSpace: _buildFlexibleSpaceBar(game.posterUrl, paletteSnapshot),
       titleSpacing: 0,
       centerTitle: true,
-      title: Text(game.title, style: Theme.of(context).textTheme.titleLarge,)
+      title: Text(
+        game.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      )
     );
   }
 
@@ -174,7 +177,7 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
                 children: [
                   Text(
                     releaseDate,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.normal
                     ),
                   )
@@ -201,7 +204,10 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
           ],
         ),
         const SizedBox(height: 16,),
-        Text(summary),
+        Text(
+          summary,
+          style: Theme.of(context).textTheme.bodyLarge
+        ),
       ],
     );
   }

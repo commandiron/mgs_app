@@ -31,6 +31,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(widget.character.shortClipPath ?? "");
+    _controller.setVolume(0.0);
     _controller.initialize();
   }
 
@@ -119,8 +120,13 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                                 _controller.pause();
                                 _controller.seekTo(Duration.zero);
                                 _showCharAvatar = true;
+                              } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+                                _controller.pause();
+                                _controller.seekTo(Duration.zero);
+                                _showCharAvatar = true;
                               } else {
                                 _showCharAvatar = false;
+                                _controller.setLooping(true);
                                 _controller.play();
                               }
                             });

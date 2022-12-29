@@ -83,7 +83,7 @@ class CharactersScreen extends StatelessWidget {
                           ),
                           Align(
                             alignment: Alignment.bottomCenter,
-                            child: Container(
+                            child: SizedBox(
                               width: double.infinity,
                               height: 100,
                               child: Padding(
@@ -154,7 +154,7 @@ class CharactersScreen extends StatelessWidget {
                               MediaQuery.of(context).size.height,
                             ),
                             child: CharacterSummaryHero(
-                                index: index
+                              index: index
                             ),
                           ),
                         ],

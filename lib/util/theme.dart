@@ -20,18 +20,34 @@ class MyTheme {
       unselectedItemColor: Colors.grey.shade400,
     ),
     textTheme: const TextTheme(
-      headlineMedium: TextStyle(
-        fontWeight: FontWeight.bold
-      ),
+      //
       headlineSmall: TextStyle(
-        fontWeight: FontWeight.bold
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w700
       ),
+      //
       titleLarge: TextStyle(
-        fontWeight: FontWeight.bold
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w700
       ),
+      //
       titleMedium: TextStyle(
-          fontWeight: FontWeight.bold
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w600
       ),
+      //
+      //
+      titleSmall: TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w600
+      ),
+      //
+      //
+      bodyLarge: TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w500,
+      ),
+      //
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: primaryLight,
@@ -43,11 +59,18 @@ class MyTheme {
         backgroundColor: MaterialStateProperty.all(Colors.white),
         foregroundColor: MaterialStateProperty.all(primaryLight),
         shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
+          const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(30))
           )
         )
       )
+    ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: primaryLight,
+      contentTextStyle: const TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w500,
+      ),
     )
   );
 

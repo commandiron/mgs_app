@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/model/category.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({required this.category, required this.onTab, Key? key}) : super(key: key);
+  const CategoryItem(
+    {
+      required this.category,
+      required this.onTab,
+      Key? key
+    }
+  ) : super(key: key);
 
   final Category category;
   final void Function() onTab;
@@ -30,15 +36,47 @@ class CategoryItem extends StatelessWidget {
             color: Colors.black.withOpacity(0.25)
           ),
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Text(
-              category.title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white
-              )
-            ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text(
+                    category.title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.white
+                    )
+                  ),
+                ),
+              ),
+              if(category.isUnderConstruction)
+                Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Soon."))
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(Radius.circular(30)),
+                          color: Colors.white.withOpacity(0.7)
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.lock,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                      ),
+                    ),
+                  ),
+                )
+            ],
           ),
         )
       ),

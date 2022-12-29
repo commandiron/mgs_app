@@ -16,22 +16,26 @@ class Categories with ChangeNotifier {
     Category(
       id: 2,
       title: "Weapons",
-      imageUrl: "https://www.imfdb.org/images/5/52/SOCOM.jpg"
+      imageUrl: "https://www.imfdb.org/images/5/52/SOCOM.jpg",
+      isUnderConstruction: true
     ),
     Category(
-        id: 3,
-        title: "Events",
-        imageUrl: "https://wallpapercave.com/wp/wp8918223.jpg"
+      id: 3,
+      title: "Events",
+      imageUrl: "https://wallpapercave.com/wp/wp8918223.jpg",
+      isUnderConstruction: true
     ),
     Category(
-        id: 4,
-        title: "Metal Gears",
-        imageUrl: "https://i.ytimg.com/vi/vX_rLYMz8cE/maxresdefault.jpg"
+      id: 4,
+      title: "Metal Gears",
+      imageUrl: "https://i.ytimg.com/vi/vX_rLYMz8cE/maxresdefault.jpg",
+      isUnderConstruction: true
     ),
     Category(
-        id: 5,
-        title: "Equipments",
-        imageUrl: "https://preview.redd.it/0k4ali39zdu41.png?auto=webp&s=a4abf3afa92d09c9c5b1e37f3c2f9add55dfad76"
+      id: 5,
+      title: "Equipments",
+      imageUrl: "https://preview.redd.it/0k4ali39zdu41.png?auto=webp&s=a4abf3afa92d09c9c5b1e37f3c2f9add55dfad76",
+      isUnderConstruction: true
     ),
   ];
 
