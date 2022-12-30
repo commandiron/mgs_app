@@ -7,11 +7,10 @@ import '../../../providers/mgs_characters.dart';
 
 class CharacterImageHero extends StatelessWidget {
 
-  const CharacterImageHero({this.imageWidth, this.imageHeight, this.blurHeight, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
+  const CharacterImageHero({this.imageWidth, this.imageHeight, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
 
   final double? imageWidth;
   final double? imageHeight;
-  final double? blurHeight;
   final ScrollPhysics? scrollPhysics;
   final int index;
 
@@ -21,28 +20,28 @@ class CharacterImageHero extends StatelessWidget {
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
     return Hero(
-        tag: "character_image_hero_$index",
-        child: SizedBox(
-          width: imageWidth,
-          height: imageHeight,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            child: PageView.builder(
-              physics: scrollPhysics,
-              itemCount: characters[index].imagePaths.length,
-              itemBuilder: (context, pageIndex) {
-                return Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: ExactAssetImage(characters[index].imagePaths[pageIndex]),
-                      fit: BoxFit.cover,
-                    ),
+      tag: "character_image_hero_$index",
+      child: SizedBox(
+        width: imageWidth,
+        height: imageHeight,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
+          child: PageView.builder(
+            physics: scrollPhysics,
+            itemCount: characters[index].imagePaths.length,
+            itemBuilder: (context, pageIndex) {
+              return Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: ExactAssetImage(characters[index].imagePaths[pageIndex]),
+                    fit: BoxFit.cover,
                   ),
-                );
-              },
-            )
-          ),
-        )
+                ),
+              );
+            },
+          )
+        ),
+      )
     );
   }
 }

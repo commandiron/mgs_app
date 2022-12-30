@@ -1,96 +1,93 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:mgs_app/model/game_platform.dart';
-import 'package:mgs_app/providers/games.dart';
-import 'package:palette_generator/palette_generator.dart';
-import 'package:provider/provider.dart';
 
 import '../../model/game.dart';
 
-class GameLandingScreen extends StatefulWidget {
-  const GameLandingScreen({Key? key}) : super(key: key);
+class GameLandingPage extends StatefulWidget {
+  const GameLandingPage({Key? key}) : super(key: key);
 
-  static const route = "game_landing";
+  static const route = "gameLanding";
 
   @override
-  State<GameLandingScreen> createState() => _GameLandingScreenState();
+  State<GameLandingPage> createState() => _GameLandingPageState();
 }
 
-class _GameLandingScreenState extends State<GameLandingScreen> {
+class _GameLandingPageState extends State<GameLandingPage> {
 
   @override
   Widget build(BuildContext context) {
 
-    final id = ModalRoute.of(context)!.settings.arguments as int;
-    final game = Provider.of<Games>(context, listen: false).findById(id);
-
-    Future<PaletteGenerator> updatePaletteGenerator () async {
-      final paletteGenerator = await PaletteGenerator.fromImageProvider(
-        Image.network(game.posterUrl).image,
-      );
-      return paletteGenerator;
-    }
+    final game = ModalRoute.of(context)!.settings.arguments as Game;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: FutureBuilder<PaletteGenerator>(
-        future: updatePaletteGenerator(),
-        builder: (context, paletteSnapshot) {
-          if(paletteSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(),);
-          } else {
-            return CustomScrollView(
-              slivers: <Widget>[
-                _buildSliverAppBar(game, paletteSnapshot),
-                _buildSliverBox(game)
-              ],
-            );
-          }
-        },
+      body: CustomScrollView(
+        controller: ScrollController(
+          initialScrollOffset: 160
+        ),
+        slivers: <Widget>[
+          _buildSliverAppBar(game),
+          _buildSliverBox(game)
+        ],
       )
     );
   }
 
-  Widget _buildSliverAppBar(Game game, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
+  Widget _buildSliverAppBar(Game game) {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       pinned: true,
       snap: false,
       floating: false,
-      expandedHeight: MediaQuery.of(context).size.height / 2,
+      elevation: 0,
+      expandedHeight: 600,
+      backgroundColor: Theme.of(context).colorScheme.background,
       iconTheme: Theme.of(context).iconTheme,
-      titleSpacing: 0,
-      centerTitle: true,
-      title: Text(
-        game.title,
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      flexibleSpace: _buildFlexibleSpaceBar(game.posterUrl, paletteSnapshot),
+      flexibleSpace: _buildFlexibleSpace(game.posterUrl, game.title)
     );
   }
-  Widget _buildFlexibleSpaceBar(String posterUrl, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
-    return FlexibleSpaceBar(
-        background: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-          ),
-          child: Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top + 52 + 16,
-                  bottom: 16,
-                  right: 32,
-                  left: 32
+
+  Widget _buildFlexibleSpace(String posterUrl, String title) {
+    return Flexible(
+      child: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    alignment: Alignment.center,
+                    image: NetworkImage(posterUrl),
+                    fit: BoxFit.cover
+                  ),
+                ),
               ),
-              child: Card(
-                color: paletteSnapshot.data?.lightMutedColor?.color,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Image.network(posterUrl),
-                ),
-              )
+            ),
           ),
-        )
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.black.withOpacity(0.7),
+                  foregroundColor: Colors.white,
+                  maxRadius: 26,
+                  minRadius: 26,
+                  child: const Icon(Icons.arrow_back),
+                ),
+              ),
+            )
+          )
+        ],
+      )
     );
   }
 
@@ -105,7 +102,10 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
             if(game.releaseDate.isNotEmpty)
               _buildReleaseDate(game.releaseDate),
             if(game.summary.isNotEmpty)
-              _buildSummary(game.summary)
+              _buildSummary(game.summary),
+            Container(
+              height: 1000,
+            ),
           ],
         ),
       ),

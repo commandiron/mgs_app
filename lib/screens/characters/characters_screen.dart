@@ -92,7 +92,6 @@ class CharactersScreen extends StatelessWidget {
           children: [
             CharacterImageHero(
               index: index,
-              blurHeight: 84,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
             buildCharacterFooter(context, character, index),

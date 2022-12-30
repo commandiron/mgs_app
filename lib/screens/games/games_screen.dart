@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mgs_app/screens/game_landing/game_landing_screen.dart';
+import 'package:mgs_app/screens/games/game_landing_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/games.dart';
@@ -33,9 +33,11 @@ class _GamesScreenState extends State<GamesScreen> {
         itemBuilder: (context, index) => GamesItem(
           game: games[index],
           onTab: () {
-            Navigator.of(context).pushNamed(
-                GameLandingScreen.route,
-                arguments: games[index].id
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const GameLandingPage(),
+                settings: RouteSettings(arguments: games[index])
+              )
             );
           }
         )

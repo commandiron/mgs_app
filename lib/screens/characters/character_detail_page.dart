@@ -43,6 +43,9 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
+        controller: ScrollController(
+          initialScrollOffset: 80
+        ),
         slivers: <Widget>[
           buildSliverAppBar(),
           buildSliverBox()
@@ -58,11 +61,9 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       snap: false,
       floating: false,
       elevation: 0,
-      expandedHeight: 360,
+      expandedHeight: 380,
       backgroundColor: Theme.of(context).colorScheme.background,
-      iconTheme: const IconThemeData(
-          color: Colors.black
-      ),
+      iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: buildFlexibleSpace(),
     );
   }
@@ -87,7 +88,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       imageWidth: double.infinity,
       imageHeight: double.infinity,
       index: widget.index,
-      blurHeight: 56,
     );
   }
   Widget buildVideoPlayer() {
