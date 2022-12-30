@@ -10,7 +10,7 @@ class BackIconHero extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Hero(
-      tag: "back_hero_$index",
+      tag: "back_icon_hero_$index",
       child: CircleAvatar(
         backgroundColor: Colors.black.withOpacity(0.0),
         foregroundColor: Colors.white,

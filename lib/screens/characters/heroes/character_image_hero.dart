@@ -21,7 +21,7 @@ class CharacterImageHero extends StatelessWidget {
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
     return Hero(
-        tag: "image_hero_$index",
+        tag: "character_image_hero_$index",
         child: SizedBox(
           width: imageWidth,
           height: imageHeight,

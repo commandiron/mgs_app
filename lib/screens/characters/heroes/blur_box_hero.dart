@@ -13,7 +13,7 @@ class BlurBoxHero extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Hero(
-      tag: "blur_hero_$index",
+      tag: "blur_box_hero_$index",
       child: SizedBox(
         height: height,
         child: ClipRRect(

@@ -11,7 +11,7 @@ class PlayIconHero extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Hero(
-      tag: "play_hero_$index",
+      tag: "play_icon_hero_$index",
       child: CircleAvatar(
         backgroundColor: Colors.black.withOpacity(0.7),
         foregroundColor: Colors.white,

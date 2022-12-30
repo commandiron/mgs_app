@@ -15,7 +15,7 @@ class CharacterNameHero extends StatelessWidget {
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
     return Hero(
-      tag: "name_hero_$index",
+      tag: "character_name_hero_$index",
       child: Text(
         characters[index].name,
         style: Theme.of(context).textTheme.titleSmall?.copyWith(

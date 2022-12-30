@@ -189,7 +189,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     );
   }
 
-
   Widget buildSliverBox() {
     return SliverToBoxAdapter(
         child: Container(
