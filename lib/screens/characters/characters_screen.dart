@@ -25,45 +25,21 @@ class CharactersScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const BackAppBar(),
-      body: _buildBody(context)
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildFilters(context),
-          _buildCharacters(context)
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFilters(BuildContext context) {
-    return Column(
-      children: [
-        _buildFilterTitle(context),
-        _buildFilterListView()
-      ],
-    );
-  }
-  Widget _buildFilterTitle(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 32,
-          vertical: 8
-      ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Filters",
-          style: Theme.of(context).textTheme.headlineSmall,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildTitle(context, "Filters"),
+            buildFilterChipList(),
+            buildTitle(context, "Characters"),
+            const SizedBox(height: 16,),
+            buildCharacterList(context)
+          ],
         ),
-      ),
+      )
     );
   }
-  Widget _buildFilterListView() {
+
+  Widget buildFilterChipList() {
     return SizedBox(
       height: 64,
       child: Consumer<Filters>(
@@ -91,32 +67,7 @@ class CharactersScreen extends StatelessWidget {
       )
     );
   }
-
-  Widget _buildCharacters(BuildContext context) {
-    return Column(
-      children: [
-        _buildCharactersTitle(context),
-        const SizedBox(height: 16,),
-        _buildCharactersListView(context)
-      ],
-    );
-  }
-  Widget _buildCharactersTitle(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 32,
-          vertical: 8
-      ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Characters",
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      ),
-    );
-  }
-  Widget _buildCharactersListView(BuildContext context) {
+  Widget buildCharacterList(BuildContext context) {
 
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
@@ -127,28 +78,31 @@ class CharactersScreen extends StatelessWidget {
         padding: EdgeInsets.zero,
         itemCount: characters.length,
         itemBuilder: (context, index) {
-          return SizedBox(
-            width: 180,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-              child: Stack(
-                children: [
-                  CharacterImageHero(
-                    index: index,
-                    blurHeight: 84,
-                    scrollPhysics: const NeverScrollableScrollPhysics(),
-                  ),
-                  _buildFooter(context, characters, index),
-                  _buildOffScreenHeroWidgets(context, index)
-                ],
-              ),
-            ),
-          );
+          return buildCharacterItem(context, characters[index], index);
         },
       ),
     );
   }
-  Widget _buildFooter(BuildContext context, List<MgsCharacter> characters, int index) {
+  Widget buildCharacterItem(BuildContext context, MgsCharacter character, int index) {
+    return SizedBox(
+      width: 180,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+        child: Stack(
+          children: [
+            CharacterImageHero(
+              index: index,
+              blurHeight: 84,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
+            ),
+            buildCharacterFooter(context, character, index),
+            buildOffScreenHeroWidgets(context, index)
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildCharacterFooter(BuildContext context, MgsCharacter character, int index) {
     return Stack(
       children: [
         Align(
@@ -190,7 +144,7 @@ class CharactersScreen extends StatelessWidget {
                                   transitionDuration: const Duration(seconds: 1),
                                   reverseTransitionDuration: const Duration(seconds: 1),
                                   pageBuilder: (context, animation, secondaryAnimation) {
-                                    return CharacterDetailPage(characters[index], index);
+                                    return CharacterDetailPage(character, index);
                                   },
                                 )
                             );
@@ -207,7 +161,7 @@ class CharactersScreen extends StatelessWidget {
       ],
     );
   }
-  Widget _buildOffScreenHeroWidgets(BuildContext context, int index) {
+  Widget buildOffScreenHeroWidgets(BuildContext context, int index) {
     return Stack(
       children: [
         Transform.translate(
@@ -241,6 +195,22 @@ class CharactersScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildTitle(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      ),
     );
   }
 }

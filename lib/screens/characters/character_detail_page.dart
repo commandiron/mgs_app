@@ -44,139 +44,147 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            pinned: true,
-            snap: false,
-            floating: false,
-            elevation: 0,
-            expandedHeight: 360,
-            backgroundColor: Theme.of(context).colorScheme.background,
-            iconTheme: const IconThemeData(
-              color: Colors.black
-            ),
-            flexibleSpace: Flexible(
-              child: Stack(
-                children: [
-                  if(_showCharAvatar)
-                    CharacterImageHero(
-                      imageWidth: double.infinity,
-                      imageHeight: double.infinity,
-                      index: widget.index,
-                      blurHeight: 56,
-                    ),
-                  if(!_showCharAvatar)
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          if(_controller.value.isPlaying) {
-                            _controller.pause();
-                          } else {
-                            _controller.play();
-                          }
-                        });
-                      },
-                      child: SizedBox.expand(
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
-                          child: Container(
-                            color: Colors.black,
-                            child: FittedBox(
-                              fit: BoxFit.cover,
-                              child: SizedBox(
-                                width: _controller.value.size.width ?? 0,
-                                height: _controller.value.size.height ?? 0,
-                                child: VideoPlayer(_controller),
-                              ),
-                            ),
-                          ),
+          buildSliverAppBar(),
+          buildSliverBox()
+        ],
+      )
+    );
+  }
+
+  Widget buildSliverAppBar() {
+    return SliverAppBar(
+      automaticallyImplyLeading: false,
+      pinned: true,
+      snap: false,
+      floating: false,
+      elevation: 0,
+      expandedHeight: 360,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      iconTheme: const IconThemeData(
+          color: Colors.black
+      ),
+      flexibleSpace: Flexible(
+        child: Stack(
+          children: [
+            if(_showCharAvatar)
+              CharacterImageHero(
+                imageWidth: double.infinity,
+                imageHeight: double.infinity,
+                index: widget.index,
+                blurHeight: 56,
+              ),
+            if(!_showCharAvatar)
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    if(_controller.value.isPlaying) {
+                      _controller.pause();
+                    } else {
+                      _controller.play();
+                    }
+                  });
+                },
+                child: SizedBox.expand(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+                    child: Container(
+                      color: Colors.black,
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: SizedBox(
+                          width: _controller.value.size.width ?? 0,
+                          height: _controller.value.size.height ?? 0,
+                          child: VideoPlayer(_controller),
                         ),
                       ),
                     ),
-                  InkWell(
-                    onTap: () {
-                      setState((){
-                        _controller.pause();
-                        _showCharAvatar = true;
-                      });
-                      Navigator.of(context).pop();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 32
-                      ),
-                      child: BackHero(index: widget.index),
-                    ),
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 32
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            if(_controller.value.isPlaying) {
-                              _controller.pause();
-                              _controller.seekTo(Duration.zero);
-                              _showCharAvatar = true;
-                            } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
-                              _controller.pause();
-                              _controller.seekTo(Duration.zero);
-                              _showCharAvatar = true;
-                            } else {
-                              _showCharAvatar = false;
-                              _controller.setLooping(true);
-                              _controller.play();
-                            }
-                          });
-                        },
-                        child: PlayHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
-                      ),
-                    ),
-                  ),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: BlurHero(
-                        index: widget.index,
-                        height: 56,
-                      )
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child:  CharacterNameHero(
-                        index: widget.index
-                      )
-                    ),
-                  ),
-                ],
+                ),
+              ),
+            InkWell(
+              onTap: () {
+                setState((){
+                  _controller.pause();
+                  _showCharAvatar = true;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 32
+                ),
+                child: BackHero(index: widget.index),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              alignment: Alignment.topCenter,
-              height: 1000,
-              child: Column(
-                children: [
-                  const SizedBox(height: 8,),
-                  DividerHero(index: widget.index),
-                  const SizedBox(height: 16,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: CharacterSummaryHero(index: widget.index),
-                  ),
-                ],
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 32
+                ),
+                child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        if(_controller.value.isPlaying) {
+                          _controller.pause();
+                          _controller.seekTo(Duration.zero);
+                          _showCharAvatar = true;
+                        } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+                          _controller.pause();
+                          _controller.seekTo(Duration.zero);
+                          _showCharAvatar = true;
+                        } else {
+                          _showCharAvatar = false;
+                          _controller.setLooping(true);
+                          _controller.play();
+                        }
+                      });
+                    },
+                    child: PlayHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
+                ),
               ),
-            )
-          )
-        ],
-      )
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: BlurHero(
+                  index: widget.index,
+                  height: 56,
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child:  CharacterNameHero(
+                      index: widget.index
+                  )
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildSliverBox() {
+    return SliverToBoxAdapter(
+        child: Container(
+          alignment: Alignment.topCenter,
+          height: 1000,
+          child: Column(
+            children: [
+              const SizedBox(height: 8,),
+              DividerHero(index: widget.index),
+              const SizedBox(height: 16,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CharacterSummaryHero(index: widget.index),
+              ),
+            ],
+          ),
+        )
     );
   }
 }
