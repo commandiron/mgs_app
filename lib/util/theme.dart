@@ -5,6 +5,7 @@ class MyTheme {
   static Color primaryLight = const Color(0xffaf0000);
   static Color secondaryLight = const Color(0xffFF6F6F);
   static Color backgroundLight = const Color(0xffEDEDED);
+  static Color lightGrey = const Color(0xffDCDCDC);
 
   static ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
@@ -71,6 +72,11 @@ class MyTheme {
         fontFamily: "Inter",
         fontWeight: FontWeight.w500,
       ),
+    ),
+    chipTheme: ChipThemeData(
+      backgroundColor: lightGrey,
+      selectedColor: lightGrey,
+      checkmarkColor: primaryLight,
     )
   );
 

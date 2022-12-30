@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mgs_app/providers/filters.dart';
 import 'package:mgs_app/providers/games.dart';
 import 'package:mgs_app/providers/mgs_characters.dart';
 import 'package:mgs_app/util/theme.dart';
@@ -37,6 +38,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => MgsCharacters(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Filters(),
         ),
       ],
       builder: (context, child) {
