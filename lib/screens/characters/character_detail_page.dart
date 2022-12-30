@@ -5,9 +5,9 @@ import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_summary_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 import 'package:video_player/video_player.dart';
-import 'heroes/back_hero.dart';
-import 'heroes/blur_hero.dart';
-import 'heroes/play_hero.dart';
+import 'heroes/back_icon_hero.dart';
+import 'heroes/blur_box_hero.dart';
+import 'heroes/play_icon_hero.dart';
 
 class CharacterDetailPage extends StatefulWidget {
   const CharacterDetailPage(this.character, this.index,{Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class CharacterDetailPage extends StatefulWidget {
 class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
-  bool _showCharAvatar = true;
+  bool _showCharImage = true;
 
   @override
   void initState() {
@@ -63,110 +63,132 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       iconTheme: const IconThemeData(
           color: Colors.black
       ),
-      flexibleSpace: Flexible(
-        child: Stack(
-          children: [
-            if(_showCharAvatar)
-              CharacterImageHero(
-                imageWidth: double.infinity,
-                imageHeight: double.infinity,
-                index: widget.index,
-                blurHeight: 56,
-              ),
-            if(!_showCharAvatar)
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    if(_controller.value.isPlaying) {
-                      _controller.pause();
-                    } else {
-                      _controller.play();
-                    }
-                  });
-                },
-                child: SizedBox.expand(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
-                    child: Container(
-                      color: Colors.black,
-                      child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: SizedBox(
-                          width: _controller.value.size.width ?? 0,
-                          height: _controller.value.size.height ?? 0,
-                          child: VideoPlayer(_controller),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            InkWell(
-              onTap: () {
-                setState((){
-                  _controller.pause();
-                  _showCharAvatar = true;
-                });
-                Navigator.of(context).pop();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 32
-                ),
-                child: BackHero(index: widget.index),
+      flexibleSpace: buildFlexibleSpace(),
+    );
+  }
+  Widget buildFlexibleSpace() {
+    return Flexible(
+      child: Stack(
+        children: [
+          if(_showCharImage)
+            buildCharacterImageHero(),
+          if(!_showCharImage)
+            buildVideoPlayer(),
+          buildBackIconHero(),
+          buildPlayIconHero(),
+          buildBlurBoxHero(),
+         buildCharacterNameHero()
+        ],
+      ),
+    );
+  }
+  Widget buildCharacterImageHero() {
+    return CharacterImageHero(
+      imageWidth: double.infinity,
+      imageHeight: double.infinity,
+      index: widget.index,
+      blurHeight: 56,
+    );
+  }
+  Widget buildVideoPlayer() {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          if(_controller.value.isPlaying) {
+            _controller.pause();
+          } else {
+            _controller.play();
+          }
+        });
+      },
+      child: SizedBox.expand(
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+          child: Container(
+            color: Colors.black,
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: SizedBox(
+                width: _controller.value.size.width,
+                height: _controller.value.size.height,
+                child: VideoPlayer(_controller),
               ),
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 32
-                ),
-                child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        if(_controller.value.isPlaying) {
-                          _controller.pause();
-                          _controller.seekTo(Duration.zero);
-                          _showCharAvatar = true;
-                        } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
-                          _controller.pause();
-                          _controller.seekTo(Duration.zero);
-                          _showCharAvatar = true;
-                        } else {
-                          _showCharAvatar = false;
-                          _controller.setLooping(true);
-                          _controller.play();
-                        }
-                      });
-                    },
-                    child: PlayHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
-                ),
-              ),
-            ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: BlurHero(
-                  index: widget.index,
-                  height: 56,
-                )
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child:  CharacterNameHero(
-                      index: widget.index
-                  )
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
+  Widget buildBackIconHero() {
+    return InkWell(
+      onTap: () {
+        setState((){
+          _controller.pause();
+          _showCharImage = true;
+        });
+        Navigator.of(context).pop();
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 32
+        ),
+        child: BackIconHero(index: widget.index),
+      ),
+    );
+  }
+  Widget buildPlayIconHero() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 32
+        ),
+        child: InkWell(
+            onTap: () {
+              setState(() {
+                if(_controller.value.isPlaying) {
+                  _controller.pause();
+                  _controller.seekTo(Duration.zero);
+                  _showCharImage = true;
+                } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+                  _controller.pause();
+                  _controller.seekTo(Duration.zero);
+                  _showCharImage = true;
+                } else {
+                  _showCharImage = false;
+                  _controller.setLooping(true);
+                  _controller.play();
+                }
+              });
+            },
+            child: PlayIconHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
+        ),
+      ),
+    );
+  }
+  Widget buildBlurBoxHero() {
+    return  Align(
+        alignment: Alignment.bottomCenter,
+        child: BlurBoxHero(
+          index: widget.index,
+          height: 56,
+        )
+    );
+  }
+  Widget buildCharacterNameHero() {
+    return  Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Align(
+          alignment: Alignment.bottomCenter,
+          child:  CharacterNameHero(
+              index: widget.index
+          )
+      ),
+    );
+  }
+
 
   Widget buildSliverBox() {
     return SliverToBoxAdapter(

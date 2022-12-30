@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/characters/character_detail_page.dart';
-import 'package:mgs_app/screens/characters/heroes/blur_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/blur_box_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +10,10 @@ import '../../../../providers/mgs_characters.dart';
 import '../../model/mgs_character.dart';
 import '../../providers/filters.dart';
 import '../../widgets/back_app_bar/back_app_bar.dart';
-import 'heroes/back_hero.dart';
+import 'heroes/back_icon_hero.dart';
 import 'heroes/character_name_hero.dart';
 import 'heroes/character_summary_hero.dart';
-import 'heroes/play_hero.dart';
+import 'heroes/play_icon_hero.dart';
 
 class CharactersScreen extends StatelessWidget {
   const CharactersScreen({Key? key}) : super(key: key);
@@ -107,7 +107,7 @@ class CharactersScreen extends StatelessWidget {
       children: [
         Align(
             alignment: Alignment.bottomCenter,
-            child: BlurHero(
+            child: BlurBoxHero(
               index: index,
               height: 100,
             )
@@ -169,14 +169,14 @@ class CharactersScreen extends StatelessWidget {
               0.0,
               - MediaQuery.of(context).size.height * 2,
             ),
-            child: BackHero(index: index)
+            child: BackIconHero(index: index)
         ),
         Transform.translate(
             offset: Offset(
               0.0,
               - MediaQuery.of(context).size.height * 2,
             ),
-            child: PlayHero(index: index)
+            child: PlayIconHero(index: index)
         ),
         Transform.translate(
             offset: Offset(

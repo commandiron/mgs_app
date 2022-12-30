@@ -1,13 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/mgs_characters.dart';
+class BackIconHero extends StatelessWidget {
 
-class BackHero extends StatelessWidget {
-
-  const BackHero({required this.index, Key? key}) : super(key: key);
+  const BackIconHero({required this.index, Key? key}) : super(key: key);
 
   final int index;
 

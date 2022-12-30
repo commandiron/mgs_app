@@ -1,13 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/mgs_characters.dart';
+class BlurBoxHero extends StatelessWidget {
 
-class BlurHero extends StatelessWidget {
-
-  const BlurHero({this.height, required this.index, Key? key}) : super(key: key);
+  const BlurBoxHero({this.height, required this.index, Key? key}) : super(key: key);
 
   final double? height;
   final int index;

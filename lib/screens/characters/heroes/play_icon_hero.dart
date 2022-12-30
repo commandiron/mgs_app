@@ -1,13 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/mgs_characters.dart';
+class PlayIconHero extends StatelessWidget {
 
-class PlayHero extends StatelessWidget {
-
-  const PlayHero({this.icon, required this.index, Key? key}) : super(key: key);
+  const PlayIconHero({this.icon, required this.index, Key? key}) : super(key: key);
 
   final int index;
   final IconData? icon;
