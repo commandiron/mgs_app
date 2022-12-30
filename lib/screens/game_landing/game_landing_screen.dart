@@ -57,16 +57,15 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       floating: false,
       expandedHeight: MediaQuery.of(context).size.height / 2,
       iconTheme: Theme.of(context).iconTheme,
-      flexibleSpace: _buildFlexibleSpaceBar(game.posterUrl, paletteSnapshot),
       titleSpacing: 0,
       centerTitle: true,
       title: Text(
         game.title,
         style: Theme.of(context).textTheme.titleLarge,
-      )
+      ),
+      flexibleSpace: _buildFlexibleSpaceBar(game.posterUrl, paletteSnapshot),
     );
   }
-
   Widget _buildFlexibleSpaceBar(String posterUrl, AsyncSnapshot<PaletteGenerator> paletteSnapshot) {
     return FlexibleSpaceBar(
         background: DecoratedBox(
@@ -112,20 +111,10 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       ),
     );
   }
-
   Widget _buildPlatforms(List<GamePlatform> platforms) {
     return Column(
       children: [
-        Flex(
-          direction: Axis.horizontal,
-          children: [
-            Text(
-              "Platforms",
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.start,
-            ),
-          ],
-        ),
+        _buildTitle("Platforms"),
         SizedBox(
           height: 64,
           child: ListView.builder(
@@ -155,20 +144,10 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       ],
     );
   }
-
   Widget _buildReleaseDate(String releaseDate) {
     return Column(
       children: [
-        Flex(
-          direction: Axis.horizontal,
-          children: [
-            Text(
-              "Release Date",
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.start,
-            ),
-          ],
-        ),
+        _buildTitle("Release Date"),
         const SizedBox(height: 16,),
         Column(
           children: [
@@ -189,24 +168,27 @@ class _GameLandingScreenState extends State<GameLandingScreen> {
       ],
     );
   }
-
   Widget _buildSummary(String summary) {
     return Column(
       children: [
-        Flex(
-          direction: Axis.horizontal,
-          children: [
-            Text(
-              "Summary",
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.start,
-            ),
-          ],
-        ),
+        _buildTitle("Summary"),
         const SizedBox(height: 16,),
         Text(
           summary,
           style: Theme.of(context).textTheme.bodyLarge
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTitle(String title) {
+    return Flex(
+      direction: Axis.horizontal,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall,
+          textAlign: TextAlign.start,
         ),
       ],
     );
