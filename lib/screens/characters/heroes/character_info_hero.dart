@@ -24,6 +24,14 @@ class CharacterInfoHero extends StatelessWidget {
           children: [
             const InfoTitle("Real Name"),
             InfoBody(characters[index].realName ?? ""),
+            const InfoTitle("Also Known As"),
+            if(characters[index].alsoKnownNames != null)
+              Column(
+                children:
+                  characters[index].alsoKnownNames!.map(
+                    (name) => Text(name)
+                  ).toList()
+              ),
             InfoBody(characters[index].summary ?? "")
           ],
         ),

@@ -160,10 +160,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
     return Column(
       children: [
         const InfoTitle("Summary"),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: InfoBody(summary),
-        )
+        InfoBody(summary)
       ],
     );
   }

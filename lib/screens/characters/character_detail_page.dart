@@ -197,13 +197,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           height: 1000,
           child: Column(
             children: [
-              const SizedBox(height: 8,),
               DividerHero(index: widget.index),
-              const SizedBox(height: 16,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CharacterInfoHero(index: widget.index),
-              ),
+              CharacterInfoHero(index: widget.index),
             ],
           ),
         )
