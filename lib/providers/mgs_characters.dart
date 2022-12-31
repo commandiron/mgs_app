@@ -20,7 +20,7 @@ class MgsCharacters with ChangeNotifier {
       nationality: "American",
       born: "1972, United States",
       age: "42",
-      summary:
+      info:
       """
       Solid Snake, real name David, also known as Old Snake, and briefly known as Iroquois Pliskin, or simply Snake, was a former spy, special operations soldier, and mercenary. Possessing an IQ of 180 and fluent in six languages,[3][4], the fame he achieved from his military exploits earned him such monikers as "Legendary Soldier,"[3] "Legendary Hero,"[5] and "the Man Who Makes the Impossible Possible."[3]
 

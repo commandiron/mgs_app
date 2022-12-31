@@ -26,7 +26,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
-  Offset _animationOffset = Offset(0, 1);
+  Offset _animationOffset = Offset(0 , 1);
 
   @override
   void initState() {
@@ -202,51 +202,110 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.topCenter,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: AnimatedSlide(
           offset: _animationOffset,
-          duration: Duration(milliseconds: 750),
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.fastOutSlowIn,
           child: Column(
             children: [
               const SizedBox(height: 8,),
-              const  ScrollDivider(),
+              const ScrollDivider(),
               const SizedBox(height: 16,),
               const InfoTitle("Biographical information"),
               const Divider(thickness: 1,),
-              const SizedBox(height: 8,),
               if(widget.character.realName != null)
-                AlignLeft(child: const InfoSubTitle("RealName")),
-                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.realName!)),
+                _buildRealName(),
               if(widget.character.alsoKnownNames != null)
-                const SizedBox(height: 8,),
-                AlignLeft(child: const InfoSubTitle("Also Known As")),
-                Column(
-                  children: widget.character.alsoKnownNames!.map(
-                    (name) => AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(name)),
-                  ).toList(),
-                ),
+                _buildAlsoKnownAs(),
               if(widget.character.nationality != null)
-                const SizedBox(height: 8,),
-                AlignLeft(child: const InfoSubTitle("Nationality")),
-                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.nationality!)),
+                _buildNationality(),
               if(widget.character.born != null)
-                const SizedBox(height: 8,),
-                AlignLeft(child: const InfoSubTitle("Born")),
-                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.born!)),
+                _buildBorn(),
               if(widget.character.age != null)
-                const SizedBox(height: 8,),
-                AlignLeft(child: const InfoSubTitle("Age")),
-                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.age!)),
-              const SizedBox(height: 16,),
-              const InfoTitle("Info"),
-              const Divider(thickness: 1,),
-              const SizedBox(height: 8,),
-              AlignLeft(child: InfoBody(widget.character.summary ?? "")),
-              const SizedBox(height: 128,),
+                _buildAge(),
+              if(widget.character.info != null)
+                _buildInfo(),
+              const SizedBox(height: 512,),
             ],
           ),
         )
       )
+    );
+  }
+  Widget _buildRealName() {
+    return Column(
+      children: [
+        const SizedBox(height: 8,),
+        AlignLeft(child: const InfoSubTitle("RealName")),
+        AlignLeft(
+            padding: const EdgeInsets.only(left: 8),
+            child: InfoBody(widget.character.realName ?? "")
+        ),
+      ],
+    );
+  }
+  Widget _buildAlsoKnownAs() {
+    return Column(
+      children: [
+        const SizedBox(height: 8,),
+        AlignLeft(child: const InfoSubTitle("Also Known As")),
+        Column(
+          children: widget.character.alsoKnownNames!.map(
+                (name) => AlignLeft(
+                padding: const EdgeInsets.only(left: 8),
+                child: InfoBody(name)
+            ),
+          ).toList(),
+        ),
+      ],
+    );
+  }
+  Widget _buildNationality() {
+    return Column(
+      children: [
+        const SizedBox(height: 8,),
+        AlignLeft(child: const InfoSubTitle("Nationality")),
+        AlignLeft(
+            padding: const EdgeInsets.only(left: 8),
+            child: InfoBody(widget.character.nationality ?? "")
+        ),
+      ],
+    );
+  }
+  Widget _buildBorn() {
+    return Column(
+      children: [
+        const SizedBox(height: 8,),
+        AlignLeft(child: const InfoSubTitle("Born")),
+        AlignLeft(
+            padding: const EdgeInsets.only(left: 8),
+            child: InfoBody(widget.character.born ?? "")
+        ),
+      ],
+    );
+  }
+  Widget _buildAge() {
+    return Column(
+      children: [
+        const SizedBox(height: 8,),
+        AlignLeft(child: const InfoSubTitle("Age")),
+        AlignLeft(
+            padding: const EdgeInsets.only(left: 8),
+            child: InfoBody(widget.character.age ?? "")
+        ),
+      ],
+    );
+  }
+  Widget _buildInfo() {
+    return Column(
+      children: [
+        const SizedBox(height: 16,),
+        const InfoTitle("Info"),
+        const Divider(thickness: 1,),
+        const SizedBox(height: 8,),
+        AlignLeft(child: InfoBody(widget.character.info ?? "")),
+      ],
     );
   }
 }

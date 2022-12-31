@@ -6,7 +6,7 @@ class MgsCharacter {
   final String? nationality;
   final String? born;
   final String? age;
-  final String? summary;
+  final String? info;
   final List<String> imagePaths;
   final String? shortClipPath;
 
@@ -19,7 +19,7 @@ class MgsCharacter {
       this.nationality,
       this.born,
       this.age,
-      this.summary,
+      this.info,
       required this.imagePaths,
       this.shortClipPath,
     }

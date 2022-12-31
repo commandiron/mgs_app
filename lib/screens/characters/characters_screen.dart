@@ -36,7 +36,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
             buildFilterChipList(),
             const InfoTitle("Characters"),
             const SizedBox(height: 16,),
-            buildCharacterList(context)
+            buildCharacterList()
           ],
         ),
       )
@@ -72,7 +72,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
     );
   }
 
-  Widget buildCharacterList(BuildContext context) {
+  Widget buildCharacterList() {
 
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
 
