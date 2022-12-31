@@ -26,15 +26,13 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
-  Offset _animationOffset = Offset(0 , 1);
+  Offset _animationOffset = const Offset(0 , 1);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() {
-        _animationOffset = Offset.zero;
-      });
+      enterInfoOffsetAnimation();
     });
     _controller = VideoPlayerController.asset(widget.character.shortClipPath ?? "");
     _controller.setVolume(0.0);
@@ -45,6 +43,17 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void enterInfoOffsetAnimation() {
+    setState(() {
+      _animationOffset = Offset.zero;
+    });
+  }
+  void exitInfoOffsetAnimation() {
+    setState(() {
+      _animationOffset = const Offset(0 , 1);
+    });
   }
 
   @override
@@ -134,6 +143,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         setState((){
           _controller.pause();
           _showCharImage = true;
+          exitInfoOffsetAnimation();
         });
         Navigator.of(context).pop();
       },
