@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:mgs_app/model/game_platform.dart';
 import 'package:mgs_app/widgets/info_body.dart';
 import 'package:mgs_app/widgets/info_title.dart';
-
 import '../../model/game.dart';
+import '../../widgets/align_left.dart';
 
 class GameLandingPage extends StatefulWidget {
   const GameLandingPage({Key? key}) : super(key: key);
@@ -95,73 +92,51 @@ class _GameLandingPageState extends State<GameLandingPage> {
 
   Widget _buildSliverBox(Game game) {
     return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          if(game.platforms.isNotEmpty)
-            _buildPlatforms(game.platforms),
-          if(game.releaseDate.isNotEmpty)
-            _buildReleaseDate(game.releaseDate),
-          if(game.summary.isNotEmpty)
-            _buildSummary(game.summary),
-          Container(
-            height: 1000,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            if(game.platforms.isNotEmpty)
+              AlignLeft(child: InfoTitle("Platforms")),
+              SizedBox(
+                height: 64,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: game.platforms.length,
+                  itemBuilder: (context, index) {
+                    return Flex(
+                      direction: Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                                width: 50,
+                                child: Image.network(
+                                  game.platforms[index].logoUrl,
+                                )
+                            ),
+                            const SizedBox(width: 20,)
+                          ],
+                        )
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 8,),
+            if(game.releaseDate.isNotEmpty)
+              AlignLeft(child: InfoTitle("Release Date")),
+              SizedBox(height: 8,),
+              AlignLeft(child: InfoBody(game.releaseDate)),
+              SizedBox(height: 16,),
+            if(game.summary.isNotEmpty)
+              AlignLeft(child: InfoTitle("Summary")),
+              SizedBox(height: 8,),
+              InfoBody(game.summary),
+          ],
+        ),
       ),
-    );
-  }
-  Widget _buildPlatforms(List<GamePlatform> platforms) {
-    return Column(
-      children: [
-        const InfoTitle("Platforms"),
-        SizedBox(
-          height: 64,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: platforms.length,
-            itemBuilder: (context, index) {
-              return Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 50,
-                          child: Image.network(
-                            platforms[index].logoUrl,
-                          )
-                      ),
-                      const SizedBox(width: 20,)
-                    ],
-                  )
-                ],
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-  Widget _buildReleaseDate(String releaseDate) {
-    return Column(
-      children: [
-        const InfoTitle("Release Date"),
-        Text(
-          releaseDate,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.normal
-          ),
-        ),
-      ],
-    );
-  }
-  Widget _buildSummary(String summary) {
-    return Column(
-      children: [
-        const InfoTitle("Summary"),
-        InfoBody(summary)
-      ],
     );
   }
 }
