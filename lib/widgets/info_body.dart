@@ -8,8 +8,8 @@ class InfoBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-        title,
-        style: Theme.of(context).textTheme.bodyLarge
+      title,
+      style: Theme.of(context).textTheme.bodyLarge,
     );
   }
 }

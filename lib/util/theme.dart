@@ -24,29 +24,34 @@ class MyTheme {
       //
       headlineSmall: TextStyle(
         fontFamily: "Inter",
-        fontWeight: FontWeight.w700
+        fontWeight: FontWeight.w700,
+        fontSize: 22
       ),
       //
       titleLarge: TextStyle(
         fontFamily: "Inter",
-        fontWeight: FontWeight.w700
+        fontWeight: FontWeight.w700,
+        fontSize: 18
       ),
       //
       titleMedium: TextStyle(
         fontFamily: "Inter",
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w600,
+        fontSize: 16
       ),
       //
       //
       titleSmall: TextStyle(
         fontFamily: "Inter",
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w600,
+        fontSize: 14
       ),
       //
       //
       bodyLarge: TextStyle(
         fontFamily: "Inter",
         fontWeight: FontWeight.w500,
+        fontSize: 14
       ),
       //
     ),

@@ -3,8 +3,11 @@ import 'package:mgs_app/model/mgs_character.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/widgets/info_body.dart';
+import 'package:mgs_app/widgets/info_sub_title.dart';
 import 'package:mgs_app/widgets/info_title.dart';
+import 'package:mgs_app/widgets/scroll_divider.dart';
 import 'package:video_player/video_player.dart';
+import '../../widgets/align_left.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/blur_box_hero.dart';
 import 'heroes/play_icon_hero.dart';
@@ -23,10 +26,16 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
+  Offset _animationOffset = Offset(0, 1);
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        _animationOffset = Offset.zero;
+      });
+    });
     _controller = VideoPlayerController.asset(widget.character.shortClipPath ?? "");
     _controller.setVolume(0.0);
     _controller.initialize();
@@ -191,23 +200,53 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   Widget buildSliverBox() {
     return SliverToBoxAdapter(
-        child: Container(
-          alignment: Alignment.topCenter,
-          height: 1000,
+      child: Container(
+        alignment: Alignment.topCenter,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: AnimatedSlide(
+          offset: _animationOffset,
+          duration: Duration(milliseconds: 750),
           child: Column(
             children: [
-              InfoTitle("Real Name"),
-              InfoBody(widget.character.realName ?? ""),
+              const SizedBox(height: 8,),
+              const  ScrollDivider(),
+              const SizedBox(height: 16,),
+              const InfoTitle("Biographical information"),
+              const Divider(thickness: 1,),
+              const SizedBox(height: 8,),
+              if(widget.character.realName != null)
+                AlignLeft(child: const InfoSubTitle("RealName")),
+                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.realName!)),
               if(widget.character.alsoKnownNames != null)
-                InfoTitle("Also Known As"),
+                const SizedBox(height: 8,),
+                AlignLeft(child: const InfoSubTitle("Also Known As")),
                 Column(
                   children: widget.character.alsoKnownNames!.map(
-                    (name) => InfoBody(name)
+                    (name) => AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(name)),
                   ).toList(),
-                )
+                ),
+              if(widget.character.nationality != null)
+                const SizedBox(height: 8,),
+                AlignLeft(child: const InfoSubTitle("Nationality")),
+                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.nationality!)),
+              if(widget.character.born != null)
+                const SizedBox(height: 8,),
+                AlignLeft(child: const InfoSubTitle("Born")),
+                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.born!)),
+              if(widget.character.age != null)
+                const SizedBox(height: 8,),
+                AlignLeft(child: const InfoSubTitle("Age")),
+                AlignLeft(padding: const EdgeInsets.only(left: 8), child: InfoBody(widget.character.age!)),
+              const SizedBox(height: 16,),
+              const InfoTitle("Info"),
+              const Divider(thickness: 1,),
+              const SizedBox(height: 8,),
+              AlignLeft(child: InfoBody(widget.character.summary ?? "")),
+              const SizedBox(height: 128,),
             ],
-          )
+          ),
         )
+      )
     );
   }
 }
