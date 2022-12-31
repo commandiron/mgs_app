@@ -23,31 +23,14 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
-  Offset _slideOffset = Offset(0, 1);
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      animatedShowCharacterInfo();
-    });
     _controller = VideoPlayerController.asset(widget.character.shortClipPath ?? "");
     _controller.setVolume(0.0);
     _controller.initialize();
   }
-
-  void animatedShowCharacterInfo() {
-    setState(() {
-      _slideOffset = Offset.zero;
-    });
-  }
-
-  void animatedHideCharacterInfo() {
-    setState(() {
-      _slideOffset = Offset(0, 1);
-    });
-  }
-
 
   @override
   void dispose() {
@@ -142,7 +125,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         setState((){
           _controller.pause();
           _showCharImage = true;
-          animatedHideCharacterInfo();
         });
         Navigator.of(context).pop();
       },
