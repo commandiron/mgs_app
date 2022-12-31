@@ -210,18 +210,17 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   Widget buildSliverBox() {
     return SliverToBoxAdapter(
-      child: Container(
-        alignment: Alignment.topCenter,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: AnimatedSlide(
-          offset: _animationOffset,
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.fastOutSlowIn,
+      child: AnimatedSlide(
+        offset: _animationOffset,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.fastOutSlowIn,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
               const SizedBox(height: 8,),
               const ScrollDivider(),
-              const SizedBox(height: 16,),
+              const SizedBox(height: 32,),
               const InfoTitle("Biographical information"),
               const Divider(thickness: 1,),
               if(widget.character.realName != null)
@@ -238,8 +237,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                 _buildInfo(),
               const SizedBox(height: 512,),
             ],
-          ),
-        )
+          )
+        ),
       )
     );
   }
