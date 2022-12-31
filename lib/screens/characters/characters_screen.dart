@@ -5,6 +5,7 @@ import 'package:mgs_app/screens/characters/character_detail_page.dart';
 import 'package:mgs_app/screens/characters/heroes/blur_box_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
+import 'package:mgs_app/widgets/info_title.dart';
 import 'package:provider/provider.dart';
 import '../../../../providers/mgs_characters.dart';
 import '../../model/mgs_character.dart';
@@ -12,14 +13,19 @@ import '../../providers/filters.dart';
 import '../../widgets/back_app_bar/back_app_bar.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/character_name_hero.dart';
-import 'heroes/character_summary_hero.dart';
+import 'heroes/character_info_hero.dart';
 import 'heroes/play_icon_hero.dart';
 
-class CharactersScreen extends StatelessWidget {
+class CharactersScreen extends StatefulWidget {
   const CharactersScreen({Key? key}) : super(key: key);
 
   static const route = "characters";
 
+  @override
+  State<CharactersScreen> createState() => _CharactersScreenState();
+}
+
+class _CharactersScreenState extends State<CharactersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +34,9 @@ class CharactersScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            buildTitle(context, "Filters"),
+            const InfoTitle("Filters"),
             buildFilterChipList(),
-            buildTitle(context, "Characters"),
+            const InfoTitle("Characters"),
             const SizedBox(height: 16,),
             buildCharacterList(context)
           ],
@@ -67,6 +73,7 @@ class CharactersScreen extends StatelessWidget {
       )
     );
   }
+
   Widget buildCharacterList(BuildContext context) {
 
     final characters = Provider.of<MgsCharacters>(context, listen: false).items;
@@ -78,12 +85,13 @@ class CharactersScreen extends StatelessWidget {
         padding: EdgeInsets.zero,
         itemCount: characters.length,
         itemBuilder: (context, index) {
-          return buildCharacterItem(context, characters[index], index);
+          return buildCharacterItem(characters[index], index);
         },
       ),
     );
   }
-  Widget buildCharacterItem(BuildContext context, MgsCharacter character, int index) {
+
+  Widget buildCharacterItem(MgsCharacter character, int index) {
     return SizedBox(
       width: 180,
       child: Padding(
@@ -94,14 +102,15 @@ class CharactersScreen extends StatelessWidget {
               index: index,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
-            buildCharacterFooter(context, character, index),
-            buildOffScreenHeroWidgets(context, index)
+            buildCharacterFooter(character, index),
+            buildOffScreenHeroWidgets(index)
           ],
         ),
       ),
     );
   }
-  Widget buildCharacterFooter(BuildContext context, MgsCharacter character, int index) {
+
+  Widget buildCharacterFooter(MgsCharacter character, int index) {
     return Stack(
       children: [
         Align(
@@ -160,7 +169,8 @@ class CharactersScreen extends StatelessWidget {
       ],
     );
   }
-  Widget buildOffScreenHeroWidgets(BuildContext context, int index) {
+
+  Widget buildOffScreenHeroWidgets(int index) {
     return Stack(
       children: [
         Transform.translate(
@@ -189,27 +199,11 @@ class CharactersScreen extends StatelessWidget {
             0.0,
             MediaQuery.of(context).size.height,
           ),
-          child: CharacterSummaryHero(
+          child: CharacterInfoHero(
               index: index
           ),
         ),
       ],
-    );
-  }
-
-  Widget buildTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8
-      ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      ),
     );
   }
 }

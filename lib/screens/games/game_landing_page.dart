@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mgs_app/model/game_platform.dart';
+import 'package:mgs_app/widgets/info_body.dart';
+import 'package:mgs_app/widgets/info_title.dart';
 
 import '../../model/game.dart';
 
@@ -93,28 +95,25 @@ class _GameLandingPageState extends State<GameLandingPage> {
 
   Widget _buildSliverBox(Game game) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            if(game.platforms.isNotEmpty)
-              _buildPlatforms(game.platforms),
-            if(game.releaseDate.isNotEmpty)
-              _buildReleaseDate(game.releaseDate),
-            if(game.summary.isNotEmpty)
-              _buildSummary(game.summary),
-            Container(
-              height: 1000,
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          if(game.platforms.isNotEmpty)
+            _buildPlatforms(game.platforms),
+          if(game.releaseDate.isNotEmpty)
+            _buildReleaseDate(game.releaseDate),
+          if(game.summary.isNotEmpty)
+            _buildSummary(game.summary),
+          Container(
+            height: 1000,
+          ),
+        ],
       ),
     );
   }
   Widget _buildPlatforms(List<GamePlatform> platforms) {
     return Column(
       children: [
-        _buildTitle("Platforms"),
+        const InfoTitle("Platforms"),
         SizedBox(
           height: 64,
           child: ListView.builder(
@@ -147,23 +146,12 @@ class _GameLandingPageState extends State<GameLandingPage> {
   Widget _buildReleaseDate(String releaseDate) {
     return Column(
       children: [
-        _buildTitle("Release Date"),
-        const SizedBox(height: 16,),
-        Column(
-          children: [
-            Flex(
-                direction: Axis.horizontal,
-                children: [
-                  Text(
-                    releaseDate,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.normal
-                    ),
-                  )
-                ]
-            ),
-            const SizedBox(height: 16,),
-          ],
+        const InfoTitle("Release Date"),
+        Text(
+          releaseDate,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.normal
+          ),
         ),
       ],
     );
@@ -171,25 +159,11 @@ class _GameLandingPageState extends State<GameLandingPage> {
   Widget _buildSummary(String summary) {
     return Column(
       children: [
-        _buildTitle("Summary"),
-        const SizedBox(height: 16,),
-        Text(
-          summary,
-          style: Theme.of(context).textTheme.bodyLarge
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTitle(String title) {
-    return Flex(
-      direction: Axis.horizontal,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall,
-          textAlign: TextAlign.start,
-        ),
+        const InfoTitle("Summary"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: InfoBody(summary),
+        )
       ],
     );
   }

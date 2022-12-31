@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/model/mgs_character.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
-import 'package:mgs_app/screens/characters/heroes/character_summary_hero.dart';
+import 'package:mgs_app/screens/characters/heroes/character_info_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
+import 'package:mgs_app/widgets/info_title.dart';
 import 'package:video_player/video_player.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/blur_box_hero.dart';
@@ -201,7 +202,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
               const SizedBox(height: 16,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CharacterSummaryHero(index: widget.index),
+                child: CharacterInfoHero(index: widget.index),
               ),
             ],
           ),
