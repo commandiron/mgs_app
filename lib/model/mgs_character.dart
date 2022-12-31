@@ -7,8 +7,8 @@ class MgsCharacter {
   final String? born;
   final String? age;
   final String? info;
-  final List<String> imagePaths;
-  final String? shortClipPath;
+  final List<String> imageUrls;
+  final String? shortClipUrl;
 
   MgsCharacter(
     {
@@ -20,8 +20,8 @@ class MgsCharacter {
       this.born,
       this.age,
       this.info,
-      required this.imagePaths,
-      this.shortClipPath,
+      required this.imageUrls,
+      this.shortClipUrl,
     }
   );
 }

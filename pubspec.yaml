@@ -34,6 +34,7 @@ dependencies:
   provider: ^6.0.5
   video_player: ^2.4.9
   share_plus: ^6.3.0
+  http: ^0.13.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -74,10 +75,6 @@ flutter:
     - assets/images/games/mgs_iv_logo.png
     - assets/images/games/mgs_pw_logo.png
     - assets/images/games/mgs_v_logo.png
-
-    - assets/images/characters/kazuhira_miller.jpg
-    - assets/images/characters/liquid_snake.jpg
-    - assets/images/characters/solid_snake.jpg
 
     - assets/videos/mgs_theme.mp4
     - assets/videos/mgs_game_over.mp4

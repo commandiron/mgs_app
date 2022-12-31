@@ -24,6 +24,20 @@ class CharactersScreen extends StatefulWidget {
 }
 
 class _CharactersScreenState extends State<CharactersScreen> {
+
+  late Future _charactersFuture;
+
+  Future _obtainCharactersFuture() {
+    return Provider.of<MgsCharacters>(context, listen: false).fetchCharacters();
+  }
+
+  @override
+  void initState() {
+    _charactersFuture = _obtainCharactersFuture();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,19 +87,29 @@ class _CharactersScreenState extends State<CharactersScreen> {
   }
 
   Widget buildCharacterList() {
-
-    final characters = Provider.of<MgsCharacters>(context, listen: false).items;
-
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 2 ,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.zero,
-        itemCount: characters.length,
-        itemBuilder: (context, index) {
-          return buildCharacterItem(characters[index], index);
-        },
-      ),
+    return FutureBuilder(
+      future: _charactersFuture,
+      builder: (context, dataSnapshot) {
+        if(dataSnapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator(),);
+        } else {
+          return Consumer<MgsCharacters>(
+            builder: (context, charactersData, child) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height / 2 ,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.zero,
+                  itemCount: charactersData.characters.length,
+                  itemBuilder: (context, index) {
+                    return buildCharacterItem(charactersData.characters[index], index);
+                  },
+                ),
+              );
+            },
+          );
+        }
+      },
     );
   }
 

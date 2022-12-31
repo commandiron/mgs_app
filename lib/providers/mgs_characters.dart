@@ -1,66 +1,69 @@
 import 'package:flutter/material.dart';
-
 import '../model/mgs_character.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MgsCharacters with ChangeNotifier {
-  final List<MgsCharacter> _items = [
-    MgsCharacter(
-      id: 0,
-      name: "Solid Snake",
-      realName: "David",
-      alsoKnownNames: [
-        "Snake",
-        "Dave",
-        "Iroquois Pliskin",
-        "Old Snake",
-        "Legendary Mercenary",
-        "Legendary Hero",
-        "The Man Who Makes the Impossible Possible"
-      ],
-      nationality: "American",
-      born: "1972, United States",
-      age: "42",
-      info:
-      """
-      Solid Snake, real name David, also known as Old Snake, and briefly known as Iroquois Pliskin, or simply Snake, was a former spy, special operations soldier, and mercenary. Possessing an IQ of 180 and fluent in six languages,[3][4], the fame he achieved from his military exploits earned him such monikers as "Legendary Soldier,"[3] "Legendary Hero,"[5] and "the Man Who Makes the Impossible Possible."[3]
+  List<MgsCharacter> _characters = [];
 
-      Snake was one of the children born of the 1972 project Les Enfants Terribles. He was created as a clone of the world-renowned soldier Big Boss, along with his brothers Liquid Snake and Solidus Snake. Initially a Green Beret, Snake was later inducted into the High-Tech Special Forces Unit FOXHOUND in the 1990s while it was commanded by Big Boss. Repeatedly tasked with disarming and destroying the latest incarnation of Metal Gear, a bipedal nuclear weapon-armed tank, Snake would thrice avert potential nuclear catastrophe, becoming a famed war hero.
+  List<MgsCharacter> get characters {
+    return [..._characters];
+  }
 
-      Following the Shadow Moses Incident and subsequent smear campaign by the Patriots, the secret organization behind American politics, Snake was labeled a terrorist. He faked his own death in the Manhattan Tanker Incident, though he re-emerged years later to assist Raiden in the Big Shell Incident. During this time, his health declined as his body entered a state of accelerated aging due to intentional genetic changes made during the cloning process.
+  final localRootUrl = "http://10.0.2.2:8080";
 
-      In 2014, Snake performed his final mission, during which he defeated Liquid Ocelot and destroyed the Patriots. After one last encounter with Big Boss, Snake chose to live his remaining days in peace.
-      """,
-      imagePaths: [
-        "assets/images/characters/solid_snake.jpg",
-        "assets/images/characters/liquid_snake.jpg",
-        "assets/images/characters/kazuhira_miller.jpg"
-      ],
-      shortClipPath: "assets/videos/mgs_theme.mp4"
-    ),
-    MgsCharacter(
-      id: 1,
-      name: "Liquid Snake",
-      realName: "Eli",
-      alsoKnownNames: [
-        "White Mamba",
-        "McDonell Miller"
-      ],
-      imagePaths: ["assets/images/characters/liquid_snake.jpg"],
-    ),
-    MgsCharacter(
-      id: 2,
-      name: "Kazuhira Miller",
-      alsoKnownNames: [
-        "Kaz",
-        "McDonell Benedict Miller",
-        "Hell Master",
-        "Master Miller"
-      ],
-      imagePaths: ["assets/images/characters/kazuhira_miller.jpg"],
-    ),
-  ];
+  Future<void> fetchCharacters() async {
+    final url = Uri.parse("$localRootUrl/mgs/characters");
+    try {
+      final response = await http.get(url);
+      final List<MgsCharacter> loadedCharacters = [];
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
-  List<MgsCharacter> get items {
-    return [..._items];
+      final charactersData = extractedData["characters"] as List<dynamic>;
+
+      charactersData.forEach(
+        (character) {
+          final extractedCharacter = character as Map<String, dynamic>;
+
+          final id = extractedCharacter["id"] as int;
+          final name = extractedCharacter["name"] as String;
+          final realName = extractedCharacter["realName"] as String?;
+
+          final alsoKnownNamesDynamicList = extractedCharacter["alsoKnownNames"] as List<dynamic>?;
+          final alsoKnownNames = alsoKnownNamesDynamicList?.map((item) => item as String).toList();
+
+          final nationality = extractedCharacter["nationality"] as String?;
+          final born = extractedCharacter["born"] as String?;
+          final age = extractedCharacter["age"] as String?;
+          final info = extractedCharacter["info"] as String?;
+
+          final imagePathsDynamicList = extractedCharacter["imagePaths"] as List<dynamic>;
+          final imageUrls = imagePathsDynamicList.map(
+            (item) => "$localRootUrl$item"
+          ).toList();
+
+          final shortClipUrl = extractedCharacter["shortClipPath"] as String?;
+
+          loadedCharacters.add(
+            MgsCharacter(
+              id: id,
+              name: name,
+              realName: realName,
+              alsoKnownNames: alsoKnownNames,
+              nationality: nationality,
+              born: born,
+              age: age,
+              info: info,
+              imageUrls: imageUrls,
+              shortClipUrl: shortClipUrl,
+            )
+          );
+        }
+      );
+      _characters = loadedCharacters.toList();
+      notifyListeners();
+    }catch(error){
+      throw error;
+    }
   }
 }

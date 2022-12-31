@@ -12,7 +12,7 @@ class CharacterNameHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final characters = Provider.of<MgsCharacters>(context, listen: false).items;
+    final characters = Provider.of<MgsCharacters>(context, listen: false).characters;
 
     return Hero(
       tag: "character_name_hero_$index",

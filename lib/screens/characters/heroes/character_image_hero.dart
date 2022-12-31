@@ -17,7 +17,7 @@ class CharacterImageHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final characters = Provider.of<MgsCharacters>(context, listen: false).items;
+    final characters = Provider.of<MgsCharacters>(context, listen: false).characters;
 
     return Hero(
       tag: "character_image_hero_$index",
@@ -28,12 +28,12 @@ class CharacterImageHero extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           child: PageView.builder(
             physics: scrollPhysics,
-            itemCount: characters[index].imagePaths.length,
+            itemCount: characters[index].imageUrls.length,
             itemBuilder: (context, pageIndex) {
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: ExactAssetImage(characters[index].imagePaths[pageIndex]),
+                    image: NetworkImage(characters[index].imageUrls[pageIndex]),
                     fit: BoxFit.cover,
                   ),
                 ),
