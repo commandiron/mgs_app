@@ -12,15 +12,13 @@ class MgsCharacters with ChangeNotifier {
 
   final localRootUrl = "http://10.0.2.2:8080";
 
-  Future<void> fetchCharacters() async {
-    final url = Uri.parse("$localRootUrl/mgs/characters");
+  Future<void> fetchCharacters(int page, int limit) async {
+    final url = Uri.parse("$localRootUrl/mgs/characters?page=$page&limit=$limit");
     try {
       final response = await http.get(url);
       final List<MgsCharacter> loadedCharacters = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-
       final charactersData = extractedData["characters"] as List<dynamic>;
-
       charactersData.forEach(
         (character) {
           final extractedCharacter = character as Map<String, dynamic>;
