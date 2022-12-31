@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/model/mgs_character.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
-import 'package:mgs_app/screens/characters/heroes/character_info_hero.dart';
-import 'package:mgs_app/screens/characters/heroes/divider_hero.dart';
+import 'package:mgs_app/widgets/info_body.dart';
 import 'package:mgs_app/widgets/info_title.dart';
 import 'package:video_player/video_player.dart';
 import 'heroes/back_icon_hero.dart';
@@ -24,14 +23,31 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
+  Offset _slideOffset = Offset(0, 1);
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      animatedShowCharacterInfo();
+    });
     _controller = VideoPlayerController.asset(widget.character.shortClipPath ?? "");
     _controller.setVolume(0.0);
     _controller.initialize();
   }
+
+  void animatedShowCharacterInfo() {
+    setState(() {
+      _slideOffset = Offset.zero;
+    });
+  }
+
+  void animatedHideCharacterInfo() {
+    setState(() {
+      _slideOffset = Offset(0, 1);
+    });
+  }
+
 
   @override
   void dispose() {
@@ -126,6 +142,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         setState((){
           _controller.pause();
           _showCharImage = true;
+          animatedHideCharacterInfo();
         });
         Navigator.of(context).pop();
       },
@@ -197,10 +214,17 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           height: 1000,
           child: Column(
             children: [
-              DividerHero(index: widget.index),
-              CharacterInfoHero(index: widget.index),
+              InfoTitle("Real Name"),
+              InfoBody(widget.character.realName ?? ""),
+              if(widget.character.alsoKnownNames != null)
+                InfoTitle("Also Known As"),
+                Column(
+                  children: widget.character.alsoKnownNames!.map(
+                    (name) => InfoBody(name)
+                  ).toList(),
+                )
             ],
-          ),
+          )
         )
     );
   }

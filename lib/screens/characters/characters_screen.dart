@@ -187,22 +187,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
             ),
             child: PlayIconHero(index: index)
         ),
-        Transform.translate(
-            offset: Offset(
-              0.0,
-              MediaQuery.of(context).size.height * 2,
-            ),
-            child: DividerHero(index: index)
-        ),
-        Transform.translate(
-          offset: Offset(
-            0.0,
-            MediaQuery.of(context).size.height,
-          ),
-          child: CharacterInfoHero(
-              index: index
-          ),
-        ),
       ],
     );
   }
