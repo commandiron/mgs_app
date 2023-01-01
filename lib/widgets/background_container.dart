@@ -14,7 +14,7 @@ class BackgroundContainer extends StatelessWidget {
       height: height,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-            colors: [Color(0xffEDEDED), Color(0xffDCDCDC)],
+            colors: [Color(0xffEDEDED), Color(0xffD4E1EA)],
             begin: Alignment.center,
             end: Alignment.bottomCenter),
       ),
