@@ -42,7 +42,7 @@ class MgsCharacters with ChangeNotifier {
         final imageUrls =
             imagePathsDynamicList.map((item) => "$localRootUrl$item").toList();
 
-        final shortClipUrl = extractedCharacter["shortClipPath"] as String?;
+        final shortClipUrl = "$localRootUrl${extractedCharacter["shortClipPath"]}";
 
         loadedCharacters.add(MgsCharacter(
           id: id,
