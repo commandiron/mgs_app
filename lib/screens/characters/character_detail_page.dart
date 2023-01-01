@@ -80,25 +80,24 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       floating: false,
       elevation: 0,
       expandedHeight: 380,
+      collapsedHeight: 60 + 56 + MediaQuery.of(context).padding.top,
       backgroundColor: Theme.of(context).colorScheme.background,
       iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: buildFlexibleSpace(),
     );
   }
   Widget buildFlexibleSpace() {
-    return Flexible(
-      child: Stack(
-        children: [
-          if(_showCharImage)
-            buildCharacterImageHero(),
-          if(!_showCharImage)
-            buildVideoPlayer(),
-          buildBackIconHero(),
-          buildPlayIconHero(),
-          buildBlurBoxHero(),
-         buildCharacterNameHero()
-        ],
-      ),
+    return Stack(
+      children: [
+        if(_showCharImage)
+          buildCharacterImageHero(),
+        if(!_showCharImage)
+          buildVideoPlayer(),
+        buildBackIconHero(),
+        buildPlayIconHero(),
+        buildBlurBoxHero(),
+        buildCharacterNameHero()
+      ],
     );
   }
   Widget buildCharacterImageHero() {
@@ -235,7 +234,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                 _buildAge(),
               if(widget.character.info != null)
                 _buildInfo(),
-              const SizedBox(height: 512,),
+              SizedBox(height: MediaQuery.of(context).size.height),
             ],
           )
         ),
