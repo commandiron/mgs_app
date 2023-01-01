@@ -34,7 +34,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       enterInfoOffsetAnimation();
     });
-    print(widget.character.shortClipUrl);
     _controller = VideoPlayerController.network(widget.character.shortClipUrl ?? "");
     _controller.setVolume(0.0);
     _controller.initialize();
