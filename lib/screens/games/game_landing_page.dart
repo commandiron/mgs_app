@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mgs_app/widgets/info_body.dart';
-import 'package:mgs_app/widgets/info_title.dart';
+import 'package:mgs_app/widgets/info/info_body.dart';
+import 'package:mgs_app/widgets/info/info_title.dart';
 import '../../model/game.dart';
 import '../../widgets/align_left.dart';
 

@@ -3,7 +3,7 @@ import 'package:mgs_app/screens/characters/character_detail_page.dart';
 import 'package:mgs_app/screens/characters/heroes/blur_box_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/widgets/align_left.dart';
-import 'package:mgs_app/widgets/info_title.dart';
+import 'package:mgs_app/widgets/info/info_title.dart';
 import 'package:provider/provider.dart';
 import '../../../../providers/mgs_characters.dart';
 import '../../model/mgs_character.dart';
