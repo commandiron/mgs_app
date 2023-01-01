@@ -51,19 +51,19 @@ class _CharactersScreenState extends State<CharactersScreen> {
             buildFilterChipList(),
             AlignLeft(padding: const EdgeInsets.only(left: 16), child: InfoTitle("Characters"),),
             const SizedBox(height: 16,),
-            FutureBuilder(
-              future: _charactersFuture,
-              builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: Center(child: CircularProgressIndicator(),)
-                  );
-                } else {
-                  return buildCharacterList();
-                }
-              },
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 1.6,
+              child: FutureBuilder(
+                future: _charactersFuture,
+                builder: (context, snapshot) {
+                  if(snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator(),);
+                  } else {
+                    return buildCharacterList();
+                  }
+                },
 
+              ),
             )
           ],
         ),
@@ -103,16 +103,13 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget buildCharacterList() {
     return Consumer<MgsCharacters>(
       builder: (context, charactersData, child) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height / 2 ,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemCount: charactersData.characters.length,
-            itemBuilder: (context, index) {
-              return buildCharacterItem(charactersData.characters[index], index);
-            },
-          ),
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.zero,
+          itemCount: charactersData.characters.length,
+          itemBuilder: (context, index) {
+            return buildCharacterItem(charactersData.characters[index], index);
+          },
         );
       },
     );
