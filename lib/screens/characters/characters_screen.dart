@@ -47,9 +47,15 @@ class _CharactersScreenState extends State<CharactersScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AlignLeft(padding: const EdgeInsets.only(left: 16), child: const InfoTitle("Filters")),
+            AlignLeft(
+              padding: const EdgeInsets.only(left: 16),
+              child: const InfoTitle("Filters")
+            ),
             buildFilterChipList(),
-            AlignLeft(padding: const EdgeInsets.only(left: 16), child: InfoTitle("Characters"),),
+            AlignLeft(
+              padding: const EdgeInsets.only(left: 16),
+              child: const InfoTitle("Characters"),
+            ),
             const SizedBox(height: 16,),
             SizedBox(
               height: MediaQuery.of(context).size.height / 1.6,
