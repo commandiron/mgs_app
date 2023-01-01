@@ -5,6 +5,7 @@ import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/widgets/info/info_body.dart';
 import 'package:mgs_app/widgets/info/info_sub_title.dart';
 import 'package:mgs_app/widgets/scroll_divider.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:video_player/video_player.dart';
 import '../../widgets/align_left.dart';
 import '../../widgets/background_container.dart';
@@ -24,6 +25,14 @@ class CharacterDetailPage extends StatefulWidget {
 }
 
 class _CharacterDetailPageState extends State<CharacterDetailPage> {
+
+  Future<Color?>_updateBgColor()async
+  {
+    final paletteGenerator = await PaletteGenerator.fromImageProvider(
+      Image.network(widget.character.imageUrls[0]).image,
+    );
+    return paletteGenerator.lightMutedColor?.color;
+  }
 
   late VideoPlayerController _controller;
   bool _showCharImage = true;
@@ -60,16 +69,22 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BackgroundContainer(
-        child: CustomScrollView(
-          controller: ScrollController(
-            initialScrollOffset: 80
-          ),
-          slivers: <Widget>[
-            buildSliverAppBar(),
-            buildSliverBox()
-          ],
-        ),
+      body: FutureBuilder<Color?>(
+        future: _updateBgColor(),
+        builder: (context, snapshot) {
+          return BackgroundContainer(
+            endColor: snapshot.data,
+            child: CustomScrollView(
+              controller: ScrollController(
+                  initialScrollOffset: 80
+              ),
+              slivers: <Widget>[
+                buildSliverAppBar(),
+                buildSliverBox()
+              ],
+            ),
+          );
+        },
       )
     );
   }
