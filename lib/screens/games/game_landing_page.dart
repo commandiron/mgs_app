@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mgs_app/widgets/background_container.dart';
 import 'package:mgs_app/widgets/info/info_body.dart';
 import 'package:mgs_app/widgets/info/info_title.dart';
 import '../../model/game.dart';
@@ -21,15 +22,16 @@ class _GameLandingPageState extends State<GameLandingPage> {
     final game = ModalRoute.of(context)!.settings.arguments as Game;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: CustomScrollView(
-        controller: ScrollController(
-          initialScrollOffset: 160
+      body: BackgroundContainer(
+        child: CustomScrollView(
+          controller: ScrollController(
+            initialScrollOffset: 160
+          ),
+          slivers: <Widget>[
+            _buildSliverAppBar(game),
+            _buildSliverBox(game)
+          ],
         ),
-        slivers: <Widget>[
-          _buildSliverAppBar(game),
-          _buildSliverBox(game)
-        ],
       )
     );
   }

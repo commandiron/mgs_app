@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/games/game_landing_page.dart';
+import 'package:mgs_app/widgets/background_container.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/games.dart';
@@ -23,24 +24,26 @@ class _GamesScreenState extends State<GamesScreen> {
     final games = Provider.of<Games>(context, listen: false).items;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const BackAppBar(),
-      body: ListView.builder(
-        physics: const ClampingScrollPhysics(),
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        itemCount: games.length,
-        itemBuilder: (context, index) => GamesItem(
-          game: games[index],
-          onTab: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const GameLandingPage(),
-                settings: RouteSettings(arguments: games[index])
-              )
-            );
-          }
-        )
+      body: BackgroundContainer(
+        height: double.infinity,
+        child: ListView.builder(
+          physics: const ClampingScrollPhysics(),
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          itemCount: games.length,
+          itemBuilder: (context, index) => GamesItem(
+            game: games[index],
+            onTab: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const GameLandingPage(),
+                  settings: RouteSettings(arguments: games[index])
+                )
+              );
+            }
+          )
+        ),
       )
     );
   }

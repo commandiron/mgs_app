@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mgs_app/widgets/background_container.dart';
 
 import '../../widgets/bottom_navigation_bar/my_bottom_navigation_bar.dart';
 import '../../widgets/my_app_bar/my_app_bar.dart';
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: BackgroundContainer(child: _buildBody()),
       bottomNavigationBar: _buildNavigationBar(),
       floatingActionButton: _buildFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked);
