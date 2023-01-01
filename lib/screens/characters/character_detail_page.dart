@@ -4,10 +4,11 @@ import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
 import 'package:mgs_app/widgets/info_body.dart';
 import 'package:mgs_app/widgets/info_sub_title.dart';
-import 'package:mgs_app/widgets/info_title.dart';
 import 'package:mgs_app/widgets/scroll_divider.dart';
 import 'package:video_player/video_player.dart';
 import '../../widgets/align_left.dart';
+import '../../widgets/background_container.dart';
+import '../../widgets/info_card.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/blur_box_hero.dart';
 import 'heroes/play_icon_hero.dart';
@@ -59,15 +60,16 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: CustomScrollView(
-        controller: ScrollController(
-          initialScrollOffset: 80
+      body: BackgroundContainer(
+        child: CustomScrollView(
+          controller: ScrollController(
+            initialScrollOffset: 80
+          ),
+          slivers: <Widget>[
+            buildSliverAppBar(),
+            buildSliverBox()
+          ],
         ),
-        slivers: <Widget>[
-          buildSliverAppBar(),
-          buildSliverBox()
-        ],
       )
     );
   }
@@ -217,21 +219,27 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              const SizedBox(height: 8,),
+              const SizedBox(height: 16,),
               const ScrollDivider(),
-              const SizedBox(height: 32,),
-              const InfoTitle("Biographical information"),
-              const Divider(thickness: 1,),
-              if(widget.character.realName != null)
-                _buildRealName(),
+              const SizedBox(height: 16,),
+              Row(
+                children: [
+                  if(widget.character.realName != null)
+                    Expanded(child: _buildRealName(),),
+                  if(widget.character.nationality != null)
+                    Expanded(child: _buildNationality(),),
+                ],
+              ),
+              Row(
+                children: [
+                  if(widget.character.born != null)
+                    Expanded(child: _buildBorn(),),
+                  if(widget.character.age != null)
+                    Expanded(child: _buildAge()),
+                ],
+              ),
               if(widget.character.alsoKnownNames != null)
                 _buildAlsoKnownAs(),
-              if(widget.character.nationality != null)
-                _buildNationality(),
-              if(widget.character.born != null)
-                _buildBorn(),
-              if(widget.character.age != null)
-                _buildAge(),
               if(widget.character.info != null)
                 _buildInfo(),
               SizedBox(height: MediaQuery.of(context).size.height),
@@ -242,78 +250,57 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     );
   }
   Widget _buildRealName() {
-    return Column(
-      children: [
-        const SizedBox(height: 8,),
-        AlignLeft(child: const InfoSubTitle("RealName")),
-        AlignLeft(
-            padding: const EdgeInsets.only(left: 8),
-            child: InfoBody(widget.character.realName ?? "")
-        ),
-      ],
-    );
-  }
-  Widget _buildAlsoKnownAs() {
-    return Column(
-      children: [
-        const SizedBox(height: 8,),
-        AlignLeft(child: const InfoSubTitle("Also Known As")),
-        Column(
-          children: widget.character.alsoKnownNames!.map(
-                (name) => AlignLeft(
-                padding: const EdgeInsets.only(left: 8),
-                child: InfoBody(name)
-            ),
-          ).toList(),
-        ),
-      ],
+    return InfoCard(
+      title: "RealName",
+      body: widget.character.realName ?? ""
     );
   }
   Widget _buildNationality() {
-    return Column(
-      children: [
-        const SizedBox(height: 8,),
-        AlignLeft(child: const InfoSubTitle("Nationality")),
-        AlignLeft(
-            padding: const EdgeInsets.only(left: 8),
-            child: InfoBody(widget.character.nationality ?? "")
-        ),
-      ],
+    return InfoCard(
+      title: "Nationality",
+      body: widget.character.nationality ?? ""
     );
   }
   Widget _buildBorn() {
-    return Column(
-      children: [
-        const SizedBox(height: 8,),
-        AlignLeft(child: const InfoSubTitle("Born")),
-        AlignLeft(
-            padding: const EdgeInsets.only(left: 8),
-            child: InfoBody(widget.character.born ?? "")
-        ),
-      ],
+    return InfoCard(
+      title: "Born",
+      body: widget.character.born ?? "",
     );
   }
   Widget _buildAge() {
-    return Column(
-      children: [
-        const SizedBox(height: 8,),
-        AlignLeft(child: const InfoSubTitle("Age")),
-        AlignLeft(
-            padding: const EdgeInsets.only(left: 8),
-            child: InfoBody(widget.character.age ?? "")
+    return InfoCard(
+      title: "Age",
+      body: widget.character.age ?? ""
+    );
+  }
+  Widget _buildAlsoKnownAs() {
+    return Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            InfoSubTitle("Also Known As"),
+            SizedBox(height: 8,),
+            Column(
+              children: widget.character.alsoKnownNames!.map(
+                    (name) => AlignLeft(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Center(child: InfoBody(name))
+                ),
+              ).toList(),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
   Widget _buildInfo() {
-    return Column(
-      children: [
-        const SizedBox(height: 16,),
-        const InfoTitle("Info"),
-        const Divider(thickness: 1,),
-        const SizedBox(height: 8,),
-        AlignLeft(child: InfoBody(widget.character.info ?? "")),
-      ],
+    return InfoCard(
+      title: "Info",
+      body: widget.character.info ?? ""
     );
   }
 }

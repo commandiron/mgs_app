@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/characters/character_detail_page.dart';
 import 'package:mgs_app/screens/characters/heroes/blur_box_hero.dart';
@@ -11,6 +9,7 @@ import '../../../../providers/mgs_characters.dart';
 import '../../model/mgs_character.dart';
 import '../../providers/filters.dart';
 import '../../widgets/back_app_bar/back_app_bar.dart';
+import '../../widgets/background_container.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/character_name_hero.dart';
 import 'heroes/play_icon_hero.dart';
@@ -38,40 +37,41 @@ class _CharactersScreenState extends State<CharactersScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: const BackAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AlignLeft(
-              padding: const EdgeInsets.only(left: 16),
-              child: const InfoTitle("Filters")
-            ),
-            buildFilterChipList(),
-            AlignLeft(
-              padding: const EdgeInsets.only(left: 16),
-              child: const InfoTitle("Characters"),
-            ),
-            const SizedBox(height: 16,),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 1.6,
-              child: FutureBuilder(
-                future: _charactersFuture,
-                builder: (context, snapshot) {
-                  if(snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator(),);
-                  } else {
-                    return buildCharacterList();
-                  }
-                },
-
+      body: BackgroundContainer(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AlignLeft(
+                padding: const EdgeInsets.only(left: 16),
+                child: const InfoTitle("Filters")
               ),
-            )
-          ],
+              buildFilterChipList(),
+              AlignLeft(
+                padding: const EdgeInsets.only(left: 16),
+                child: const InfoTitle("Characters"),
+              ),
+              const SizedBox(height: 16,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 1.6,
+                child: FutureBuilder(
+                  future: _charactersFuture,
+                  builder: (context, snapshot) {
+                    if(snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator(),);
+                    } else {
+                      return buildCharacterList();
+                    }
+                  },
+
+                ),
+              )
+            ],
+          ),
         ),
       )
     );

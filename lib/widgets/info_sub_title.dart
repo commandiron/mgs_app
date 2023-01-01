@@ -9,7 +9,7 @@ class InfoSubTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.titleLarge,
+      style: Theme.of(context).textTheme.titleLarge
     );
   }
 }
