@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/screens/characters/character_detail_page.dart';
 import 'package:mgs_app/screens/characters/heroes/blur_box_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
+import 'package:mgs_app/widgets/align_left.dart';
 import 'package:mgs_app/widgets/info_title.dart';
 import 'package:provider/provider.dart';
 import '../../../../providers/mgs_characters.dart';
@@ -46,9 +47,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const InfoTitle("Filters"),
+            AlignLeft(padding: const EdgeInsets.only(left: 16), child: const InfoTitle("Filters")),
             buildFilterChipList(),
-            const InfoTitle("Characters"),
+            AlignLeft(padding: const EdgeInsets.only(left: 16), child: InfoTitle("Characters"),),
             const SizedBox(height: 16,),
             FutureBuilder(
               future: _charactersFuture,
