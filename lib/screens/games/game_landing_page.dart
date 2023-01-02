@@ -94,7 +94,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if(widget.game.platforms != null)
+            if(widget.game.platformLogoUrls != null)
               Column(
                 children: [
                   AlignLeft(child: InfoTitle("Platforms")),
@@ -102,9 +102,9 @@ class _GameLandingPageState extends State<GameLandingPage> {
                     height: 64,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: widget.game.platforms!.length,
+                      itemCount: widget.game.platformLogoUrls!.length,
                       itemBuilder: (context, index) {
-                        if(widget.game.platforms![index] != null) {
+                        if(widget.game.platformLogoUrls![index] != null) {
                           return Flex(
                             direction: Axis.vertical,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +114,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
                                   SizedBox(
                                       width: 50,
                                       child: Image.network(
-                                        widget.game.platforms![index]!.logoUrl,
+                                        widget.game.platformLogoUrls![index]!,
                                       )
                                   ),
                                   const SizedBox(width: 20,)

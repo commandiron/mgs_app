@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:mgs_app/providers/game_platforms.dart';
 import '../model/game.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,10 +30,10 @@ class Games with ChangeNotifier {
         final logoUrl = "$localRootUrl${extractedGame["logoPath"]}";
         final posterUrl = "$localRootUrl${extractedGame["posterPath"]}";
 
-        final platformsDynamicList = extractedGame["platforms"] as List<dynamic>?;
-        final platforms = platformsDynamicList?.map(
+        final platformNames = extractedGame["platformNames"] as List<dynamic>?;
+        final platformLogoUrls = platformNames?.map(
           (item) {
-            return GamePlatforms().fromString(item);
+            return platformNameToLogoUrl[item];
           }
         ).toList();
 
@@ -48,7 +46,7 @@ class Games with ChangeNotifier {
             name: name,
             logoUrl: logoUrl,
             posterUrl: posterUrl,
-            platforms: platforms,
+            platformLogoUrls: platformLogoUrls,
             releaseDate: releaseDate,
             summary: summary,
           )
@@ -61,5 +59,18 @@ class Games with ChangeNotifier {
       throw error;
     }
   }
+
+  static Map<String, String> platformNameToLogoUrl = {
+    "PlayStation" : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1200px-Playstation_logo_colour.svg.png",
+    "PlayStation 2" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Playstation2-Logo.svg/1200px-Playstation2-Logo.svg.png",
+    "PlayStation 3" : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PlayStation_3_logo_%282009%29.svg/2560px-PlayStation_3_logo_%282009%29.svg.png",
+    "PlayStation 4" : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PlayStation_4_logo_and_wordmark.svg/1280px-PlayStation_4_logo_and_wordmark.svg.png",
+    "PlayStation 5 " : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
+    "PlayStation Vita" : "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/PlayStation_Vita_logo.svg/2560px-PlayStation_Vita_logo.svg.png",
+    "XBOX 360" : "https://static.wikia.nocookie.net/logopedia/images/7/7b/Xbox_360_logo.png/",
+    "Mobile Phone" : "https://cdn-icons-png.flaticon.com/512/0/191.png",
+    "Virtual Console" : "https://upload.wikimedia.org/wikipedia/commons/b/ba/Wii_Virtual_console_Logo.png",
+    "MSX 2" : "https://www.msx.org/wiki/images/3/37/MSX2_logo.png",
+  };
 }
 
