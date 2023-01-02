@@ -23,7 +23,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
       body: BackgroundContainer(
         child: CustomScrollView(
           controller: ScrollController(
-            initialScrollOffset: 160
+            initialScrollOffset: 260
           ),
           slivers: <Widget>[
             _buildSliverAppBar(),
@@ -49,44 +49,42 @@ class _GameLandingPageState extends State<GameLandingPage> {
   }
 
   Widget _buildFlexibleSpace() {
-    return Flexible(
-      child: Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    alignment: Alignment.center,
-                    image: NetworkImage(widget.game.posterUrl),
-                    fit: BoxFit.cover
-                  ),
+    return Stack(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  alignment: Alignment.center,
+                  image: NetworkImage(widget.game.posterUrl),
+                  fit: BoxFit.cover
                 ),
               ),
             ),
           ),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  backgroundColor: Colors.black.withOpacity(0.7),
-                  foregroundColor: Colors.white,
-                  maxRadius: 26,
-                  minRadius: 26,
-                  child: const Icon(Icons.arrow_back),
-                ),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.black.withOpacity(0.7),
+                foregroundColor: Colors.white,
+                maxRadius: 26,
+                minRadius: 26,
+                child: const Icon(Icons.arrow_back),
               ),
-            )
+            ),
           )
-        ],
-      )
+        )
+      ],
     );
   }
 
@@ -106,23 +104,27 @@ class _GameLandingPageState extends State<GameLandingPage> {
                       scrollDirection: Axis.horizontal,
                       itemCount: widget.game.platforms!.length,
                       itemBuilder: (context, index) {
-                        return Flex(
-                          direction: Axis.vertical,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                    width: 50,
-                                    child: Image.network(
-                                      widget.game.platforms![index].logoUrl,
-                                    )
-                                ),
-                                const SizedBox(width: 20,)
-                              ],
-                            )
-                          ],
-                        );
+                        if(widget.game.platforms![index] != null) {
+                          return Flex(
+                            direction: Axis.vertical,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                      width: 50,
+                                      child: Image.network(
+                                        widget.game.platforms![index]!.logoUrl,
+                                      )
+                                  ),
+                                  const SizedBox(width: 20,)
+                                ],
+                              )
+                            ],
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
                       },
                     ),
                   ),

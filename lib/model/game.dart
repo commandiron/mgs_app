@@ -5,7 +5,7 @@ class Game {
   final String name;
   final String logoUrl;
   final String posterUrl;
-  final List<GamePlatform>? platforms;
+  final List<GamePlatform?>? platforms;
   final String? releaseDate;
   final String? summary;
 

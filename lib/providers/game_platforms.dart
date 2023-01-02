@@ -9,7 +9,7 @@ class GamePlatforms {
   final playstation2 = GamePlatform(
     id: 1,
     title: "PlayStation 2",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1200px-Playstation_logo_colour.svg.png"
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Playstation2-Logo.svg/1200px-Playstation2-Logo.svg.png"
   );
   final playstation3 = GamePlatform(
     id: 2,
@@ -19,12 +19,12 @@ class GamePlatforms {
   final playstation4 = GamePlatform(
     id: 3,
     title: "PlayStation 4",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1200px-Playstation_logo_colour.svg.png"
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PlayStation_4_logo_and_wordmark.svg/1280px-PlayStation_4_logo_and_wordmark.svg.png"
   );
   final playstation5 = GamePlatform(
     id: 4,
     title: "PlayStation 5",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1200px-Playstation_logo_colour.svg.png"
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png"
   );
   final playstationVita = GamePlatform(
     id: 5,
@@ -52,7 +52,7 @@ class GamePlatforms {
     logoUrl: "https://www.msx.org/wiki/images/3/37/MSX2_logo.png"
   );
 
-  GamePlatform fromString(String string) {
+  GamePlatform? fromString(String string) {
     if(string == "PlayStation") {
       return GamePlatforms().playstation;
     }
@@ -83,6 +83,6 @@ class GamePlatforms {
     if(string == "MSX 2") {
       return GamePlatforms().mSX2;
     }
-    return GamePlatforms().playstation;
+    return null;
   }
 }
