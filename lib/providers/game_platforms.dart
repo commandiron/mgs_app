@@ -51,4 +51,38 @@ class GamePlatforms {
     title: "MSX 2",
     logoUrl: "https://www.msx.org/wiki/images/3/37/MSX2_logo.png"
   );
+
+  GamePlatform fromString(String string) {
+    if(string == "PlayStation") {
+      return GamePlatforms().playstation;
+    }
+    if(string == "PlayStation 2") {
+      return GamePlatforms().playstation2;
+    }
+    if(string == "PlayStation 3") {
+      return GamePlatforms().playstation3;
+    }
+    if(string == "PlayStation 4") {
+      return GamePlatforms().playstation4;
+    }
+    if(string == "PlayStation 5") {
+      return GamePlatforms().playstation5;
+    }
+    if(string == "PlayStation Vita") {
+      return GamePlatforms().playstationVita;
+    }
+    if(string == "XBOX 360") {
+      return GamePlatforms().xBox360;
+    }
+    if(string == "Mobile Phone") {
+      return GamePlatforms().mobilePhone;
+    }
+    if(string == "Virtual Console") {
+      return GamePlatforms().virtualConsole;
+    }
+    if(string == "MSX 2") {
+      return GamePlatforms().mSX2;
+    }
+    return GamePlatforms().playstation;
+  }
 }

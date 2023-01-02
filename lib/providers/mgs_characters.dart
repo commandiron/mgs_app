@@ -57,7 +57,6 @@ class MgsCharacters with ChangeNotifier {
           shortClipUrl: shortClipUrl,
         ));
       }
-      charactersData.forEach((character) {});
       _characters = loadedCharacters.toList();
       notifyListeners();
     } catch (error) {

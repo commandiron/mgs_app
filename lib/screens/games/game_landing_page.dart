@@ -6,9 +6,9 @@ import '../../model/game.dart';
 import '../../widgets/align_left.dart';
 
 class GameLandingPage extends StatefulWidget {
-  const GameLandingPage({Key? key}) : super(key: key);
+  const GameLandingPage(this.game, {Key? key}) : super(key: key);
 
-  static const route = "gameLanding";
+  final Game game;
 
   @override
   State<GameLandingPage> createState() => _GameLandingPageState();
@@ -19,8 +19,6 @@ class _GameLandingPageState extends State<GameLandingPage> {
   @override
   Widget build(BuildContext context) {
 
-    final game = ModalRoute.of(context)!.settings.arguments as Game;
-
     return Scaffold(
       body: BackgroundContainer(
         child: CustomScrollView(
@@ -28,15 +26,15 @@ class _GameLandingPageState extends State<GameLandingPage> {
             initialScrollOffset: 160
           ),
           slivers: <Widget>[
-            _buildSliverAppBar(game),
-            _buildSliverBox(game)
+            _buildSliverAppBar(),
+            _buildSliverBox()
           ],
         ),
       )
     );
   }
 
-  Widget _buildSliverAppBar(Game game) {
+  Widget _buildSliverAppBar() {
     return SliverAppBar(
       automaticallyImplyLeading: false,
       pinned: true,
@@ -46,11 +44,11 @@ class _GameLandingPageState extends State<GameLandingPage> {
       expandedHeight: 600,
       backgroundColor: Theme.of(context).colorScheme.background,
       iconTheme: Theme.of(context).iconTheme,
-      flexibleSpace: _buildFlexibleSpace(game.posterUrl, game.title)
+      flexibleSpace: _buildFlexibleSpace()
     );
   }
 
-  Widget _buildFlexibleSpace(String posterUrl, String title) {
+  Widget _buildFlexibleSpace() {
     return Flexible(
       child: Stack(
         children: [
@@ -63,7 +61,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.center,
-                    image: NetworkImage(posterUrl),
+                    image: NetworkImage(widget.game.posterUrl),
                     fit: BoxFit.cover
                   ),
                 ),
@@ -92,50 +90,62 @@ class _GameLandingPageState extends State<GameLandingPage> {
     );
   }
 
-  Widget _buildSliverBox(Game game) {
+  Widget _buildSliverBox() {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if(game.platforms.isNotEmpty)
-              AlignLeft(child: InfoTitle("Platforms")),
-              SizedBox(
-                height: 64,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: game.platforms.length,
-                  itemBuilder: (context, index) {
-                    return Flex(
-                      direction: Axis.vertical,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
+            if(widget.game.platforms != null)
+              Column(
+                children: [
+                  AlignLeft(child: InfoTitle("Platforms")),
+                  SizedBox(
+                    height: 64,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.game.platforms!.length,
+                      itemBuilder: (context, index) {
+                        return Flex(
+                          direction: Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                                width: 50,
-                                child: Image.network(
-                                  game.platforms[index].logoUrl,
-                                )
-                            ),
-                            const SizedBox(width: 20,)
+                            Row(
+                              children: [
+                                SizedBox(
+                                    width: 50,
+                                    child: Image.network(
+                                      widget.game.platforms![index].logoUrl,
+                                    )
+                                ),
+                                const SizedBox(width: 20,)
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 8,),
+                ],
               ),
-              SizedBox(height: 8,),
-            if(game.releaseDate.isNotEmpty)
-              AlignLeft(child: InfoTitle("Release Date")),
-              SizedBox(height: 8,),
-              AlignLeft(child: InfoBody(game.releaseDate)),
-              SizedBox(height: 16,),
-            if(game.summary.isNotEmpty)
-              AlignLeft(child: InfoTitle("Summary")),
-              SizedBox(height: 8,),
-              InfoBody(game.summary),
+            if(widget.game.releaseDate != null)
+              Column(
+                children: [
+                  AlignLeft(child: InfoTitle("Release Date")),
+                  SizedBox(height: 8,),
+                  AlignLeft(child: InfoBody(widget.game.releaseDate!)),
+                  SizedBox(height: 16,),
+                ],
+              ),
+            if(widget.game.summary != null)
+              Column(
+                children: [
+                  AlignLeft(child: InfoTitle("Summary")),
+                  SizedBox(height: 8,),
+                  InfoBody(widget.game.summary!),
+                ],
+              )
           ],
         ),
       ),

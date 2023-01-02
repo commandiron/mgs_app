@@ -18,31 +18,53 @@ class GamesScreen extends StatefulWidget {
 
 class _GamesScreenState extends State<GamesScreen> {
 
+  late Future _gamesFuture;
+
+  Future _obtainGamesFuture() {
+    return Provider.of<Games>(context, listen: false).fetchGames();
+  }
+
+  @override
+  void initState() {
+    _gamesFuture = _obtainGamesFuture();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    final games = Provider.of<Games>(context, listen: false).items;
 
     return Scaffold(
       appBar: const BackAppBar(),
       body: BackgroundContainer(
         height: double.infinity,
-        child: ListView.builder(
-          physics: const ClampingScrollPhysics(),
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemCount: games.length,
-          itemBuilder: (context, index) => GamesItem(
-            game: games[index],
-            onTab: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const GameLandingPage(),
-                  settings: RouteSettings(arguments: games[index])
-                )
+        child: FutureBuilder(
+          future: _gamesFuture,
+          builder: (context, snapshot) {
+            if(snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator(),);
+            } else {
+              return Consumer<Games>(
+                builder: (context, gamesData, child) {
+                  return ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: gamesData.games.length,
+                    itemBuilder: (context, index) => GamesItem(
+                      game: gamesData.games[index],
+                      onTab: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => GameLandingPage(gamesData.games[index]),
+                          )
+                        );
+                      }
+                    )
+                  );
+                },
               );
             }
-          )
+          },
         ),
       )
     );
