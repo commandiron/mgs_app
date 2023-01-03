@@ -11,7 +11,8 @@ import 'heroes/blur_box_hero.dart';
 import 'heroes/play_icon_hero.dart';
 
 class CharacterDetailPage extends StatefulWidget {
-  const CharacterDetailPage(this.character, this.index,{Key? key}) : super(key: key);
+  const CharacterDetailPage(this.character, this.index, {Key? key})
+      : super(key: key);
 
   final MgsCharacter character;
   final int index;
@@ -21,10 +22,9 @@ class CharacterDetailPage extends StatefulWidget {
 }
 
 class _CharacterDetailPageState extends State<CharacterDetailPage> {
-
   late VideoPlayerController _controller;
   bool _showCharImage = true;
-  Offset _animationOffset = const Offset(0 , 1);
+  Offset _animationOffset = const Offset(0, 1);
 
   @override
   void initState() {
@@ -32,7 +32,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       enterInfoOffsetAnimation();
     });
-    _controller = VideoPlayerController.network(widget.character.shortClipUrl ?? "");
+    _controller =
+        VideoPlayerController.network(widget.character.shortClipUrl ?? "");
     _controller.setVolume(0.0);
     _controller.initialize();
   }
@@ -48,27 +49,22 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       _animationOffset = Offset.zero;
     });
   }
+
   void exitInfoOffsetAnimation() {
     setState(() {
-      _animationOffset = const Offset(0 , 1);
+      _animationOffset = const Offset(0, 1);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BackgroundContainer(
-        child: CustomScrollView(
-          controller: ScrollController(
-              initialScrollOffset: 80
-          ),
-          slivers: <Widget>[
-            buildSliverAppBar(),
-            buildSliverBox()
-          ],
-        ),
-      )
-    );
+        body: BackgroundContainer(
+      child: CustomScrollView(
+        controller: ScrollController(initialScrollOffset: 80),
+        slivers: <Widget>[buildSliverAppBar(), buildSliverBox()],
+      ),
+    ));
   }
 
   Widget buildSliverAppBar() {
@@ -85,21 +81,22 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       flexibleSpace: buildFlexibleSpace(),
     );
   }
+
   Widget buildFlexibleSpace() {
     return Stack(
       children: [
-        if(_showCharImage)
-          buildCharacterImageHero(),
-        if(!_showCharImage)
-          buildVideoPlayer(),
+        if (_showCharImage) buildCharacterImageHero(),
+        if (!_showCharImage) buildVideoPlayer(),
         buildBackIconHero(),
-        if(widget.character.shortClipUrl != null)
-          buildPlayIconHero(),
+        if (widget.character.shortClipUrl != null) buildPlayIconHero(),
+        if (widget.character.imageUrls.length > 1)
+          buildNextImageAvailableIcon(),
         buildBlurBoxHero(),
         buildCharacterNameHero()
       ],
     );
   }
+
   Widget buildCharacterImageHero() {
     return CharacterImageHero(
       imageWidth: double.infinity,
@@ -107,11 +104,12 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       index: widget.index,
     );
   }
+
   Widget buildVideoPlayer() {
     return InkWell(
       onTap: () {
         setState(() {
-          if(_controller.value.isPlaying) {
+          if (_controller.value.isPlaying) {
             _controller.pause();
           } else {
             _controller.play();
@@ -120,7 +118,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       },
       child: SizedBox.expand(
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(30)),
           child: Container(
             color: Colors.black,
             child: FittedBox(
@@ -136,10 +135,11 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       ),
     );
   }
+
   Widget buildBackIconHero() {
     return InkWell(
       onTap: () {
-        setState((){
+        setState(() {
           _controller.pause();
           _showCharImage = true;
           exitInfoOffsetAnimation();
@@ -147,107 +147,156 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         Navigator.of(context).pop();
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 32
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child: BackIconHero(index: widget.index),
       ),
     );
   }
+
   Widget buildPlayIconHero() {
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 32
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child: InkWell(
-          onTap: () {
-            setState(() {
-              if(_controller.value.isPlaying) {
-                _controller.pause();
-                _controller.seekTo(Duration.zero);
-                _showCharImage = true;
-              } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
-                _controller.pause();
-                _controller.seekTo(Duration.zero);
-                _showCharImage = true;
-              } else {
-                _showCharImage = false;
-                _controller.setLooping(true);
-                _controller.play();
-              }
-            });
-          },
-          child: PlayIconHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
+            onTap: () {
+              setState(() {
+                if (_controller.value.isPlaying) {
+                  _controller.pause();
+                  _controller.seekTo(Duration.zero);
+                  _showCharImage = true;
+                } else if (!_controller.value.isPlaying &&
+                    _controller.value.position == _controller.value.duration) {
+                  _controller.pause();
+                  _controller.seekTo(Duration.zero);
+                  _showCharImage = true;
+                } else {
+                  _showCharImage = false;
+                  _controller.setLooping(true);
+                  _controller.play();
+                }
+              });
+            },
+            child: PlayIconHero(
+                icon: _controller.value.isPlaying ? Icons.close : null,
+                index: widget.index)),
+      ),
+    );
+  }
+
+  Widget buildNextImageAvailableIcon() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        alignment: Alignment.center,
+        width: 100,
+        height: 100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white.withOpacity(0.5),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 8,),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                "swipe",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Colors.white),
+              ),
+            )
+          ],
         ),
       ),
     );
   }
+
   Widget buildBlurBoxHero() {
-    return  Align(
+    return Align(
         alignment: Alignment.bottomCenter,
         child: BlurBoxHero(
           index: widget.index,
           height: 56,
-        )
-    );
+        ));
   }
+
   Widget buildCharacterNameHero() {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Align(
           alignment: Alignment.bottomCenter,
-          child:  CharacterNameHero(
-              index: widget.index
-          )
-      ),
+          child: CharacterNameHero(index: widget.index)),
     );
   }
 
   Widget buildSliverBox() {
     return SliverToBoxAdapter(
-      child: AnimatedSlide(
-        offset: _animationOffset,
-        duration: const Duration(milliseconds: 800),
-        curve: Curves.fastOutSlowIn,
-        child: Padding(
+        child: AnimatedSlide(
+      offset: _animationOffset,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.fastOutSlowIn,
+      child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               const ScrollDivider(),
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               Row(
                 children: [
-                  if(widget.character.realName != null)
-                    Expanded(child: _buildRealName(),),
-                  if(widget.character.nationality != null)
-                    Expanded(child: _buildNationality(),),
+                  if (widget.character.realName != null)
+                    Expanded(
+                      child: _buildRealName(),
+                    ),
+                  if (widget.character.nationality != null)
+                    Expanded(
+                      child: _buildNationality(),
+                    ),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if(widget.character.born != null)
-                    Expanded(child: _buildBorn(),),
-                  if(widget.character.age != null)
+                  if (widget.character.born != null)
+                    Expanded(
+                      child: _buildBorn(),
+                    ),
+                  if (widget.character.age != null)
                     Expanded(child: _buildAge()),
                 ],
               ),
-              if(widget.character.alsoKnownNames != null)
-                _buildAlsoKnownAs(),
-              if(widget.character.info != null)
-                _buildInfo(),
+              if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
+              if (widget.character.info != null) _buildInfo(),
               SizedBox(height: MediaQuery.of(context).size.height),
             ],
-          )
-        ),
-      )
-    );
+          )),
+    ));
   }
+
   Widget _buildRealName() {
     return InfoCard(
       title: "RealName",
@@ -255,6 +304,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
+
   Widget _buildNationality() {
     return InfoCard(
       title: "Nationality",
@@ -262,6 +312,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
+
   Widget _buildBorn() {
     return InfoCard(
       title: "Born",
@@ -269,6 +320,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
+
   Widget _buildAge() {
     return InfoCard(
       title: "Age",
@@ -276,12 +328,14 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
+
   Widget _buildAlsoKnownAs() {
     return InfoCard(
       title: "Also Known As",
       bodies: widget.character.alsoKnownNames ?? [],
     );
   }
+
   Widget _buildInfo() {
     return InfoCard(
       title: "Info",
@@ -291,4 +345,3 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     );
   }
 }
-
