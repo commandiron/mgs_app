@@ -67,12 +67,26 @@ flutter:
     - assets/images/mgs_main_logo.jpg
     - assets/images/foxhound_logo.png
 
-    - assets/images/categories/category_games_image.jpg
-    - assets/images/categories/category_characters_image.jpg
-    - assets/images/categories/category_weapons_image.jpg
-    - assets/images/categories/category_events_image.jpg
-    - assets/images/categories/category_metal_gears_image.jpg
-    - assets/images/categories/category_equipments_image.jpg
+    - assets/images/category/category_games_image.jpg
+    - assets/images/category/category_characters_image.jpg
+    - assets/images/category/category_weapons_image.jpg
+    - assets/images/category/category_events_image.jpg
+    - assets/images/category/category_metal_gears_image.jpg
+    - assets/images/category/category_equipments_image.jpg
+
+    - assets/images/platform_logo/ps_logo.png
+    - assets/images/platform_logo/ps2_logo.png
+    - assets/images/platform_logo/ps3_logo.png
+    - assets/images/platform_logo/ps4_logo.png
+    - assets/images/platform_logo/ps5_logo.png
+    - assets/images/platform_logo/ps_vita_logo.png
+    - assets/images/platform_logo/xbox360_logo.png
+    - assets/images/platform_logo/mobile_phone_logo.png
+    - assets/images/platform_logo/virtual_console_logo.png
+    - assets/images/platform_logo/msx2_logo.png
+    - assets/images/platform_logo/nvidia_shield_logo.png
+    - assets/images/platform_logo/playstation_network_logo.png
+    - assets/images/platform_logo/microsoft_windows_logo.png
 
     - assets/videos/mgs_theme.mp4
     - assets/videos/mgs_game_over.mp4

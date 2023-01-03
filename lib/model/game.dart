@@ -3,7 +3,7 @@ class Game {
   final String name;
   final String logoUrl;
   final String posterUrl;
-  final List<String?>? platformLogoUrls;
+  final List<String?>? platformLogoPaths;
   final String? releaseDate;
   final String? summary;
 
@@ -13,7 +13,7 @@ class Game {
       required this.name,
       required this.logoUrl,
       required this.posterUrl,
-      this.platformLogoUrls,
+      this.platformLogoPaths,
       this.releaseDate,
       this.summary,
     }

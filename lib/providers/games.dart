@@ -31,9 +31,9 @@ class Games with ChangeNotifier {
         final posterUrl = "$localRootUrl${extractedGame["posterPath"]}";
 
         final platformNames = extractedGame["platformNames"] as List<dynamic>?;
-        final platformLogoUrls = platformNames?.map(
+        final platformLogoPaths = platformNames?.map(
           (item) {
-            return platformNameToLogoUrl[item];
+            return platformNameToPlatformLogoPath[item];
           }
         ).toList();
 
@@ -46,7 +46,7 @@ class Games with ChangeNotifier {
             name: name,
             logoUrl: logoUrl,
             posterUrl: posterUrl,
-            platformLogoUrls: platformLogoUrls,
+            platformLogoPaths: platformLogoPaths,
             releaseDate: releaseDate,
             summary: summary,
           )
@@ -60,17 +60,20 @@ class Games with ChangeNotifier {
     }
   }
 
-  static Map<String, String> platformNameToLogoUrl = {
-    "PlayStation" : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1200px-Playstation_logo_colour.svg.png",
-    "PlayStation 2" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Playstation2-Logo.svg/1200px-Playstation2-Logo.svg.png",
-    "PlayStation 3" : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PlayStation_3_logo_%282009%29.svg/2560px-PlayStation_3_logo_%282009%29.svg.png",
-    "PlayStation 4" : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PlayStation_4_logo_and_wordmark.svg/1280px-PlayStation_4_logo_and_wordmark.svg.png",
-    "PlayStation 5 " : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
-    "PlayStation Vita" : "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/PlayStation_Vita_logo.svg/2560px-PlayStation_Vita_logo.svg.png",
-    "XBOX 360" : "https://static.wikia.nocookie.net/logopedia/images/7/7b/Xbox_360_logo.png/",
-    "Mobile Phone" : "https://cdn-icons-png.flaticon.com/512/0/191.png",
-    "Virtual Console" : "https://upload.wikimedia.org/wikipedia/commons/b/ba/Wii_Virtual_console_Logo.png",
-    "MSX 2" : "https://www.msx.org/wiki/images/3/37/MSX2_logo.png",
+  static Map<String, String> platformNameToPlatformLogoPath = {
+    "PlayStation" : "assets/images/platform_logo/ps_logo.png",
+    "PlayStation 2" : "assets/images/platform_logo/ps2_logo.png",
+    "PlayStation 3" : "assets/images/platform_logo/ps3_logo.png",
+    "PlayStation 4" : "assets/images/platform_logo/ps4_logo.png",
+    "PlayStation 5 " : "assets/images/platform_logo/ps5_logo.png",
+    "PlayStation Vita" : "assets/images/platform_logo/ps_vita_logo.png",
+    "XBOX 360" : "assets/images/platform_logo/xbox360_logo.png",
+    "Mobile Phone" : "assets/images/platform_logo/mobile_phone_logo.png",
+    "Virtual Console" : "assets/images/platform_logo/virtual_console_logo.png",
+    "MSX 2" : "assets/images/platform_logo/msx2_logo.png",
+    "Nvidia Shield" : "assets/images/platform_logo/nvidia_shield_logo.png",
+    "PlayStation Network" : "assets/images/platform_logo/playstation_network_logo.png",
+    "Microsoft Windows" : "assets/images/platform_logo/microsoft_windows_logo.png",
   };
 }
 

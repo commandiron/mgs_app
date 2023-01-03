@@ -6,35 +6,35 @@ class Categories with ChangeNotifier {
     Category(
       id: 0,
       title: "Games",
-      imagePath: "assets/images/categories/category_games_image.jpg"
+      imagePath: "assets/images/category/category_games_image.jpg"
     ),
     Category(
       id: 1,
       title: "Characters",
-      imagePath: "assets/images/categories/category_characters_image.jpg"
+      imagePath: "assets/images/category/category_characters_image.jpg"
     ),
     Category(
       id: 2,
       title: "Weapons",
-      imagePath: "assets/images/categories/category_weapons_image.jpg",
+      imagePath: "assets/images/category/category_weapons_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 3,
       title: "Events",
-      imagePath: "assets/images/categories/category_events_image.jpg",
+      imagePath: "assets/images/category/category_events_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 4,
       title: "Metal Gears",
-      imagePath: "assets/images/categories/category_metal_gears_image.jpg",
+      imagePath: "assets/images/category/category_metal_gears_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 5,
       title: "Equipments",
-      imagePath: "assets/images/categories/category_equipments_image.jpg",
+      imagePath: "assets/images/category/category_equipments_image.jpg",
       isUnderConstruction: true
     ),
   ];
