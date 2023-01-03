@@ -76,23 +76,20 @@ class MgsCharacters with ChangeNotifier {
   filterCharacters(List<Filter> filters) {
     _filteredCharacters = _unFilteredCharacters;
 
-    filters.forEach(
-      (filter) {
+      for (var filter in filters) {
         if(filter.isSelected) {
           _filteredCharacters = _filteredCharacters.where(
-            (character) {
-              if(character.gameTags != null) {
-                return character.gameTags!.contains(filter.gameTag);
-              } else {
-                return false;
+                  (character) {
+                if (character.gameTags != null) {
+                  return character.gameTags!.contains(filter.gameTag);
+                } else {
+                  return false;
+                }
               }
-            }
           ).toList();
         }
       }
-    );
-
-    _characters = _filteredCharacters;
-    notifyListeners();
+      _characters = _filteredCharacters;
+      notifyListeners();
   }
 }
