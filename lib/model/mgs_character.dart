@@ -1,5 +1,4 @@
 class MgsCharacter {
-  final int id;
   final String name;
   final String? realName;
   final List<String>? alsoKnownNames;
@@ -12,7 +11,6 @@ class MgsCharacter {
 
   MgsCharacter(
     {
-      required this.id,
       required this.name,
       this.realName,
       this.alsoKnownNames,

@@ -23,7 +23,6 @@ class MgsCharacters with ChangeNotifier {
       for (var character in charactersData) {
         final extractedCharacter = character as Map<String, dynamic>;
 
-        final id = extractedCharacter["id"] as int;
         final name = extractedCharacter["name"] as String;
         final realName = extractedCharacter["realName"] as String?;
 
@@ -45,7 +44,6 @@ class MgsCharacters with ChangeNotifier {
         final shortClipUrl = "$localRootUrl${extractedCharacter["shortClipPath"]}";
 
         loadedCharacters.add(MgsCharacter(
-          id: id,
           name: name,
           realName: realName,
           alsoKnownNames: alsoKnownNames,
