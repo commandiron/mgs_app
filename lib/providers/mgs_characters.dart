@@ -4,6 +4,8 @@ import '../model/mgs_character.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../util/constants.dart';
+
 class MgsCharacters with ChangeNotifier {
   List<MgsCharacter> _characters = [];
 
@@ -14,11 +16,10 @@ class MgsCharacters with ChangeNotifier {
     return [..._characters];
   }
 
-  final localRootUrl = "http://10.0.2.2:8080";
 
   Future<void> fetchCharacters(int page, int limit) async {
     final url =
-        Uri.parse("$localRootUrl/mgs/characters?page=$page&limit=$limit");
+        Uri.parse("${Constants.localRootUrl}/mgs/characters?page=$page&limit=$limit");
     try {
       final response = await http.get(url);
       final List<MgsCharacter> loadedCharacters = [];
@@ -43,12 +44,12 @@ class MgsCharacters with ChangeNotifier {
         final imagePathsDynamicList =
             extractedCharacter["imagePaths"] as List<dynamic>;
         final imageUrls =
-            imagePathsDynamicList.map((item) => "$localRootUrl$item").toList();
+            imagePathsDynamicList.map((item) => "${Constants.localRootUrl}$item").toList();
 
         final shortClipPath = extractedCharacter["shortClipPath"] as String?;
         String? shortClipUrl;
         if(shortClipPath != null) {
-          shortClipUrl = "$localRootUrl$shortClipPath";
+          shortClipUrl = "${Constants.localRootUrl}$shortClipPath";
         }
 
         final gameTagsDynamicList =

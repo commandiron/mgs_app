@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../model/game.dart';
 import 'package:http/http.dart' as http;
 
+import '../util/constants.dart';
+
 class Games with ChangeNotifier {
 
   List<Game> _games = [
@@ -13,10 +15,8 @@ class Games with ChangeNotifier {
     return [..._games];
   }
 
-  final localRootUrl = "http://10.0.2.2:8080";
-
   Future<void> fetchGames() async {
-    final url = Uri.parse("$localRootUrl/mgs/games");
+    final url = Uri.parse("${Constants.localRootUrl}/mgs/games");
     try {
       final response = await http.get(url);
       final List<Game> loadedGames = [];
@@ -27,8 +27,8 @@ class Games with ChangeNotifier {
 
         final id = extractedGame["id"] as int;
         final name = extractedGame["name"] as String;
-        final logoUrl = "$localRootUrl${extractedGame["logoPath"]}";
-        final posterUrl = "$localRootUrl${extractedGame["posterPath"]}";
+        final logoUrl = "${Constants.localRootUrl}${extractedGame["logoPath"]}";
+        final posterUrl = "${Constants.localRootUrl}${extractedGame["posterPath"]}";
 
         final platformNames = extractedGame["platformNames"] as List<dynamic>;
         final platformLogoPaths = platformNames.map(
