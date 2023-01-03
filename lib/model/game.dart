@@ -3,9 +3,9 @@ class Game {
   final String name;
   final String logoUrl;
   final String posterUrl;
-  final List<String?>? platformLogoPaths;
-  final String? releaseDate;
-  final String? summary;
+  final List<String?> platformLogoPaths;
+  final String releaseDate;
+  final String summary;
 
   Game(
     {
@@ -13,9 +13,9 @@ class Game {
       required this.name,
       required this.logoUrl,
       required this.posterUrl,
-      this.platformLogoPaths,
-      this.releaseDate,
-      this.summary,
+      required this.platformLogoPaths,
+      required this.releaseDate,
+      required this.summary,
     }
   );
 }

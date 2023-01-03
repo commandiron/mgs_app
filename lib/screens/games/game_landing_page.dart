@@ -94,60 +94,57 @@ class _GameLandingPageState extends State<GameLandingPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if(widget.game.platformLogoPaths != null)
-              Column(
-                children: [
-                  AlignLeft(child: InfoTitle("Platforms")),
-                  SizedBox(
-                    height: 64,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.game.platformLogoPaths!.length,
-                      itemBuilder: (context, index) {
-                        if(widget.game.platformLogoPaths![index] != null) {
-                          return Flex(
-                            direction: Axis.vertical,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                      width: 50,
-                                      child: Image.asset(
-                                        widget.game.platformLogoPaths![index]!,
-                                      )
-                                  ),
-                                  const SizedBox(width: 20,)
-                                ],
-                              )
-                            ],
-                          );
-                        } else {
-                          return SizedBox.shrink();
-                        }
-                      },
-                    ),
+            Column(
+              children: [
+                AlignLeft(child: const InfoTitle("Platforms")),
+                SizedBox(
+                  height: 64,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.game.platformLogoPaths.length,
+                    itemBuilder: (context, index) {
+                      if(widget.game.platformLogoPaths[index] != null) {
+                        return Flex(
+                          direction: Axis.vertical,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                    width: 50,
+                                    child: Image.asset(
+                                      widget.game.platformLogoPaths[index]!,
+                                    )
+                                ),
+                                const SizedBox(width: 20,)
+                              ],
+                            )
+                          ],
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
                   ),
-                  SizedBox(height: 8,),
-                ],
-              ),
-            if(widget.game.releaseDate != null)
-              Column(
-                children: [
-                  AlignLeft(child: InfoTitle("Release Date")),
-                  SizedBox(height: 8,),
-                  AlignLeft(child: InfoBody(widget.game.releaseDate!)),
-                  SizedBox(height: 16,),
-                ],
-              ),
-            if(widget.game.summary != null)
-              Column(
-                children: [
-                  AlignLeft(child: InfoTitle("Summary")),
-                  SizedBox(height: 8,),
-                  InfoBody(widget.game.summary!),
-                ],
-              )
+                ),
+                const SizedBox(height: 8,),
+              ],
+            ),
+            Column(
+              children: [
+                AlignLeft(child: const InfoTitle("Release Date")),
+                const SizedBox(height: 8,),
+                AlignLeft(child: InfoBody(widget.game.releaseDate)),
+                const SizedBox(height: 16,),
+              ],
+            ),
+            Column(
+              children: [
+                AlignLeft(child: const InfoTitle("Summary")),
+                const SizedBox(height: 8,),
+                InfoBody(widget.game.summary),
+              ],
+            )
           ],
         ),
       ),

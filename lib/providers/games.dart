@@ -30,15 +30,15 @@ class Games with ChangeNotifier {
         final logoUrl = "$localRootUrl${extractedGame["logoPath"]}";
         final posterUrl = "$localRootUrl${extractedGame["posterPath"]}";
 
-        final platformNames = extractedGame["platformNames"] as List<dynamic>?;
-        final platformLogoPaths = platformNames?.map(
+        final platformNames = extractedGame["platformNames"] as List<dynamic>;
+        final platformLogoPaths = platformNames.map(
           (item) {
             return platformNameToPlatformLogoPath[item];
           }
         ).toList();
 
-        final releaseDate = extractedGame["releaseDate"] as String?;
-        final summary = extractedGame["summary"] as String?;
+        final releaseDate = extractedGame["releaseDate"] as String;
+        final summary = extractedGame["summary"] as String;
 
         loadedGames.add(
           Game(
