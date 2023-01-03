@@ -229,6 +229,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                 ],
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if(widget.character.born != null)
                     Expanded(child: _buildBorn(),),
@@ -250,25 +251,29 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   Widget _buildRealName() {
     return InfoCard(
       title: "RealName",
-      bodies: [widget.character.realName ?? ""]
+      bodies: [widget.character.realName ?? ""],
+      height: 100,
     );
   }
   Widget _buildNationality() {
     return InfoCard(
       title: "Nationality",
-      bodies: [widget.character.nationality ?? ""]
+      bodies: [widget.character.nationality ?? ""],
+      height: 100,
     );
   }
   Widget _buildBorn() {
     return InfoCard(
       title: "Born",
       bodies: [widget.character.born ?? ""],
+      height: 100,
     );
   }
   Widget _buildAge() {
     return InfoCard(
       title: "Age",
-      bodies: [widget.character.age ?? ""]
+      bodies: [widget.character.age ?? ""],
+      height: 100,
     );
   }
   Widget _buildAlsoKnownAs() {
@@ -282,6 +287,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       title: "Info",
       bodies: [widget.character.info ?? ""],
       bodyTextAlign: TextAlign.start,
+      fit: false,
     );
   }
 }
