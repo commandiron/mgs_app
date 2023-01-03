@@ -133,11 +133,29 @@ class _CharactersScreenState extends State<CharactersScreen> {
               index: index,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
+            if(character.shortClipUrl != null)
+              buildHasVideoIcon(),
             buildCharacterFooter(character, index),
             buildOffScreenHeroWidgets(index)
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildHasVideoIcon() {
+    return  Container(
+        alignment: Alignment.topRight,
+        padding: const EdgeInsets.all(8),
+        child: CircleAvatar(
+          backgroundColor: Colors.blue.withOpacity(0.5),
+          radius: 16,
+          child: const Icon(
+            Icons.videocam,
+            color: Colors.white,
+            size: 20,
+          ),
+        )
     );
   }
 
