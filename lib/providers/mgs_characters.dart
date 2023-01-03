@@ -45,7 +45,11 @@ class MgsCharacters with ChangeNotifier {
         final imageUrls =
             imagePathsDynamicList.map((item) => "$localRootUrl$item").toList();
 
-        final shortClipUrl = "$localRootUrl${extractedCharacter["shortClipPath"]}";
+        final shortClipPath = extractedCharacter["shortClipPath"] as String?;
+        String? shortClipUrl;
+        if(shortClipPath != null) {
+          shortClipUrl = "$localRootUrl$shortClipPath";
+        }
 
         final gameTagsDynamicList =
         extractedCharacter["gameTags"] as List<dynamic>?;

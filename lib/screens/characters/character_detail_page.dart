@@ -96,7 +96,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         if(!_showCharImage)
           buildVideoPlayer(),
         buildBackIconHero(),
-        buildPlayIconHero(),
+        if(widget.character.shortClipUrl != null)
+          buildPlayIconHero(),
         buildBlurBoxHero(),
         buildCharacterNameHero()
       ],
@@ -166,24 +167,24 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
             vertical: 32
         ),
         child: InkWell(
-            onTap: () {
-              setState(() {
-                if(_controller.value.isPlaying) {
-                  _controller.pause();
-                  _controller.seekTo(Duration.zero);
-                  _showCharImage = true;
-                } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
-                  _controller.pause();
-                  _controller.seekTo(Duration.zero);
-                  _showCharImage = true;
-                } else {
-                  _showCharImage = false;
-                  _controller.setLooping(true);
-                  _controller.play();
-                }
-              });
-            },
-            child: PlayIconHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
+          onTap: () {
+            setState(() {
+              if(_controller.value.isPlaying) {
+                _controller.pause();
+                _controller.seekTo(Duration.zero);
+                _showCharImage = true;
+              } else if(!_controller.value.isPlaying && _controller.value.position == _controller.value.duration) {
+                _controller.pause();
+                _controller.seekTo(Duration.zero);
+                _showCharImage = true;
+              } else {
+                _showCharImage = false;
+                _controller.setLooping(true);
+                _controller.play();
+              }
+            });
+          },
+          child: PlayIconHero(icon: _controller.value.isPlaying ? Icons.close : null, index: widget.index)
         ),
       ),
     );
