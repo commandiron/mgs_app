@@ -301,7 +301,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   Widget _buildInfo() {
     return InfoCard(
       title: "Info",
-      body: widget.character.info ?? ""
+      body: widget.character.info ?? "",
+      bodyTextAlign: TextAlign.start,
     );
   }
 }

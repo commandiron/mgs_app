@@ -4,10 +4,11 @@ import 'info_body.dart';
 import 'info_sub_title.dart';
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({required this.title, required this.body, Key? key}) : super(key: key);
+  const InfoCard({required this.title, required this.body, this.bodyTextAlign, Key? key}) : super(key: key);
 
   final String title;
   final String body;
+  final TextAlign? bodyTextAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class InfoCard extends StatelessWidget {
           children: [
             InfoSubTitle(title),
             const SizedBox(height: 8,),
-            InfoBody(body)
+            InfoBody(body, textAlign: bodyTextAlign)
           ],
         ),
       ),
