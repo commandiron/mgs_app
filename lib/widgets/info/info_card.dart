@@ -28,7 +28,7 @@ class InfoCard extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Card(
-                    color: Colors.blue.shade50,
+                    color: Colors.grey.shade50,
                     margin: const EdgeInsets.all(0),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
