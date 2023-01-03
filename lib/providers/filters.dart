@@ -46,8 +46,10 @@ class Filters with ChangeNotifier {
     return [..._items];
   }
 
-  setSelected(int id, bool value) {
-    _items.firstWhere((element) => element.id == id).selected = value;
+  setSelected(int id, bool isSelected) {
+    _items.firstWhere(
+      (element) => element.id == id
+    ).isSelected = isSelected;
     notifyListeners();
   }
 }

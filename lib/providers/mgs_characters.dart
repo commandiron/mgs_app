@@ -73,21 +73,25 @@ class MgsCharacters with ChangeNotifier {
     }
   }
 
-  filterCharacters(Filter filter) {
-    if(!filter.selected){
-      _characters = _unFilteredCharacters;
-      notifyListeners();
-      return;
-    }
-    _filteredCharacters = _characters.where(
-      (character) {
-        if(character.gameTags != null) {
-          return character.gameTags!.contains(filter.gameTag);
-        } else {
-          return false;
+  filterCharacters(List<Filter> filters) {
+    _filteredCharacters = _unFilteredCharacters;
+
+    filters.forEach(
+      (filter) {
+        if(filter.isSelected) {
+          _filteredCharacters = _filteredCharacters.where(
+            (character) {
+              if(character.gameTags != null) {
+                return character.gameTags!.contains(filter.gameTag);
+              } else {
+                return false;
+              }
+            }
+          ).toList();
         }
       }
-    ).toList();
+    );
+
     _characters = _filteredCharacters;
     notifyListeners();
   }

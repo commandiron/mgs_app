@@ -1,12 +1,12 @@
 class Filter {
   final int id;
   final String gameTag;
-  bool selected;
+  bool isSelected;
   Filter(
     {
       required this.id,
       required this.gameTag,
-      this.selected = false
+      this.isSelected = false
     }
   );
 }
