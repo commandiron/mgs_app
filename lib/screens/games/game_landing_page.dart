@@ -142,7 +142,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
               children: [
                 AlignLeft(child: const InfoTitle("Summary")),
                 const SizedBox(height: 8,),
-                InfoBody(widget.game.summary),
+                InfoBody(widget.game.summary, textAlign: TextAlign.start,),
               ],
             )
           ],

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/model/mgs_character.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
-import 'package:mgs_app/widgets/info/info_body.dart';
-import 'package:mgs_app/widgets/info/info_sub_title.dart';
 import 'package:mgs_app/widgets/scroll_divider.dart';
 import 'package:video_player/video_player.dart';
-import '../../widgets/align_left.dart';
 import '../../widgets/background_container.dart';
 import '../../widgets/info/info_card.dart';
 import 'heroes/back_icon_hero.dart';
@@ -253,55 +250,37 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   Widget _buildRealName() {
     return InfoCard(
       title: "RealName",
-      body: widget.character.realName ?? ""
+      bodies: [widget.character.realName ?? ""]
     );
   }
   Widget _buildNationality() {
     return InfoCard(
       title: "Nationality",
-      body: widget.character.nationality ?? ""
+      bodies: [widget.character.nationality ?? ""]
     );
   }
   Widget _buildBorn() {
     return InfoCard(
       title: "Born",
-      body: widget.character.born ?? "",
+      bodies: [widget.character.born ?? ""],
     );
   }
   Widget _buildAge() {
     return InfoCard(
       title: "Age",
-      body: widget.character.age ?? ""
+      bodies: [widget.character.age ?? ""]
     );
   }
   Widget _buildAlsoKnownAs() {
-    return Card(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            InfoSubTitle("Also Known As"),
-            SizedBox(height: 8,),
-            Column(
-              children: widget.character.alsoKnownNames!.map(
-                    (name) => AlignLeft(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Center(child: InfoBody(name))
-                ),
-              ).toList(),
-            ),
-          ],
-        ),
-      ),
+    return InfoCard(
+      title: "Also Known As",
+      bodies: widget.character.alsoKnownNames ?? [],
     );
   }
   Widget _buildInfo() {
     return InfoCard(
       title: "Info",
-      body: widget.character.info ?? "",
+      bodies: [widget.character.info ?? ""],
       bodyTextAlign: TextAlign.start,
     );
   }
