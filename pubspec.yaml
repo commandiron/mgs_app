@@ -67,6 +67,13 @@ flutter:
     - assets/images/mgs_main_logo.jpg
     - assets/images/foxhound_logo.png
 
+    - assets/images/categories/category_games_image.jpg
+    - assets/images/categories/category_characters_image.jpg
+    - assets/images/categories/category_weapons_image.jpg
+    - assets/images/categories/category_events_image.jpg
+    - assets/images/categories/category_metal_gears_image.jpg
+    - assets/images/categories/category_equipments_image.jpg
+
     - assets/videos/mgs_theme.mp4
     - assets/videos/mgs_game_over.mp4
 

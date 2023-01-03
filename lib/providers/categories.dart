@@ -6,35 +6,35 @@ class Categories with ChangeNotifier {
     Category(
       id: 0,
       title: "Games",
-      imageUrl: "https://images.gog-statics.com/e7c6ab0d300a11ed9195f0d8bf65954d042a2d4d405d99069edb3fbe3b1906c8_product_card_v2_mobile_slider_639.jpg"
+      imagePath: "assets/images/categories/category_games_image.jpg"
     ),
     Category(
       id: 1,
       title: "Characters",
-      imageUrl: "https://static.wikia.nocookie.net/metalgear/images/9/92/Metal_gear_solid4_12.jpg/"
+      imagePath: "assets/images/categories/category_characters_image.jpg"
     ),
     Category(
       id: 2,
       title: "Weapons",
-      imageUrl: "https://www.imfdb.org/images/5/52/SOCOM.jpg",
+      imagePath: "assets/images/categories/category_weapons_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 3,
       title: "Events",
-      imageUrl: "https://wallpapercave.com/wp/wp8918223.jpg",
+      imagePath: "assets/images/categories/category_events_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 4,
       title: "Metal Gears",
-      imageUrl: "https://i.ytimg.com/vi/vX_rLYMz8cE/maxresdefault.jpg",
+      imagePath: "assets/images/categories/category_metal_gears_image.jpg",
       isUnderConstruction: true
     ),
     Category(
       id: 5,
       title: "Equipments",
-      imageUrl: "https://preview.redd.it/0k4ali39zdu41.png?auto=webp&s=a4abf3afa92d09c9c5b1e37f3c2f9add55dfad76",
+      imagePath: "assets/images/categories/category_equipments_image.jpg",
       isUnderConstruction: true
     ),
   ];
