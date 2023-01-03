@@ -52,4 +52,11 @@ class Filters with ChangeNotifier {
     ).isSelected = isSelected;
     notifyListeners();
   }
+
+  resetFilters() {
+    for(var item in _items) {
+      item.isSelected = false;
+    }
+    notifyListeners();
+  }
 }
