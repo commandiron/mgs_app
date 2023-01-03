@@ -13,7 +13,7 @@ class PlayIconHero extends StatelessWidget {
     return Hero(
       tag: "play_icon_hero_$index",
       child: CircleAvatar(
-        backgroundColor: Colors.blue.withOpacity(0.5),
+        backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
         foregroundColor: Colors.white,
         radius: 26,
         child: Icon(icon ?? Icons.play_arrow),

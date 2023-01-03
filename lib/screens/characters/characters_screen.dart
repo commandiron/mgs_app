@@ -121,7 +121,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
       },
     );
   }
-
   Widget buildCharacterItem(MgsCharacter character, int index) {
     return SizedBox(
       width: 180,
@@ -142,13 +141,12 @@ class _CharactersScreenState extends State<CharactersScreen> {
       ),
     );
   }
-
   Widget buildHasVideoIcon() {
     return  Container(
         alignment: Alignment.topRight,
         padding: const EdgeInsets.all(8),
         child: CircleAvatar(
-          backgroundColor: Colors.blue.withOpacity(0.5),
+          backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
           radius: 16,
           child: const Icon(
             Icons.videocam,
@@ -158,7 +156,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
         )
     );
   }
-
   Widget buildCharacterFooter(MgsCharacter character, int index) {
     return Stack(
       children: [
@@ -218,7 +215,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
       ],
     );
   }
-
   Widget buildOffScreenHeroWidgets(int index) {
     return Stack(
       children: [

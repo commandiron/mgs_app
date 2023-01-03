@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class MyTheme {
 
   static Color primaryLight = const Color(0xffaf0000);
+  static Color secondaryLight = const Color(0xff00A2ED);
   static Color backgroundLight = const Color(0xffEDEDED);
   static Color lightGrey = const Color(0xffDCDCDC);
 
   static ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
       primary: primaryLight,
+      secondary: secondaryLight,
       background: backgroundLight
     ),
     appBarTheme: const AppBarTheme(
