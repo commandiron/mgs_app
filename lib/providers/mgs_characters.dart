@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import '../model/filter.dart';
 import '../model/mgs_character.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MgsCharacters with ChangeNotifier {
   List<MgsCharacter> _characters = [];
+
+  List<MgsCharacter> _unFilteredCharacters = [];
+  List<MgsCharacter> _filteredCharacters = [];
 
   List<MgsCharacter> get characters {
     return [..._characters];
@@ -43,6 +47,11 @@ class MgsCharacters with ChangeNotifier {
 
         final shortClipUrl = "$localRootUrl${extractedCharacter["shortClipPath"]}";
 
+        final gameTagsDynamicList =
+        extractedCharacter["gameTags"] as List<dynamic>?;
+        final gameTags =
+        gameTagsDynamicList?.map((item) => item as String).toList();
+
         loadedCharacters.add(MgsCharacter(
           name: name,
           realName: realName,
@@ -53,12 +62,33 @@ class MgsCharacters with ChangeNotifier {
           info: info,
           imageUrls: imageUrls,
           shortClipUrl: shortClipUrl,
+          gameTags: gameTags
         ));
       }
       _characters = loadedCharacters.toList();
+      _unFilteredCharacters = loadedCharacters.toList();
       notifyListeners();
     } catch (error) {
       throw error;
     }
+  }
+
+  filterCharacters(Filter filter) {
+    if(!filter.selected){
+      _characters = _unFilteredCharacters;
+      notifyListeners();
+      return;
+    }
+    _filteredCharacters = _characters.where(
+      (character) {
+        if(character.gameTags != null) {
+          return character.gameTags!.contains(filter.gameTag);
+        } else {
+          return false;
+        }
+      }
+    ).toList();
+    _characters = _filteredCharacters;
+    notifyListeners();
   }
 }

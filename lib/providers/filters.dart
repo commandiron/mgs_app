@@ -6,31 +6,39 @@ class Filters with ChangeNotifier {
   final List<Filter> _items = [
     Filter(
       id: 0,
-      name: "MG"
+      gameTag: "MG"
     ),
     Filter(
       id: 1,
-      name: "MG 2"
+      gameTag: "MG 2"
     ),
     Filter(
       id: 2,
-      name: "MGS 1"
+      gameTag: "MGS"
     ),
     Filter(
       id: 3,
-      name: "MGS 2"
+      gameTag: "MGS 2"
     ),
     Filter(
       id: 4,
-      name: "MGS 3"
+      gameTag: "MGS 3"
     ),
     Filter(
       id: 5,
-      name: "MGS 4"
+      gameTag: "MGS 4"
     ),
     Filter(
       id: 6,
-      name: "MGS 5"
+      gameTag: "MGS PW"
+    ),
+    Filter(
+      id: 7,
+      gameTag: "MGS 5 GZ"
+    ),
+    Filter(
+      id: 8,
+      gameTag: "MGS 5 TPP"
     ),
   ];
 

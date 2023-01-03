@@ -93,9 +93,10 @@ class _CharactersScreenState extends State<CharactersScreen> {
                 ),
                 child: FilterChip(
                   selected: filter.selected,
-                  label: Text(filter.name),
+                  label: Text(filter.gameTag),
                   onSelected: (isSelected) {
                     filters.setSelected(filter.id, isSelected);
+                    Provider.of<MgsCharacters>(context, listen: false).filterCharacters(filter);
                   },
                 ),
               );
