@@ -17,21 +17,21 @@ class InfoCard extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16))
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Flex(
               direction: Axis.vertical,
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Card(
-                    margin: EdgeInsets.all(0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16))
+                    color: Colors.blue.shade50,
+                    margin: const EdgeInsets.all(0),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
                     ),
                     child: Center(
                       child: Padding(

@@ -252,28 +252,28 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     return InfoCard(
       title: "RealName",
       bodies: [widget.character.realName ?? ""],
-      height: 100,
+      height: 80,
     );
   }
   Widget _buildNationality() {
     return InfoCard(
       title: "Nationality",
       bodies: [widget.character.nationality ?? ""],
-      height: 100,
+      height: 80,
     );
   }
   Widget _buildBorn() {
     return InfoCard(
       title: "Born",
       bodies: [widget.character.born ?? ""],
-      height: 100,
+      height: 80,
     );
   }
   Widget _buildAge() {
     return InfoCard(
       title: "Age",
       bodies: [widget.character.age ?? ""],
-      height: 100,
+      height: 80,
     );
   }
   Widget _buildAlsoKnownAs() {
