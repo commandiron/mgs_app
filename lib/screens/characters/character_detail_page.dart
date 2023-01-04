@@ -62,12 +62,13 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BackgroundContainer(
-      child: CustomScrollView(
-        controller: ScrollController(initialScrollOffset: 80),
-        slivers: <Widget>[buildSliverAppBar(), buildSliverBox()],
-      ),
-    ));
+      body: BackgroundContainer(
+        child: CustomScrollView(
+          controller: ScrollController(initialScrollOffset: 80),
+          slivers: <Widget>[buildSliverAppBar(), buildSliverBox()],
+        ),
+      )
+    );
   }
 
   Widget buildSliverAppBar() {
