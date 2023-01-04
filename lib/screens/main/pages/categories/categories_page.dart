@@ -3,6 +3,7 @@ import 'package:mgs_app/screens/main/pages/categories/widgets/category_item.dart
 import 'package:provider/provider.dart';
 
 import '../../../../providers/categories.dart';
+import '../../../../providers/filters.dart';
 import '../../../characters/characters_screen.dart';
 import '../../../games/games_screen.dart';
 
@@ -37,6 +38,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             if(index == 0) {
               Navigator.of(context).pushNamed(GamesScreen.route);
             } else if(index == 1) {
+              Provider.of<Filters>(context, listen: false).resetFilters();
               Navigator.of(context).pushNamed(CharactersScreen.route);
             }
           }

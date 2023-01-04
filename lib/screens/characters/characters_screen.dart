@@ -34,7 +34,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
   @override
   void initState() {
     _charactersFuture = _obtainCharactersFuture();
-    Provider.of<Filters>(context, listen: false).resetFilters();
     super.initState();
   }
 
