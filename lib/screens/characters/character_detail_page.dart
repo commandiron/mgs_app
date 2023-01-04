@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/model/mgs_character.dart';
 import 'package:mgs_app/screens/characters/heroes/character_image_hero.dart';
 import 'package:mgs_app/screens/characters/heroes/character_name_hero.dart';
+import 'package:mgs_app/screens/characters/next_image_available_animated_icon.dart';
 import 'package:mgs_app/widgets/scroll_divider.dart';
 import 'package:video_player/video_player.dart';
 import '../../widgets/background_container.dart';
@@ -25,6 +26,8 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   late VideoPlayerController _controller;
   bool _showCharImage = true;
   Offset _animationOffset = const Offset(0, 1);
+
+
 
   @override
   void initState() {
@@ -185,50 +188,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
   }
 
   Widget buildNextImageAvailableIcon() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        alignment: Alignment.center,
-        width: 100,
-        height: 100,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white.withOpacity(0.1),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white.withOpacity(0.5),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8,),
-            Container(
-              alignment: Alignment.center,
-              child: Text(
-                "swipe",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Colors.white),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+    return NextImageAvailableAnimatedIcon();
   }
 
   Widget buildBlurBoxHero() {

@@ -9,7 +9,7 @@ class Constants {
 
   static String appName = "Mgs App";
 
-  static String localRootUrl = "http://0.0.0.0:8080";
+  static String localRootUrl = "http://10.0.2.2:8080";
 
   static Map<String, WidgetBuilder> routes = {
     IntroScreen.route : (context) => const IntroScreen(),
