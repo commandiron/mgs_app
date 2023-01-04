@@ -7,21 +7,71 @@ class NextImageAvailableAnimatedIcon extends StatefulWidget {
   State<NextImageAvailableAnimatedIcon> createState() => _NextImageAvailableAnimatedIconState();
 }
 
-class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnimatedIcon> {
+class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnimatedIcon> with TickerProviderStateMixin {
 
-  double _firstOpacity = 1.0;
-  double _secondOpacity = 1.0;
-  double _thirdOpacity = 1.0;
+  late AnimationController animationController1;
+  late AnimationController animationController2;
+  late AnimationController animationController3;
 
   @override
   void initState() {
-    _startAnimation();
+    animationController1 =  AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+      lowerBound: 0.1,
+      upperBound: 1.0
+    );
+    animationController2 =  AnimationController(
+        duration: const Duration(milliseconds: 1000),
+        vsync: this,
+        lowerBound: 0.1,
+        upperBound: 1.0
+    );
+    animationController3 =  AnimationController(
+        duration: const Duration(milliseconds: 1000),
+        vsync: this,
+        lowerBound: 0.1,
+        upperBound: 1.0
+    );
+
+
+    startAnimation();
     super.initState();
   }
 
-  _startAnimation() {
-    Future.delayed(Duration(seconds: 1));
-    _firstOpacity = 0.1;
+
+  startAnimation() async {
+    startAnimation1();
+    startAnimation2();
+    startAnimation3();
+  }
+
+  startAnimation1() async {
+    await Future.delayed(Duration(milliseconds: 0));
+    animationController3.repeat(
+        reverse: true
+    );
+  }
+  startAnimation2() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    animationController2.repeat(
+        reverse: true
+    );
+  }
+  startAnimation3() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    animationController1.repeat(
+        reverse: true
+    );
+  }
+
+
+  @override
+  void dispose() {
+    animationController1.dispose();
+    animationController2.dispose();
+    animationController3.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -29,8 +79,8 @@ class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnima
       alignment: Alignment.center,
       child: Container(
         alignment: Alignment.center,
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -39,21 +89,35 @@ class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnima
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AnimatedOpacity(
-                    opacity: _firstOpacity,
-                    duration: Duration(milliseconds: 500),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
+                  AnimatedBuilder(
+                    animation: animationController1,
+                    builder: (BuildContext context, Widget? child) {
+                      return Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white.withOpacity(animationController1.value),
+                        size: 50,
+                      );
+                    }
                   ),
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white.withOpacity(0.5),
+                  AnimatedBuilder(
+                    animation: animationController2,
+                    builder: (BuildContext context, Widget? child) {
+                      return Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white.withOpacity(animationController2.value),
+                        size: 50,
+                      );
+                    }
                   ),
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white.withOpacity(0.1),
+                  AnimatedBuilder(
+                    animation: animationController3,
+                    builder: (BuildContext context, Widget? child) {
+                      return Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white.withOpacity(animationController3.value),
+                        size: 50,
+                      );
+                    },
                   ),
                 ],
               ),
