@@ -35,6 +35,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         itemBuilder: (context, index) => CategoryItem(
           category: categories[index],
           onTab: () {
+            FocusScope.of(context).unfocus();
             if(index == 0) {
               Navigator.of(context).pushNamed(GamesScreen.route);
             } else if(index == 1) {
