@@ -12,59 +12,84 @@ class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnima
   late AnimationController animationController1;
   late AnimationController animationController2;
   late AnimationController animationController3;
+  double _swipeOpacity = 0.0;
 
   @override
   void initState() {
     animationController1 =  AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
-      lowerBound: 0.1,
+      lowerBound: 0.0,
       upperBound: 1.0
     );
     animationController2 =  AnimationController(
-        duration: const Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 200),
         vsync: this,
-        lowerBound: 0.1,
+        lowerBound: 0.0,
         upperBound: 1.0
     );
     animationController3 =  AnimationController(
-        duration: const Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 200),
         vsync: this,
-        lowerBound: 0.1,
+        lowerBound: 0.0,
         upperBound: 1.0
     );
-
 
     startAnimation();
     super.initState();
   }
-
-
   startAnimation() async {
+    await Future.delayed(Duration(milliseconds: 1000));
     startAnimation1();
     startAnimation2();
     startAnimation3();
   }
 
   startAnimation1() async {
-    await Future.delayed(Duration(milliseconds: 0));
-    animationController3.repeat(
-        reverse: true
-    );
+    await Future.delayed(Duration(milliseconds: 200));
+    setState(() {
+      _swipeOpacity = 1.0;
+    });
+    animationController3.forward().whenComplete(() {
+      setState(() {
+        _swipeOpacity = 0.0;
+      });
+      animationController3.reverse().whenComplete(() async {
+        await Future.delayed(Duration(milliseconds: 500));
+        setState(() {
+          _swipeOpacity = 1.0;
+        });
+        animationController3.forward().whenComplete(() {
+          setState(() {
+            _swipeOpacity = 0.0;
+          });
+          animationController3.reverse();
+        });
+      });
+    });
   }
   startAnimation2() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    animationController2.repeat(
-        reverse: true
-    );
+    await Future.delayed(Duration(milliseconds: 300));
+    animationController2.forward().whenComplete(() {
+      animationController2.reverse().whenComplete(() async {
+        await Future.delayed(Duration(milliseconds: 500));
+        animationController2.forward().whenComplete(() {
+          animationController2.reverse();
+        });
+      });
+    });
   }
   startAnimation3() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    animationController1.repeat(
-        reverse: true
-    );
+    await Future.delayed(Duration(milliseconds: 400));
+    animationController1.forward().whenComplete(() {
+      animationController1.reverse().whenComplete(() async {
+        await Future.delayed(Duration(milliseconds: 500));
+        animationController1.forward().whenComplete(() {
+          animationController1.reverse();
+        });
+      });
+    });
   }
-
 
   @override
   void dispose() {
@@ -125,13 +150,17 @@ class _NextImageAvailableAnimatedIconState extends State<NextImageAvailableAnima
             const SizedBox(height: 8,),
             Container(
               alignment: Alignment.center,
-              child: Text(
-                "swipe",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Colors.white),
-              ),
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 400),
+                opacity: _swipeOpacity,
+                child: Text(
+                  "swipe",
+                  style: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(
+                    color: Colors.white
+                  ),
+                ),
+              )
             )
           ],
         ),

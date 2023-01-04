@@ -99,7 +99,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       ],
     );
   }
-
   Widget buildCharacterImageHero() {
     return CharacterImageHero(
       imageWidth: double.infinity,
@@ -107,7 +106,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       index: widget.index,
     );
   }
-
   Widget buildVideoPlayer() {
     return InkWell(
       onTap: () {
@@ -138,7 +136,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       ),
     );
   }
-
   Widget buildBackIconHero() {
     return InkWell(
       onTap: () {
@@ -155,7 +152,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       ),
     );
   }
-
   Widget buildPlayIconHero() {
     return Align(
       alignment: Alignment.topRight,
@@ -186,11 +182,9 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       ),
     );
   }
-
   Widget buildNextImageAvailableIcon() {
-    return NextImageAvailableAnimatedIcon();
+    return const NextImageAvailableAnimatedIcon();
   }
-
   Widget buildBlurBoxHero() {
     return Align(
         alignment: Alignment.bottomCenter,
@@ -199,7 +193,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           height: 56,
         ));
   }
-
   Widget buildCharacterNameHero() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -256,7 +249,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           )),
     ));
   }
-
   Widget _buildRealName() {
     return InfoCard(
       title: "RealName",
@@ -264,7 +256,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
-
   Widget _buildNationality() {
     return InfoCard(
       title: "Nationality",
@@ -272,7 +263,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
-
   Widget _buildBorn() {
     return InfoCard(
       title: "Born",
@@ -280,7 +270,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
-
   Widget _buildAge() {
     return InfoCard(
       title: "Age",
@@ -288,14 +277,12 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       height: 80,
     );
   }
-
   Widget _buildAlsoKnownAs() {
     return InfoCard(
       title: "Also Known As",
       bodies: widget.character.alsoKnownNames ?? [],
     );
   }
-
   Widget _buildInfo() {
     return InfoCard(
       title: "Info",
