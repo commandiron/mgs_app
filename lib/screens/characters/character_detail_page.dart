@@ -94,7 +94,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         buildBackIconHero(),
         if (widget.character.shortClipUrl != null) buildPlayIconHero(),
         if (widget.character.imageUrls.length > 1)
-          buildNextImageAvailableIcon(),
+          // buildNextImageAvailableIcon(),
         buildBlurBoxHero(),
         buildCharacterNameHero()
       ],
