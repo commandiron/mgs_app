@@ -209,23 +209,22 @@ class _CharactersScreenState extends State<CharactersScreen> {
                   ),
                   Expanded(
                     child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              PageRouteBuilder(
-                                transitionDuration: const Duration(seconds: 1),
-                                reverseTransitionDuration:
-                                    const Duration(seconds: 1),
-                                pageBuilder:
-                                    (context, animation, secondaryAnimation) {
-                                  return CharacterDetailPage(character, index);
-                                },
-                              )
-                            );
-                          },
-                          child: const Text("Details"),
-                        )),
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              transitionDuration: const Duration(seconds: 1),
+                              reverseTransitionDuration: const Duration(seconds: 1),
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return CharacterDetailPage(character, index);
+                              },
+                            )
+                          );
+                        },
+                        child: const Text("Details"),
+                      )
+                    ),
                   ),
                 ],
               ),
