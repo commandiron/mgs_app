@@ -33,6 +33,7 @@ class InfoCard2 extends StatelessWidget {
         width: double.infinity,
         height: height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flex(
               direction: Axis.vertical,
@@ -41,7 +42,7 @@ class InfoCard2 extends StatelessWidget {
                   width: double.infinity,
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(4.0),
                       child: InfoTitle(
                         title,
                       ),
@@ -54,7 +55,7 @@ class InfoCard2 extends StatelessWidget {
               direction: Axis.vertical,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                   child: Column(
                     children: bodies.map(
                       (body) {

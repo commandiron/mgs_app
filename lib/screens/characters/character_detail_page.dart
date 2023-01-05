@@ -213,12 +213,12 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         duration: const Duration(milliseconds: 800),
         curve: Curves.fastOutSlowIn,
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: ExactAssetImage("assets/images/character_detail_background.jpg"),
               fit: BoxFit.cover,
             ),
-            borderRadius: const BorderRadius.vertical(
+            borderRadius: BorderRadius.vertical(
               top: Radius.circular(30)
             ),
           ),
