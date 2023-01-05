@@ -66,6 +66,8 @@ flutter:
     - assets/images/mgs_alert.jpg
     - assets/images/mgs_main_logo.jpg
     - assets/images/foxhound_logo.png
+    - assets/images/character_detail_background.jpg
+    - assets/images/character_detail_background2.jpg
 
     - assets/images/category/category_games_image.jpg
     - assets/images/category/category_characters_image.jpg
