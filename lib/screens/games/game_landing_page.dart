@@ -46,6 +46,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
       collapsedHeight: 60 + MediaQuery.of(context).padding.top,
       backgroundColor: Colors.transparent,
       iconTheme: Theme.of(context).iconTheme,
+      scrolledUnderElevation: 10,
       flexibleSpace: _buildFlexibleSpace()
     );
   }

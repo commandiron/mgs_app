@@ -83,6 +83,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       elevation: 0,
       expandedHeight: 380,
       collapsedHeight: 60 + 56 + MediaQuery.of(context).padding.top,
+      scrolledUnderElevation: 10,
       backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0),
       iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: buildFlexibleSpace(),
