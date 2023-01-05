@@ -230,31 +230,31 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                // Row(
-                //   children: [
-                //     if (widget.character.realName != null)
-                //       Expanded(
-                //         child: _buildRealName(),
-                //       ),
-                //     if (widget.character.nationality != null)
-                //       Expanded(
-                //         child: _buildNationality(),
-                //       ),
-                //   ],
-                // ),
-                // Row(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     if (widget.character.born != null)
-                //       Expanded(
-                //         child: _buildBorn(),
-                //       ),
-                //     if (widget.character.age != null)
-                //       Expanded(child: _buildAge()),
-                //   ],
-                // ),
-                // if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
-                // if (widget.character.info != null) _buildInfo(),
+                Row(
+                  children: [
+                    if (widget.character.realName != null)
+                      Expanded(
+                        child: _buildRealName(),
+                      ),
+                    if (widget.character.nationality != null)
+                      Expanded(
+                        child: _buildNationality(),
+                      ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.character.born != null)
+                      Expanded(
+                        child: _buildBorn(),
+                      ),
+                    if (widget.character.age != null)
+                      Expanded(child: _buildAge()),
+                  ],
+                ),
+                if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
+                if (widget.character.info != null) _buildInfo(),
                 SizedBox(height: MediaQuery.of(context).size.height),
               ],
             )
