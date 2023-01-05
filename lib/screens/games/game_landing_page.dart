@@ -42,7 +42,8 @@ class _GameLandingPageState extends State<GameLandingPage> {
       snap: false,
       floating: false,
       elevation: 0,
-      expandedHeight: 600,
+      expandedHeight: MediaQuery.of(context).size.height,
+      collapsedHeight: 60 + MediaQuery.of(context).padding.top,
       backgroundColor: Colors.transparent,
       iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: _buildFlexibleSpace()
@@ -56,7 +57,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
           width: double.infinity,
           height: double.infinity,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
