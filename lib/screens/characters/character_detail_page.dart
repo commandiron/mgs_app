@@ -83,7 +83,7 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       elevation: 0,
       expandedHeight: 380,
       collapsedHeight: 60 + 56 + MediaQuery.of(context).padding.top,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0),
       iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: buildFlexibleSpace(),
     );
@@ -208,50 +208,60 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
 
   Widget buildSliverBox() {
     return SliverToBoxAdapter(
-        child: AnimatedSlide(
-      offset: _animationOffset,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.fastOutSlowIn,
-      child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 16,
-              ),
-              const ScrollDivider(),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  if (widget.character.realName != null)
-                    Expanded(
-                      child: _buildRealName(),
-                    ),
-                  if (widget.character.nationality != null)
-                    Expanded(
-                      child: _buildNationality(),
-                    ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.character.born != null)
-                    Expanded(
-                      child: _buildBorn(),
-                    ),
-                  if (widget.character.age != null)
-                    Expanded(child: _buildAge()),
-                ],
-              ),
-              if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
-              if (widget.character.info != null) _buildInfo(),
-              SizedBox(height: MediaQuery.of(context).size.height),
-            ],
-          )),
-    ));
+      child: AnimatedSlide(
+        offset: _animationOffset,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.fastOutSlowIn,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade400,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(30)
+            )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                const ScrollDivider(),
+                const SizedBox(
+                  height: 16,
+                ),
+                // Row(
+                //   children: [
+                //     if (widget.character.realName != null)
+                //       Expanded(
+                //         child: _buildRealName(),
+                //       ),
+                //     if (widget.character.nationality != null)
+                //       Expanded(
+                //         child: _buildNationality(),
+                //       ),
+                //   ],
+                // ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     if (widget.character.born != null)
+                //       Expanded(
+                //         child: _buildBorn(),
+                //       ),
+                //     if (widget.character.age != null)
+                //       Expanded(child: _buildAge()),
+                //   ],
+                // ),
+                // if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
+                // if (widget.character.info != null) _buildInfo(),
+                SizedBox(height: MediaQuery.of(context).size.height),
+              ],
+            )
+          ),
+        ),
+      )
+    );
   }
   Widget _buildRealName() {
     return InfoCard(

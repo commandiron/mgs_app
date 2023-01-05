@@ -129,6 +129,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
         child: Stack(
           children: [
             CharacterImageHero(
+              topRadius: 30,
               index: index,
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),

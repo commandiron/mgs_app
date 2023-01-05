@@ -7,10 +7,11 @@ import '../../../providers/mgs_characters.dart';
 
 class CharacterImageHero extends StatefulWidget {
 
-  const CharacterImageHero({this.imageWidth, this.imageHeight, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
+  const CharacterImageHero({this.imageWidth, this.imageHeight, this.topRadius = 0, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
 
   final double? imageWidth;
   final double? imageHeight;
+  final double topRadius;
   final ScrollPhysics? scrollPhysics;
   final int index;
 
@@ -33,7 +34,10 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
         width: widget.imageWidth,
         height: widget.imageHeight,
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(widget.topRadius),
+            bottom: const Radius.circular(30)
+          ),
           child: Stack(
             children: [
               PageView.builder(
@@ -55,19 +59,20 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
                   );
                 },
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 64),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _buildPageIndicator(
-                      length: characters[widget.index].imageUrls.length,
-                      pageIndex: _selectedPageIndex
+              if(characters[widget.index].imageUrls.length > 1)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 64),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _buildPageIndicator(
+                        length: characters[widget.index].imageUrls.length,
+                        pageIndex: _selectedPageIndex
+                      ),
                     ),
-                  ),
+                  )
                 )
-              )
             ],
           )
         ),
