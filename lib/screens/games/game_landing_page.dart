@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mgs_app/widgets/background_container.dart';
-import 'package:mgs_app/widgets/info/info_body.dart';
 import 'package:mgs_app/widgets/info/info_title.dart';
 import '../../model/game.dart';
 import '../../widgets/align_left.dart';
@@ -92,104 +91,120 @@ class _GameLandingPageState extends State<GameLandingPage> {
 
   Widget _buildSliverBox() {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8),
+          borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(30)
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 16,
+              ),
+              const ScrollDivider(),
+              const SizedBox(
+                height: 16,
+              ),
+              _buildPlatformsCard(),
+              _buildReleaseDateCard(),
+              _buildSummaryCard()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlatformsCard() {
+    return Card(
+      color: Colors.white.withOpacity(0.7),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+              Radius.circular(16)
+          )
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(8),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                const ScrollDivider(),
-                const SizedBox(
-                  height: 16,
-                ),
-                Card(
-                  color: Colors.white.withOpacity(0.7),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(16)
-                      )
-                  ),
-                  child: Container(
+            Flex(
+                direction: Axis.vertical,
+                children: const [
+                  SizedBox(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flex(
-                          direction: Axis.vertical,
-                          children: const [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(4.0),
-                                  child: InfoTitle(
-                                    "Platforms",
-                                  ),
-                                ),
-                              ) ,
-                            )
-                          ]
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: InfoTitle(
+                          "Platforms",
                         ),
-                        Flex(
-                          direction: Axis.vertical,
-                          children: [
-                            SizedBox(
-                              height: 64,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: widget.game.platformLogoPaths.length,
-                                itemBuilder: (context, index) {
-                                  if(widget.game.platformLogoPaths[index] != null) {
-                                    return Flex(
-                                      direction: Axis.vertical,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 50,
-                                              child: Image.asset(
-                                                widget.game.platformLogoPaths[index]!,
-                                              )
-                                            ),
-                                            const SizedBox(width: 20,)
-                                          ],
-                                        )
-                                      ],
-                                    );
-                                  } else {
-                                    return const SizedBox.shrink();
-                                  }
-                                },
-                              ),
-                            ),
-                          ]
-                        )
-                      ],
+                      ),
+                    ) ,
+                  )
+                ]
+            ),
+            Flex(
+                direction: Axis.vertical,
+                children: [
+                  SizedBox(
+                    height: 64,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: widget.game.platformLogoPaths.length,
+                      itemBuilder: (context, index) {
+                        if(widget.game.platformLogoPaths[index] != null) {
+                          return Flex(
+                            direction: Axis.vertical,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                      width: 50,
+                                      child: Image.asset(
+                                        widget.game.platformLogoPaths[index]!,
+                                      )
+                                  ),
+                                  const SizedBox(width: 20,)
+                                ],
+                              )
+                            ],
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
                     ),
                   ),
-                ),
-                const SizedBox(height: 8,),
-              ],
-            ),
-            AlignLeft(
-              child: InfoCard(
-                title: "Release Date",
-                bodies: [widget.game.releaseDate],
-              )
-            ),
-            AlignLeft(
-              child: InfoCard(
-                title: "Summary",
-                bodies: [widget.game.summary],
-                fit: false,
-              )
+                ]
             )
           ],
         ),
       ),
+    );
+  }
+  Widget _buildReleaseDateCard() {
+    return AlignLeft(
+        child: InfoCard(
+          title: "Release Date",
+          bodies: [widget.game.releaseDate],
+        )
+    );
+  }
+  Widget _buildSummaryCard() {
+    return AlignLeft(
+      child: InfoCard(
+        title: "Summary",
+        bodies: [widget.game.summary],
+        fit: false,
+      )
     );
   }
 }
