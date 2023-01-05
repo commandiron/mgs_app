@@ -24,7 +24,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
       body: BackgroundContainer(
         child: CustomScrollView(
           controller: ScrollController(
-            initialScrollOffset: 260
+            initialScrollOffset: 450
           ),
           slivers: <Widget>[
             _buildSliverAppBar(),
