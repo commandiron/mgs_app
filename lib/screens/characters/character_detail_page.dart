@@ -212,65 +212,62 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
         offset: _animationOffset,
         duration: const Duration(milliseconds: 800),
         curve: Curves.fastOutSlowIn,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: ExactAssetImage("assets/images/character_detail_background.jpg"),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(30)
+            ),
+          ),
           child: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: ExactAssetImage("assets/images/character_detail_background.jpg"),
-                fit: BoxFit.cover,
-              ),
+              color: Colors.white.withOpacity(0.8),
               borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30)
+                  top: Radius.circular(30)
               ),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(30)
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const ScrollDivider(),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        if (widget.character.realName != null)
-                          Expanded(
-                            child: _buildRealName(),
-                          ),
-                        if (widget.character.nationality != null)
-                          Expanded(
-                            child: _buildNationality(),
-                          ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (widget.character.born != null)
-                          Expanded(
-                            child: _buildBorn(),
-                          ),
-                        if (widget.character.age != null)
-                          Expanded(child: _buildAge()),
-                      ],
-                    ),
-                    if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
-                    if (widget.character.info != null) _buildInfo(),
-                    SizedBox(height: MediaQuery.of(context).size.height),
-                  ],
-                )
-              ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const ScrollDivider(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      if (widget.character.realName != null)
+                        Expanded(
+                          child: _buildRealName(),
+                        ),
+                      if (widget.character.nationality != null)
+                        Expanded(
+                          child: _buildNationality(),
+                        ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (widget.character.born != null)
+                        Expanded(
+                          child: _buildBorn(),
+                        ),
+                      if (widget.character.age != null)
+                        Expanded(child: _buildAge()),
+                    ],
+                  ),
+                  if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
+                  if (widget.character.info != null) _buildInfo(),
+                  SizedBox(height: MediaQuery.of(context).size.height / 2),
+                ],
+              )
             ),
           ),
         ),

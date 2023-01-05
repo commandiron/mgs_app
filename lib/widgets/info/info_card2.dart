@@ -23,8 +23,8 @@ class InfoCard2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.black.withOpacity(0.5),
-      shape: RoundedRectangleBorder(
+      color: Colors.white.withOpacity(0.7),
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(16)
         )
@@ -44,7 +44,6 @@ class InfoCard2 extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: InfoTitle(
                         title,
-                        color: Colors.white
                       ),
                     ),
                   ) ,
@@ -63,14 +62,12 @@ class InfoCard2 extends StatelessWidget {
                           return FittedBox(
                             child: InfoBody(
                               body,
-                              color: Colors.white
                             ),
                           );
                         } else {
                           return InfoBody(
                             body,
                             textAlign: TextAlign.start,
-                            color: Colors.white
                           );
                         }
                       }
