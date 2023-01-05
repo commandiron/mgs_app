@@ -4,6 +4,8 @@ import 'package:mgs_app/widgets/info/info_body.dart';
 import 'package:mgs_app/widgets/info/info_title.dart';
 import '../../model/game.dart';
 import '../../widgets/align_left.dart';
+import '../../widgets/info/info_card.dart';
+import '../../widgets/scroll_divider.dart';
 
 class GameLandingPage extends StatefulWidget {
   const GameLandingPage(this.game, {Key? key}) : super(key: key);
@@ -42,7 +44,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
       floating: false,
       elevation: 0,
       expandedHeight: 600,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.transparent,
       iconTheme: Theme.of(context).iconTheme,
       flexibleSpace: _buildFlexibleSpace()
     );
@@ -96,54 +98,94 @@ class _GameLandingPageState extends State<GameLandingPage> {
           children: [
             Column(
               children: [
-                AlignLeft(child: const InfoTitle("Platforms")),
-                SizedBox(
-                  height: 64,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.game.platformLogoPaths.length,
-                    itemBuilder: (context, index) {
-                      if(widget.game.platformLogoPaths[index] != null) {
-                        return Flex(
+                const ScrollDivider(),
+                const SizedBox(
+                  height: 16,
+                ),
+                Card(
+                  color: Colors.white.withOpacity(0.7),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(16)
+                      )
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flex(
                           direction: Axis.vertical,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                    width: 50,
-                                    child: Image.asset(
-                                      widget.game.platformLogoPaths[index]!,
-                                    )
+                          children: const [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child: InfoTitle(
+                                    "Platforms",
+                                  ),
                                 ),
-                                const SizedBox(width: 20,)
-                              ],
+                              ) ,
                             )
-                          ],
-                        );
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
+                          ]
+                        ),
+                        Flex(
+                          direction: Axis.vertical,
+                          children: [
+                            SizedBox(
+                              height: 64,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: widget.game.platformLogoPaths.length,
+                                itemBuilder: (context, index) {
+                                  if(widget.game.platformLogoPaths[index] != null) {
+                                    return Flex(
+                                      direction: Axis.vertical,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 50,
+                                              child: Image.asset(
+                                                widget.game.platformLogoPaths[index]!,
+                                              )
+                                            ),
+                                            const SizedBox(width: 20,)
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  } else {
+                                    return const SizedBox.shrink();
+                                  }
+                                },
+                              ),
+                            ),
+                          ]
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8,),
               ],
             ),
-            Column(
-              children: [
-                AlignLeft(child: const InfoTitle("Release Date")),
-                const SizedBox(height: 8,),
-                AlignLeft(child: InfoBody(widget.game.releaseDate)),
-                const SizedBox(height: 16,),
-              ],
+            AlignLeft(
+              child: InfoCard(
+                title: "Release Date",
+                bodies: [widget.game.releaseDate],
+              )
             ),
-            Column(
-              children: [
-                AlignLeft(child: const InfoTitle("Summary")),
-                const SizedBox(height: 8,),
-                InfoBody(widget.game.summary, textAlign: TextAlign.start,),
-              ],
+            AlignLeft(
+              child: InfoCard(
+                title: "Summary",
+                bodies: [widget.game.summary],
+                fit: false,
+              )
             )
           ],
         ),

@@ -29,9 +29,10 @@ class InfoCard extends StatelessWidget {
           Radius.circular(16)
         )
       ),
-      child: SizedBox(
+      child: Container(
         width: double.infinity,
         height: height,
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
