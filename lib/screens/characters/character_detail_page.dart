@@ -65,7 +65,10 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       body: BackgroundContainer(
         child: CustomScrollView(
           controller: ScrollController(initialScrollOffset: 80),
-          slivers: <Widget>[buildSliverAppBar(), buildSliverBox()],
+          slivers: <Widget>[
+            buildSliverAppBar(),
+            buildSliverBox()
+          ],
         ),
       )
     );
