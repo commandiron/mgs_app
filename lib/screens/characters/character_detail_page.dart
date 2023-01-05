@@ -6,7 +6,7 @@ import 'package:mgs_app/screens/characters/next_image_available_animated_icon.da
 import 'package:mgs_app/widgets/scroll_divider.dart';
 import 'package:video_player/video_player.dart';
 import '../../widgets/background_container.dart';
-import '../../widgets/info/info_card.dart';
+import '../../widgets/info/info_card2.dart';
 import 'heroes/back_icon_hero.dart';
 import 'heroes/blur_box_hero.dart';
 import 'heroes/play_icon_hero.dart';
@@ -216,55 +216,61 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey.shade400,
               image: DecorationImage(
                 image: ExactAssetImage("assets/images/character_detail_background.jpg"),
                 fit: BoxFit.cover,
-                opacity: 0.1
               ),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(30)
-              )
+              ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const ScrollDivider(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      if (widget.character.realName != null)
-                        Expanded(
-                          child: _buildRealName(),
-                        ),
-                      if (widget.character.nationality != null)
-                        Expanded(
-                          child: _buildNationality(),
-                        ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (widget.character.born != null)
-                        Expanded(
-                          child: _buildBorn(),
-                        ),
-                      if (widget.character.age != null)
-                        Expanded(child: _buildAge()),
-                    ],
-                  ),
-                  if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
-                  if (widget.character.info != null) _buildInfo(),
-                  SizedBox(height: MediaQuery.of(context).size.height),
-                ],
-              )
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(30)
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const ScrollDivider(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        if (widget.character.realName != null)
+                          Expanded(
+                            child: _buildRealName(),
+                          ),
+                        if (widget.character.nationality != null)
+                          Expanded(
+                            child: _buildNationality(),
+                          ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (widget.character.born != null)
+                          Expanded(
+                            child: _buildBorn(),
+                          ),
+                        if (widget.character.age != null)
+                          Expanded(child: _buildAge()),
+                      ],
+                    ),
+                    if (widget.character.alsoKnownNames != null) _buildAlsoKnownAs(),
+                    if (widget.character.info != null) _buildInfo(),
+                    SizedBox(height: MediaQuery.of(context).size.height),
+                  ],
+                )
+              ),
             ),
           ),
         ),
@@ -272,41 +278,41 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
     );
   }
   Widget _buildRealName() {
-    return InfoCard(
+    return InfoCard2(
       title: "RealName",
       bodies: [widget.character.realName ?? ""],
       height: 80,
     );
   }
   Widget _buildNationality() {
-    return InfoCard(
+    return InfoCard2(
       title: "Nationality",
       bodies: [widget.character.nationality ?? ""],
       height: 80,
     );
   }
   Widget _buildBorn() {
-    return InfoCard(
+    return InfoCard2(
       title: "Born",
       bodies: [widget.character.born ?? ""],
       height: 80,
     );
   }
   Widget _buildAge() {
-    return InfoCard(
+    return InfoCard2(
       title: "Age",
       bodies: [widget.character.age ?? ""],
       height: 80,
     );
   }
   Widget _buildAlsoKnownAs() {
-    return InfoCard(
+    return InfoCard2(
       title: "Also Known As",
       bodies: widget.character.alsoKnownNames ?? [],
     );
   }
   Widget _buildInfo() {
-    return InfoCard(
+    return InfoCard2(
       title: "Info",
       bodies: [widget.character.info ?? ""],
       bodyTextAlign: TextAlign.start,
