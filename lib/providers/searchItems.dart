@@ -15,14 +15,14 @@ class SearchItems with ChangeNotifier {
   Future<void> search(String query, int page, int limit) async {
     _items = [];
 
-    final gameSearchItems = await _searchGames(query);
-    if(gameSearchItems != null) {
-      _items += gameSearchItems;
-    }
-
     final characterSearchItems = await _searchCharacters(query, page, limit);
     if(characterSearchItems != null) {
       _items += characterSearchItems;
+    }
+
+    final gameSearchItems = await _searchGames(query);
+    if(gameSearchItems != null) {
+      _items += gameSearchItems;
     }
 
     notifyListeners();
