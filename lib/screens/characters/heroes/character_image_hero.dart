@@ -1,19 +1,30 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../providers/mgs_characters.dart';
+import '../../../model/mgs_character.dart';
+import '../../../providers/filters.dart';
 
 class CharacterImageHero extends StatefulWidget {
 
-  const CharacterImageHero({this.imageWidth, this.imageHeight, this.topRadius = 0, this.scrollPhysics, required this.index, Key? key}) : super(key: key);
+  const CharacterImageHero(
+      {
+        this.imageWidth,
+        this.imageHeight,
+        this.topRadius = 0,
+        this.scrollPhysics,
+        required this.character,
+        required this.index,
+        required this.initialPage,
+        Key? key
+      }
+  ) : super(key: key);
 
   final double? imageWidth;
   final double? imageHeight;
   final double topRadius;
   final ScrollPhysics? scrollPhysics;
+  final MgsCharacter character;
   final int index;
+  final int initialPage;
 
   @override
   State<CharacterImageHero> createState() => _CharacterImageHeroState();
@@ -22,12 +33,34 @@ class CharacterImageHero extends StatefulWidget {
 class _CharacterImageHeroState extends State<CharacterImageHero> {
 
   int _selectedPageIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController(
+      initialPage: widget.initialPage
+    );
+    setState(() {
+      _selectedPageIndex = widget.initialPage;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    final characters = Provider.of<MgsCharacters>(context, listen: false).characters;
-
+    if(widget.scrollPhysics == const NeverScrollableScrollPhysics()) {
+      final firstFilterGameTag = Provider.of<Filters>(context).firstSelectedFilter?.gameTag;
+      if(firstFilterGameTag != null) {
+        final imageIndex = widget.character.gameTagToImageIndexMap?[firstFilterGameTag] ?? 0;
+        if(_pageController.hasClients) {
+          _pageController.jumpToPage(imageIndex);
+        }
+      } else {
+        if(_pageController.hasClients) {
+          _pageController.jumpToPage(0);
+        }
+      }
+    }
     return Hero(
       tag: "character_image_hero_${widget.index}",
       child: SizedBox(
@@ -41,8 +74,9 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
           child: Stack(
             children: [
               PageView.builder(
+                controller: _pageController,
                 physics: widget.scrollPhysics,
-                itemCount: characters[widget.index].imageUrls.length,
+                itemCount: widget.character.imageUrls.length,
                 onPageChanged: (pageIndex) {
                   setState(() {
                     _selectedPageIndex = pageIndex;
@@ -52,14 +86,14 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
                   return Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(characters[widget.index].imageUrls[pageIndex]),
+                        image: NetworkImage(widget.character.imageUrls[pageIndex]),
                         fit: BoxFit.cover,
                       ),
                     ),
                   );
                 },
               ),
-              if(characters[widget.index].imageUrls.length > 1)
+              if(widget.character.imageUrls.length > 1)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -67,7 +101,7 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: _buildPageIndicator(
-                        length: characters[widget.index].imageUrls.length,
+                        length: widget.character.imageUrls.length,
                         pageIndex: _selectedPageIndex
                       ),
                     ),

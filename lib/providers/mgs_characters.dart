@@ -86,13 +86,13 @@ class MgsCharacters with ChangeNotifier {
       for (var filter in filters) {
         if(filter.isSelected) {
           _filteredCharacters = _filteredCharacters.where(
-                  (character) {
-                if (character.gameTagToImageIndexMap != null) {
-                  return character.gameTagToImageIndexMap!.keys.contains(filter.gameTag);
-                } else {
-                  return false;
-                }
+            (character) {
+              if (character.gameTagToImageIndexMap != null) {
+                return character.gameTagToImageIndexMap!.keys.contains(filter.gameTag);
+              } else {
+                return false;
               }
+            }
           ).toList();
         }
       }

@@ -46,8 +46,12 @@ class Filters with ChangeNotifier {
     return [..._items];
   }
 
-  List<Filter> get selectedItems {
-    return _items.where((element) => element.isSelected == true).toList();
+  Filter? get firstSelectedFilter {
+    if(_items.any((element) => element.isSelected == true)) {
+      return _items.firstWhere((element) => element.isSelected == true);
+    } else {
+      return null;
+    }
   }
 
   setSelected(int id, bool isSelected) {

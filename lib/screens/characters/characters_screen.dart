@@ -121,7 +121,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
     );
   }
 
-  Widget buildCharacterItem(MgsCharacter character, int index) {
+  Widget buildCharacterItem(MgsCharacter character, int index,) {
     return SizedBox(
       width: 180,
       child: Padding(
@@ -130,8 +130,10 @@ class _CharactersScreenState extends State<CharactersScreen> {
           children: [
             CharacterImageHero(
               topRadius: 30,
+              character: character,
               index: index,
               scrollPhysics: const NeverScrollableScrollPhysics(),
+              initialPage: 1,
             ),
             Column(
               children: [
