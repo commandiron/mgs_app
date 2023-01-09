@@ -28,7 +28,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
 
   Future _obtainCharactersFuture() {
     return Provider.of<MgsCharacters>(context, listen: false)
-        .fetchCharacters(1, 30);
+        .fetchCharacters(1, 50);
   }
 
   @override
