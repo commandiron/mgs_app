@@ -20,36 +20,22 @@ MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework wit
 <img src="art/topRatedTenFilms-overview.gif" width="250" height="530">
 
 * Application - Features ☕
-   * One time animated splash screen
-   * Search
-   * Paging
-   * Nested navigation
-   * Watchlist db
+   * Self-written backend
+   * Clips
+   * Hero animations 
+   * Filters
    * Language - English
 * Tech-stack ⚛️
-    * [Kotlin](https://kotlinlang.org/) + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operation
-    * [Jetpack](https://developer.android.com/jetpack)
-        * [Compose](https://developer.android.com/jetpack/compose) - toolkit for building native UI
-        * [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - deal with whole in-app navigation      
-        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
-    * [Retrofit](https://square.github.io/retrofit/) - HTTP client
-    * [Coil](https://coil-kt.github.io/coil/compose/) - image loading library
-    * [Paging](https://developer.android.com/jetpack/androidx/releases/paging) -  load and display pages from a remote server.
-    * [Room](https://developer.android.com/jetpack/androidx/releases/room) - database object mapping
-    * [Accompanist](https://github.com/google/accompanist)
-        * navigationAnimation
-        * pager
-        * systemUi
-    * [Hilt](https://dagger.dev/hilt/) - DI
-    * [Material 3](https://m3.material.io) - design
-* Architecture 🏗️
-    * Model-View-ViewModel
-    * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
+    * [Dart](https://dart.dev)
+    * [Flutter](https://flutter.dev)
+        * [Provider](https://pub.dev/packages/provider) - data provider
+        * [Video Player](https://pub.dev/packages/video_player) - video on a widget     
+        * [Share Plus](https://pub.dev/packages/share_plus) - share content     
+        * [http](https://pub.dev/packages/http) - http requests   
  
  * Todo ✔️
-   * Shimmer Effect ✔️
-   * Movie Details ✔️
-   * by Country ❌
-   * Different Screen Sizes and Orientation ❌
-   * Light Theme ❌
-   * Turkish Language ❌
+   * Search Category ❌
+   * Dark theme ❌
+   * Other Categories; Weapons, Events, Metal Gears, Equipments ❌
+   * Ios bugs; Video player not working ❌
+   * Responsive; support different screen sizes ❌
