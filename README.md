@@ -1,16 +1,40 @@
-# mgs_app
+<h1 align="center">MgsApp</h1>
 
-A new Flutter project.
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"> 
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
+</p>
 
-## Getting Started
+<p align="center">  
+MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework with self-written RestApi <a href="https://github.com/commandiron/mgs-server/">Mgs Server </a>
+</p>
+</br>
 
-This project is a starting point for a Flutter application.
+* Screenshots 🖼️
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://user-images.githubusercontent.com/50905347/211379920-5dc90e19-e172-444a-ae12-7c0f8cab03bb.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379947-f442750c-35de-4ed4-9719-bc7780eeff6f.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379968-390263fc-d51c-4803-a300-c13e3f71345e.png" width="250" height="530">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="https://user-images.githubusercontent.com/50905347/211380385-359d8371-2bb2-49f7-af67-47e04543b482.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380408-276ce1e3-a1fb-4ba5-8019-09cda691c13c.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380045-69850ae3-e921-4359-8216-40000a2f45ea.png" width="250" height="530">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Ux 🧪
+
+* Application - Features ☕
+   * Self-written backend
+   * Clips
+   * Hero animations 
+   * Filters
+   * Language - English
+* Tech-stack ⚛️
+    * [Dart](https://dart.dev)
+    * [Flutter](https://flutter.dev)
+        * [Provider](https://pub.dev/packages/provider) - data provider
+        * [Video Player](https://pub.dev/packages/video_player) - video on a widget     
+        * [Share Plus](https://pub.dev/packages/share_plus) - share content     
+        * [http](https://pub.dev/packages/http) - http requests   
+ 
+ * Todo ✔️
+   * Search Category ❌
+   * Dark theme ❌
+   * Other Categories; Weapons, Events, Metal Gears, Equipments ❌
+   * Ios bugs; Video player not working ❌
+   * Responsive; support different screen sizes ❌
