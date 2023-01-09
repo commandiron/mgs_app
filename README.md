@@ -10,14 +10,11 @@ MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework wit
 </p>
 </br>
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/50905347/194304178-16ac8e1c-16ae-40ff-b767-c0a725303c0a.png#gh-dark-mode-only" width="750" height="366">
-<img src="https://user-images.githubusercontent.com/50905347/194304140-0cb14446-521b-4016-b939-55b8aa67bac1.png#gh-light-mode-only" width="750" height="366">
-</p>
+* Screenshots 🖼️
 
-* Ux 🧪
+<img src="https://user-images.githubusercontent.com/50905347/188006059-7ad6b080-0de1-4b65-81e3-ff57bc30b8e7.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188006061-e9df62e5-660b-41e5-bd58-6b0b1a60b6e3.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188006065-39ad2f1a-c058-42e7-a871-2b409fb19a9f.png" width="250" height="530">
 
-<img src="art/topRatedTenFilms-overview.gif" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/188601877-635ded7c-a93e-4f5f-b1c0-dd22da15eab3.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188601886-6d308250-ebb1-4536-8bdf-22ee5c1b8ed8.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/189700790-f87cf195-c7c2-4842-8564-d4a8addb14bf.png" width="250" height="530">
 
 * Application - Features ☕
    * Self-written backend
