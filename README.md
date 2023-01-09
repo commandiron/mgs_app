@@ -12,9 +12,9 @@ MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework wit
 
 * Screenshots 🖼️
 
-<img src="https://user-images.githubusercontent.com/50905347/188006059-7ad6b080-0de1-4b65-81e3-ff57bc30b8e7.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188006061-e9df62e5-660b-41e5-bd58-6b0b1a60b6e3.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188006065-39ad2f1a-c058-42e7-a871-2b409fb19a9f.png" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/211379920-5dc90e19-e172-444a-ae12-7c0f8cab03bb.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379947-f442750c-35de-4ed4-9719-bc7780eeff6f.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379968-390263fc-d51c-4803-a300-c13e3f71345e.png" width="250" height="530">
 
-<img src="https://user-images.githubusercontent.com/50905347/188601877-635ded7c-a93e-4f5f-b1c0-dd22da15eab3.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/188601886-6d308250-ebb1-4536-8bdf-22ee5c1b8ed8.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/189700790-f87cf195-c7c2-4842-8564-d4a8addb14bf.png" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/188601877-635ded7c-a93e-4f5f-b1c0-dd22da15eab3.png" width="250" height="530">&nbsp;&nbsp;<img src="(https://user-images.githubusercontent.com/50905347/211380026-ee24a63d-137f-4ca3-85ad-edbe3e24aecd.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380045-69850ae3-e921-4359-8216-40000a2f45ea.png" width="250" height="530">
 
 * Application - Features ☕
    * Self-written backend
