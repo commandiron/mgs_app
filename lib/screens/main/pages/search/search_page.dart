@@ -65,7 +65,14 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               );
             } else {
-              return const Center(child: Text("No Result"),);
+              return Center(
+                child: Text(
+                  "No Result",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.red
+                  ),
+                ),
+              );
             }
           },
       ),

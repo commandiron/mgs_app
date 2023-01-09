@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
-        if (_searchText.isNotEmpty) SearchPage(),
+        if (_searchText.isNotEmpty) const SearchPage(),
       ],
     );
   }
