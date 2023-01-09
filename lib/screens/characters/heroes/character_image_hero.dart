@@ -33,8 +33,17 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
 
   @override
   void initState() {
-    _pageController = PageController();
+    _pageController = PageController(
+      initialPage: widget.character.coverIndex
+    );
+    _selectedPageIndex = widget.character.coverIndex;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override

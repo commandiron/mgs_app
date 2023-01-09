@@ -7,6 +7,7 @@ class MgsCharacter {
   final String? age;
   final String? info;
   final List<String> imageUrls;
+  final int coverIndex;
   final String? shortClipUrl;
   final List<String>? gameTags;
 
@@ -20,6 +21,7 @@ class MgsCharacter {
       this.age,
       this.info,
       required this.imageUrls,
+      required this.coverIndex,
       this.shortClipUrl,
       this.gameTags
     }

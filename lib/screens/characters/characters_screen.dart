@@ -110,6 +110,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
     return Consumer<MgsCharacters>(
       builder: (context, charactersData, child) {
         return ListView.builder(
+          key: UniqueKey(),
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
           itemCount: charactersData.characters.length,
