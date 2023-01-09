@@ -52,12 +52,9 @@ class MgsCharacters with ChangeNotifier {
           shortClipUrl = "${Constants.localRootUrl}$shortClipPath";
         }
 
-        final gameTagToImageIndexDynamicMap =
-        extractedCharacter["gameTagToImageIndexMap"] as Map<String, dynamic>?;
-
-        Map<String, int>? gameTagToImageIndexMap = gameTagToImageIndexDynamicMap?.map(
-          (key, value) => MapEntry(key, value as int)
-        );
+        final gameTagsDynamicList =
+        extractedCharacter["gameTags"] as List<dynamic>;
+        final gameTags = gameTagsDynamicList.map((item) => item as String).toList();
 
         loadedCharacters.add(MgsCharacter(
           name: name,
@@ -69,7 +66,7 @@ class MgsCharacters with ChangeNotifier {
           info: info,
           imageUrls: imageUrls,
           shortClipUrl: shortClipUrl,
-          gameTagToImageIndexMap: gameTagToImageIndexMap
+          gameTags: gameTags
         ));
       }
       _characters = loadedCharacters.toList();
@@ -87,8 +84,8 @@ class MgsCharacters with ChangeNotifier {
         if(filter.isSelected) {
           _filteredCharacters = _filteredCharacters.where(
             (character) {
-              if (character.gameTagToImageIndexMap != null) {
-                return character.gameTagToImageIndexMap!.keys.contains(filter.gameTag);
+              if (character.gameTags != null) {
+                return character.gameTags!.contains(filter.gameTag);
               } else {
                 return false;
               }

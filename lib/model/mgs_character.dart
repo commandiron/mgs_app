@@ -8,7 +8,7 @@ class MgsCharacter {
   final String? info;
   final List<String> imageUrls;
   final String? shortClipUrl;
-  final Map<String, int>? gameTagToImageIndexMap;
+  final List<String>? gameTags;
 
   MgsCharacter(
     {
@@ -21,7 +21,7 @@ class MgsCharacter {
       this.info,
       required this.imageUrls,
       this.shortClipUrl,
-      this.gameTagToImageIndexMap
+      this.gameTags
     }
   );
 }

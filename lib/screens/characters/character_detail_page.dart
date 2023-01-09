@@ -110,7 +110,6 @@ class _CharacterDetailPageState extends State<CharacterDetailPage> {
       imageHeight: double.infinity,
       character: widget.character,
       index: widget.index,
-      initialPage: 1,
     );
   }
   Widget buildVideoPlayer() {

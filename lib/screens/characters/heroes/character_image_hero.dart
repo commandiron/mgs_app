@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../model/mgs_character.dart';
-import '../../../providers/filters.dart';
 
 class CharacterImageHero extends StatefulWidget {
 
@@ -13,7 +11,6 @@ class CharacterImageHero extends StatefulWidget {
         this.scrollPhysics,
         required this.character,
         required this.index,
-        required this.initialPage,
         Key? key
       }
   ) : super(key: key);
@@ -24,7 +21,6 @@ class CharacterImageHero extends StatefulWidget {
   final ScrollPhysics? scrollPhysics;
   final MgsCharacter character;
   final int index;
-  final int initialPage;
 
   @override
   State<CharacterImageHero> createState() => _CharacterImageHeroState();
@@ -37,30 +33,12 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
 
   @override
   void initState() {
-    _pageController = PageController(
-      initialPage: widget.initialPage
-    );
-    setState(() {
-      _selectedPageIndex = widget.initialPage;
-    });
+    _pageController = PageController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.scrollPhysics == const NeverScrollableScrollPhysics()) {
-      final firstFilterGameTag = Provider.of<Filters>(context).firstSelectedFilter?.gameTag;
-      if(firstFilterGameTag != null) {
-        final imageIndex = widget.character.gameTagToImageIndexMap?[firstFilterGameTag] ?? 0;
-        if(_pageController.hasClients) {
-          _pageController.jumpToPage(imageIndex);
-        }
-      } else {
-        if(_pageController.hasClients) {
-          _pageController.jumpToPage(0);
-        }
-      }
-    }
     return Hero(
       tag: "character_image_hero_${widget.index}",
       child: SizedBox(
