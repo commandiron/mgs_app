@@ -138,7 +138,8 @@ class MgsCharacters with ChangeNotifier {
         final gameTags = gameTagsDynamicList.map((item) => item as String)
             .toList();
 
-        loadedCharacters.add(MgsCharacter(
+        loadedCharacters.add(
+          MgsCharacter(
             name: name,
             realName: realName,
             alsoKnownNames: alsoKnownNames,
@@ -149,7 +150,8 @@ class MgsCharacters with ChangeNotifier {
             imageUrls: imageUrls,
             shortClipUrl: shortClipUrl,
             gameTags: gameTags
-        ));
+          )
+        );
 
         _characters = loadedCharacters.toList();
         notifyListeners();
