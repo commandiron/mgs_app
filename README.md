@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">  
-TopRated10Films is a native android movie app for create Top 10 movies in desired category, written in Kotlin using Jetpack Compose with themoviedb api.
+MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework with self-written RestApi <a href="https://github.com/commandiron/mgs-server/">Mgs Server </a> written in Kotlin using Ktor.
 </p>
 </br>
 
