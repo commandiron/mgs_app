@@ -18,6 +18,8 @@ MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework wit
 
 * Ux 🧪
 
+<img src="art/mgs_app_overview.gif" width="250" height="530">
+
 * Application - Features ☕
    * Self-written backend
    * Clips
