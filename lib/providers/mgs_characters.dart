@@ -110,7 +110,7 @@ class MgsCharacters with ChangeNotifier {
         int coverIndex = 0;
         if(firstFilterGameTag != null) {
           coverIndex = character.gameTags?.indexOf(firstFilterGameTag) ?? 0;
-          if(coverIndex > character.imageUrls.length) {
+          if(coverIndex >= character.imageUrls.length) {
             coverIndex = 0;
           }
         }
