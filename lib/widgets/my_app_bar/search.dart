@@ -71,6 +71,7 @@ class _SearchState extends State<Search> {
                   if(_textIsEmpty) {
                     _focusNode.requestFocus();
                   } else {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     _controller.clear();
                   }
                   setState(() {
