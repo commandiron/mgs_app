@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mgs_app/providers/filters.dart';
 import 'package:mgs_app/providers/games.dart';
 import 'package:mgs_app/providers/mgs_characters.dart';
+import 'package:mgs_app/providers/searchItems.dart';
 import 'package:mgs_app/util/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +42,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => Filters(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => SearchItems(),
         ),
       ],
       builder: (context, child) {
