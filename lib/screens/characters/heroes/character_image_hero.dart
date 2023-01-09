@@ -33,10 +33,25 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
 
   @override
   void initState() {
-    _pageController = PageController(
-      initialPage: widget.character.coverIndex
-    );
     _selectedPageIndex = widget.character.coverIndex;
+    if(widget.scrollPhysics == const NeverScrollableScrollPhysics()) {
+      _pageController = PageController(
+          initialPage: widget.character.coverIndex
+      );
+      Future.delayed(const Duration(milliseconds: 500)).then(
+        (value) {
+          _pageController.animateToPage(
+              widget.character.coverIndex,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.linear
+          );
+        }
+      );
+    } else {
+      _pageController = PageController(
+          initialPage: widget.character.coverIndex
+      );
+    }
     super.initState();
   }
 
@@ -65,6 +80,7 @@ class _CharacterImageHeroState extends State<CharacterImageHero> {
                 physics: widget.scrollPhysics,
                 itemCount: widget.character.imageUrls.length,
                 onPageChanged: (pageIndex) {
+
                   setState(() {
                     _selectedPageIndex = pageIndex;
                   });
