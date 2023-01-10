@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">  
-MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework with self-written RestApi <a href="https://github.com/commandiron/mgs-server/">Mgs Server </a>
+MgsApp is a Metal Gear Solid fan app written in Dart using Flutter Framework with self-written <a href="https://github.com/commandiron/mgs-server/">RestApi</a>
 </p>
 </br>
 
