@@ -23,9 +23,13 @@ Metal Gear Solid fan app written in Dart using Flutter Framework with self-writt
 * Ux 🧪
 
 [Games](art/mgs_app_games.gif)
+
 [Characters](art/mgs_app_characters.gif)
+
 [Filters](art/mgs_app_filters.gif)
+
 [Clips](art/mgs_app_clips.gif)
+
 [Rotation in clips](art/mgs_app_rotation.gif)
 
 * Application - Features ☕
