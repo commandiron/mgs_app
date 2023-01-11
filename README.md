@@ -4,9 +4,9 @@
 
 <h1 align="center">MgsApp</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"> 
-  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
+<p align="center"> 
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" width="80" height="20"> 
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" width="80" height="20">
 </p>
 
 <p align="center">  
@@ -14,11 +14,7 @@ Metal Gear Solid fan app written in Dart using Flutter Framework with self-writt
 </p>
 </br>
 
-<img src="art/mgs_app_cover.png"> 
-
-* Screenshots 🖼️
-
-<img src="https://user-images.githubusercontent.com/50905347/211379920-5dc90e19-e172-444a-ae12-7c0f8cab03bb.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379947-f442750c-35de-4ed4-9719-bc7780eeff6f.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211379968-390263fc-d51c-4803-a300-c13e3f71345e.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380385-359d8371-2bb2-49f7-af67-47e04543b482.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380408-276ce1e3-a1fb-4ba5-8019-09cda691c13c.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/211380045-69850ae3-e921-4359-8216-40000a2f45ea.png" width="125" height="265">
+<img src="art/mgs_app_cover_whitebg.png"> 
 
 * Ux 🧪
 
